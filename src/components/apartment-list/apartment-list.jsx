@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ApartmentList = (props) => {
-  const {apartmentTitleArray} = props;
+  const {apartmentTitleArray, cityTitleHandler} = props;
 
   if (!Array.isArray(apartmentTitleArray)) {
     return null;
@@ -40,7 +40,7 @@ const ApartmentList = (props) => {
                   <span className="visually-hidden">Rating</span>
                 </div>
               </div>
-              <h2 className="place-card__name">
+              <h2 className="place-card__name" onClick={cityTitleHandler}>
                 <a href="#">{item}</a>
               </h2>
               <p className="place-card__type">Apartment</p>
@@ -53,7 +53,8 @@ const ApartmentList = (props) => {
 };
 
 ApartmentList.propTypes = {
-  apartmentTitleArray: PropTypes.arrayOf(PropTypes.string).isRequired
+  apartmentTitleArray: PropTypes.arrayOf(PropTypes.string).isRequired,
+  cityTitleHandler: PropTypes.func
 };
 
 export default ApartmentList;
