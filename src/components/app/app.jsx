@@ -3,10 +3,12 @@ import Main from "../main/main.jsx";
 
 const App = (props) => {
   // eslint-disable-next-line react/prop-types
-  const {offerPlacesCount} = props;
+  const {offerPlacesCount, apartmentTitleArray} = props;
 
   return (
-    <Main offerPlacesCount={offerPlacesCount}/>
+    <Main
+      offerPlacesCount={offerPlacesCount}
+      apartmentTitleArray={apartmentTitleArray}/>
   );
 };
 
