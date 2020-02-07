@@ -4,6 +4,10 @@ import PropTypes from "prop-types";
 const ApartmentList = (props) => {
   const {apartmentTitleArray} = props;
 
+  if (!Array.isArray(apartmentTitleArray)) {
+    return null;
+  }
+
   return (
     <div className="cities__places-list places__list tabs__content">
       {apartmentTitleArray.map((item, index) => {
