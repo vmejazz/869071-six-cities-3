@@ -1,7 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ApartmentList = (props) => {
-  // eslint-disable-next-line react/prop-types
   const {apartmentTitleArray} = props;
 
   return (
@@ -46,6 +46,10 @@ const ApartmentList = (props) => {
       })}
     </div>
   );
+};
+
+ApartmentList.propTypes = {
+  apartmentTitleArray: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default ApartmentList;

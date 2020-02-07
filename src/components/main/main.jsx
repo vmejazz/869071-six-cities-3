@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
 
 const Main = (props) => {
-  // eslint-disable-next-line react/prop-types
   const {offerPlacesCount, apartmentTitleArray} = props;
 
   return (
@@ -111,6 +111,11 @@ const Main = (props) => {
       </div>
     </React.Fragment>
   );
+};
+
+Main.propTypes = {
+  offerPlacesCount: PropTypes.number.isRequired,
+  apartmentTitleArray: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default Main;
