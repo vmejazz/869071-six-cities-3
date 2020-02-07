@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import App from "./app.jsx";
 
 const OFFER_PLACES = 254;
 
@@ -11,27 +11,14 @@ const apartmentTitleArray = [
   `Another title`
 ];
 
+describe(`Test render App component`, () => {
 
-describe(`Test Main page`, () => {
-
-  it(`<Main /> should render all page`, () => {
+  it(`<App /> should render page`, () => {
     const tree = renderer
       .create(
-          <Main
+          <App
             offerPlacesCount={OFFER_PLACES}
             apartmentTitleArray={apartmentTitleArray}/>
-      )
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`<Main /> should render page whith empty props`, () => {
-    const tree = renderer
-      .create(
-          <Main
-            offerPlacesCount={null}
-            apartmentTitleArray={null}/>
       )
       .toJSON();
 
