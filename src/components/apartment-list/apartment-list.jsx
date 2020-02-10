@@ -40,7 +40,10 @@ const ApartmentList = (props) => {
                   <span className="visually-hidden">Rating</span>
                 </div>
               </div>
-              <h2 className="place-card__name" onClick={cityTitleHandler}>
+              <h2
+                className="place-card__name"
+                onClick={cityTitleHandler}
+              >
                 <a href="#">{item}</a>
               </h2>
               <p className="place-card__type">Apartment</p>

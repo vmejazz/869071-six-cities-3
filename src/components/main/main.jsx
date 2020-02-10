@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
 
 const Main = (props) => {
-  const {offerPlacesCount, apartmentTitleArray, cityTitleHandler} = props;
+  let {offerPlacesCount, apartmentTitleArray, cityTitleHandler} = props;
 
   return (
     <React.Fragment>
