@@ -2,11 +2,15 @@ import React from "react";
 import renderer from "react-test-renderer";
 import ApartmentList from "./apartment-list.jsx";
 
-const apartmentTitleArray = [
-  `First title`,
-  `Second title`,
-  `Third title`,
-  `Another title`
+const offersArray = [
+  {
+    id: 1,
+    title: `First title`
+  },
+  {
+    id: 2,
+    title: `Second title`
+  }
 ];
 
 describe(`Test Apartment list`, () => {
@@ -15,7 +19,7 @@ describe(`Test Apartment list`, () => {
     const tree = renderer
       .create(
           <ApartmentList
-            apartmentTitleArray={apartmentTitleArray}/>
+            offersArray={offersArray}/>
       )
       .toJSON();
 

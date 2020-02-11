@@ -2,13 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ApartmentCard = (props) => {
-  const {placeOffer, onCityTitleClick} = props;
+  const {placeOffer, onCityTitleClick, onMouseHover} = props;
   const {id, title, price, srcImg} = placeOffer;
+  const DEACTIVATE_ID = -1;
 
   return (
     <article className="cities__place-card place-card"
       key={id}
       onClick={onCityTitleClick}
+      onMouseEnter={() => onMouseHover(id)}
+      onMouseLeave={() => onMouseHover(DEACTIVATE_ID)}
     >
       <div className="place-card__mark">
         <span>Premium</span>
@@ -48,14 +51,6 @@ const ApartmentCard = (props) => {
   );
 };
 
-// ApartmentCard.propTypes = {
-//   placeOffer: PropTypes.object.isRequired,
-//   onCityTitleClick: PropTypes.func,
-//   id: PropTypes.number.isRequired,
-//   title: PropTypes.string.isRequired,
-//   price: PropTypes.number,
-//   srcImg: PropTypes.string,
-// };
 ApartmentCard.propTypes = {
   placeOffer: PropTypes.shape({
     id: PropTypes.number,
@@ -63,7 +58,8 @@ ApartmentCard.propTypes = {
     price: PropTypes.number,
     srcImg: PropTypes.string
   }).isRequired,
-  onCityTitleClick: PropTypes.func
+  onCityTitleClick: PropTypes.func,
+  onMouseHover: PropTypes.func
 };
 
 export default ApartmentCard;

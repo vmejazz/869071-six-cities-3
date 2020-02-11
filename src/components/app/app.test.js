@@ -4,11 +4,11 @@ import App from "./app.jsx";
 
 const OFFER_PLACES = 254;
 
-const apartmentTitleArray = [
-  `First title`,
-  `Second title`,
-  `Third title`,
-  `Another title`
+const offersArray = [
+  {
+    id: 1,
+    title: `First title`
+  }
 ];
 
 describe(`Test render App component`, () => {
@@ -18,7 +18,7 @@ describe(`Test render App component`, () => {
       .create(
           <App
             offerPlacesCount={OFFER_PLACES}
-            apartmentTitleArray={apartmentTitleArray}/>
+            offersArray={offersArray}/>
       )
       .toJSON();
 

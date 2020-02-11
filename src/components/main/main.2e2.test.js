@@ -7,8 +7,11 @@ Enzyme.configure({
   adapter: new Adapter()
 });
 
-const apartmentTitleArray = [
-  `Title of apartment`
+const offersArray = [
+  {
+    id: 1,
+    title: `Title of apartment`
+  }
 ];
 
 it(`Should button be pressed`, () => {
@@ -16,12 +19,12 @@ it(`Should button be pressed`, () => {
 
   const mainScreen = mount(
       <Main
-        apartmentTitleArray={apartmentTitleArray}
+        offersArray={offersArray}
         onCityTitleClick={handleCityTitle}
       />
   );
 
-  const titleLink = mainScreen.find(`.place-card__name`);
+  const titleLink = mainScreen.find(`.place-card`);
 
   titleLink.props().onClick();
 

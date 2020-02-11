@@ -6,6 +6,17 @@ class ApartmentList extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.state = {
+      activeCardId: -1
+    };
+
+    this._setActiveCard = this._setActiveCard.bind(this);
+  }
+
+  _setActiveCard(id) {
+    this.setState({
+      activeCardId: id
+    });
   }
 
   render() {
@@ -19,6 +30,7 @@ class ApartmentList extends PureComponent {
               key={item.id}
               placeOffer={item}
               onCityTitleClick={onCityTitleClick}
+              onMouseHover={this._setActiveCard}
             />
           );
         })}
