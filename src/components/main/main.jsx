@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
 
 const Main = (props) => {
-  let {offerPlacesCount, apartmentTitleArray, cityTitleHandler} = props;
+  const {offerPlacesCount, apartmentTitleArray, onCityTitleClick} = props;
 
   return (
     <React.Fragment>
@@ -101,7 +101,7 @@ const Main = (props) => {
                 </form>
                 <ApartmentList
                   apartmentTitleArray={apartmentTitleArray}
-                  cityTitleHandler={cityTitleHandler}/>
+                  onCityTitleClick={onCityTitleClick}/>
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map"></section>
@@ -114,10 +114,16 @@ const Main = (props) => {
   );
 };
 
+Main.defaultProps = {
+  offerPlacesCount: 3,
+  apartmentTitleArray: [],
+  onCityTitleClick: () => {}
+};
+
 Main.propTypes = {
   offerPlacesCount: PropTypes.number.isRequired,
   apartmentTitleArray: PropTypes.arrayOf(PropTypes.string).isRequired,
-  cityTitleHandler: PropTypes.func
+  onCityTitleClick: PropTypes.func
 };
 
 export default Main;

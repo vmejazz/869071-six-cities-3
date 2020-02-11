@@ -2,11 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ApartmentList = (props) => {
-  const {apartmentTitleArray, cityTitleHandler} = props;
-
-  if (!Array.isArray(apartmentTitleArray)) {
-    return null;
-  }
+  const {apartmentTitleArray, onCityTitleClick} = props;
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -42,7 +38,7 @@ const ApartmentList = (props) => {
               </div>
               <h2
                 className="place-card__name"
-                onClick={cityTitleHandler}
+                onClick={onCityTitleClick}
               >
                 <a href="#">{item}</a>
               </h2>
@@ -57,7 +53,7 @@ const ApartmentList = (props) => {
 
 ApartmentList.propTypes = {
   apartmentTitleArray: PropTypes.arrayOf(PropTypes.string).isRequired,
-  cityTitleHandler: PropTypes.func
+  onCityTitleClick: PropTypes.func
 };
 
 export default ApartmentList;

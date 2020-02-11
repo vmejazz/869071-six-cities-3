@@ -12,12 +12,12 @@ const apartmentTitleArray = [
 ];
 
 it(`Should button be pressed`, () => {
-  const cityTitleHandler = jest.fn();
+  const handleCityTitle = jest.fn();
 
   const mainScreen = mount(
       <Main
         apartmentTitleArray={apartmentTitleArray}
-        cityTitleHandler={cityTitleHandler}
+        onCityTitleClick={handleCityTitle}
       />
   );
 
@@ -25,5 +25,5 @@ it(`Should button be pressed`, () => {
 
   titleLink.props().onClick();
 
-  expect(cityTitleHandler.mock.calls.length).toBe(1);
+  expect(handleCityTitle.mock.calls.length).toBe(1);
 });

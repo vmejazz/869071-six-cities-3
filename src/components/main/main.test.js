@@ -29,9 +29,7 @@ describe(`Test Main page`, () => {
   it(`<Main /> should render page whith empty props`, () => {
     const tree = renderer
       .create(
-          <Main
-            offerPlacesCount={null}
-            apartmentTitleArray={null}/>
+          <Main />
       )
       .toJSON();
 

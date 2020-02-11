@@ -311,6 +311,7 @@ exports[`Test Main page <Main /> should render all page 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
+                  onClick={[Function]}
                 >
                   <a
                     href="#"
@@ -412,6 +413,7 @@ exports[`Test Main page <Main /> should render all page 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
+                  onClick={[Function]}
                 >
                   <a
                     href="#"
@@ -513,6 +515,7 @@ exports[`Test Main page <Main /> should render all page 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
+                  onClick={[Function]}
                 >
                   <a
                     href="#"
@@ -614,6 +617,7 @@ exports[`Test Main page <Main /> should render all page 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
+                  onClick={[Function]}
                 >
                   <a
                     href="#"
@@ -807,6 +811,7 @@ exports[`Test Main page <Main /> should render page whith empty props 1`] = `
           <b
             className="places__found"
           >
+            3
              places to stay in Amsterdam
           </b>
           <form
@@ -863,6 +868,9 @@ exports[`Test Main page <Main /> should render page whith empty props 1`] = `
               </li>
             </ul>
           </form>
+          <div
+            className="cities__places-list places__list tabs__content"
+          />
         </section>
         <div
           className="cities__right-section"
