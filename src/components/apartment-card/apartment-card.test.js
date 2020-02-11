@@ -1,25 +1,21 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import ApartmentList from "./apartment-list.jsx";
+import ApartmentCard from "./apartment-card";
 
-const offersArray = [
-  {
-    id: 1,
-    title: `First title`
-  },
-  {
-    id: 2,
-    title: `Second title`
-  }
-];
+const placeOffer = {
+  id: 1,
+  title: `New Perfect Apartment`,
+  price: 500,
+  srcImg: `./img/apartment-03.jpg`
+};
 
 describe(`Test Apartment list`, () => {
 
   it(`<ApartmentList /> should render list`, () => {
     const tree = renderer
       .create(
-          <ApartmentList
-            offersArray={offersArray}/>
+          <ApartmentCard
+            placeOffer={placeOffer}/>
       )
       .toJSON();
 
