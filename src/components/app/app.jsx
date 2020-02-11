@@ -3,19 +3,19 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
 const App = (props) => {
-  const {offerPlacesCount, apartmentTitleArray, onCityTitleClick} = props;
+  const {offerPlacesCount, offersArray, onCityTitleClick} = props;
 
   return (
     <Main
       offerPlacesCount={offerPlacesCount}
-      apartmentTitleArray={apartmentTitleArray}
+      offersArray={offersArray}
       onCityTitleClick={onCityTitleClick}/>
   );
 };
 
 App.propTypes = {
   offerPlacesCount: PropTypes.number.isRequired,
-  apartmentTitleArray: PropTypes.arrayOf(PropTypes.string).isRequired,
+  offersArray: PropTypes.arrayOf(PropTypes.object).isRequired,
   onCityTitleClick: PropTypes.func
 };
 
