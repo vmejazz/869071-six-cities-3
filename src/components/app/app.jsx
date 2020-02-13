@@ -6,6 +6,7 @@ import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.
 
 const App = (props) => {
   const {offerPlacesCount, offersArray, onCityTitleClick} = props;
+  const offer = offersArray[0];
 
   return (
     <BrowserRouter>
@@ -17,7 +18,7 @@ const App = (props) => {
             onCityTitleClick={onCityTitleClick}/>
         </Route>
         <Route exact path="/dev-apartment-detail-info">
-          <ApartmentDetailInfo />
+          <ApartmentDetailInfo offer={offer}/>
         </Route>
       </Switch>
     </BrowserRouter>
