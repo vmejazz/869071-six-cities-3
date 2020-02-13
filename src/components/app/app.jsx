@@ -1,15 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Main from "../main/main.jsx";
+import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
 
 const App = (props) => {
   const {offerPlacesCount, offersArray, onCityTitleClick} = props;
 
   return (
-    <Main
-      offerPlacesCount={offerPlacesCount}
-      offersArray={offersArray}
-      onCityTitleClick={onCityTitleClick}/>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Main
+            offerPlacesCount={offerPlacesCount}
+            offersArray={offersArray}
+            onCityTitleClick={onCityTitleClick}/>
+        </Route>
+        <Route exact path="/dev-apartment-detail-info">
+          <ApartmentDetailInfo />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
