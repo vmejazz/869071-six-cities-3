@@ -15,7 +15,12 @@ const App = (props) => {
 
 App.propTypes = {
   offerPlacesCount: PropTypes.number.isRequired,
-  offersArray: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offersArray: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number,
+    srcImg: PropTypes.string
+  })).isRequired,
   onCityTitleClick: PropTypes.func
 };
 
