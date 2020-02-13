@@ -15,12 +15,12 @@ const offersArray = [
 ];
 
 it(`Should button be pressed`, () => {
-  const handleCityTitle = jest.fn();
+  const onApartmentCardClick = jest.fn();
 
   const mainScreen = mount(
       <Main
         offersArray={offersArray}
-        onCityTitleClick={handleCityTitle}
+        onApartmentCardClick={onApartmentCardClick}
       />
   );
 
@@ -28,5 +28,5 @@ it(`Should button be pressed`, () => {
 
   titleLink.props().onClick();
 
-  expect(handleCityTitle.mock.calls.length).toBe(1);
+  expect(onApartmentCardClick.mock.calls.length).toBe(1);
 });

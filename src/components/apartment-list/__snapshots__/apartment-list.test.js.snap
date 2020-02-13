@@ -6,16 +6,11 @@ exports[`Test Apartment list <ApartmentList /> should render list 1`] = `
 >
   <article
     className="cities__place-card place-card"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
-      className="place-card__mark"
-    >
-      <span>
-        Premium
-      </span>
-    </div>
+    
     <div
       className="cities__image-wrapper place-card__image-wrapper"
     >
@@ -79,7 +74,7 @@ exports[`Test Apartment list <ApartmentList /> should render list 1`] = `
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "100%",
               }
             }
           />
@@ -101,23 +96,16 @@ exports[`Test Apartment list <ApartmentList /> should render list 1`] = `
       </h2>
       <p
         className="place-card__type"
-      >
-        Apartment
-      </p>
+      />
     </div>
   </article>
   <article
     className="cities__place-card place-card"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
-      className="place-card__mark"
-    >
-      <span>
-        Premium
-      </span>
-    </div>
+    
     <div
       className="cities__image-wrapper place-card__image-wrapper"
     >
@@ -181,7 +169,7 @@ exports[`Test Apartment list <ApartmentList /> should render list 1`] = `
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "100%",
               }
             }
           />
@@ -203,9 +191,7 @@ exports[`Test Apartment list <ApartmentList /> should render list 1`] = `
       </h2>
       <p
         className="place-card__type"
-      >
-        Apartment
-      </p>
+      />
     </div>
   </article>
 </div>
