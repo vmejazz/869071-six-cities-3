@@ -23,17 +23,18 @@ const offersArray = [
     title: `Perfect apartment`,
     price: 200,
     srcImg: `img/apartment-02.jpg`,
+    srcGallery: [`img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`],
     description: `All super long text about apartmmnet with cools stuffs`,
     premium: false,
-    type: `room`,
-    rate: 4.8,
+    type: `House`,
+    rate: 1,
     bedrooms: 3,
     maxGuests: 4,
     apartmentStuff: [`wifi`, `Cable TV`, `Kitchen`],
     ownerInfo: {
       name: `Jon`,
       super: true,
-      srcAvatar: `img/avatar.jpg`
+      srcAvatar: `img/avatar-max.jpg`
     }
   },
   {
@@ -41,17 +42,18 @@ const offersArray = [
     title: `Imagine apartment`,
     price: 250,
     srcImg: `img/apartment-03.jpg`,
+    srcGallery: [`img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`],
     description: `All super long text about apartmmnet with cools stuffs`,
     premium: false,
-    type: `room`,
-    rate: 4.8,
+    type: `Apartment`,
+    rate: 3,
     bedrooms: 3,
     maxGuests: 4,
     apartmentStuff: [`wifi`, `Cable TV`, `Kitchen`],
     ownerInfo: {
       name: `Jon`,
       super: true,
-      srcAvatar: `img/avatar.jpg`
+      srcAvatar: `img/avatar-max.jpg`
     }
   },
   {
@@ -59,17 +61,18 @@ const offersArray = [
     title: `Best of the best apartment`,
     price: 400,
     srcImg: `img/apartment-01.jpg`,
+    srcGallery: [`img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`],
     description: `All super long text about apartmmnet with cools stuffs`,
     premium: false,
-    type: `room`,
-    rate: 4.8,
+    type: `Apartment`,
+    rate: 2.2,
     bedrooms: 3,
     maxGuests: 4,
     apartmentStuff: [`wifi`, `Cable TV`, `Kitchen`],
     ownerInfo: {
       name: `Jon`,
       super: true,
-      srcAvatar: `img/avatar.jpg`
+      srcAvatar: `img/avatar-max.jpg`
     }
   }
 ];

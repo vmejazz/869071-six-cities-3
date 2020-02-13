@@ -9,25 +9,51 @@ class App extends PureComponent {
     super(props);
 
     this.state = {
-      link: `/`
+      activeId: -1
     };
+
+    this._handleApartmentCardClick = this._handleApartmentCardClick.bind(this);
+  }
+
+  _handleApartmentCardClick(id) {
+    this.setState({
+      activeId: id
+    });
+  }
+
+  _renderApp() {
+    const {offerPlacesCount, offersArray} = this.props;
+    const {activeId} = this.state;
+
+    if (activeId < 0) {
+      return (
+        <Main
+          offerPlacesCount={offerPlacesCount}
+          offersArray={offersArray}
+          onApartmentCardClick={this._handleApartmentCardClick}
+        />
+      );
+    }
+    if (activeId >= 0) {
+      return (
+        <ApartmentDetailInfo offer={offersArray[activeId - 1]} />
+      );
+    }
+
+    return null;
   }
 
   render() {
-    const {offerPlacesCount, offersArray, onCityTitleClick} = this.props;
-    const offer = offersArray[0];
+    const offer = this.props.offersArray[0];
 
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Main
-              offerPlacesCount={offerPlacesCount}
-              offersArray={offersArray}
-              onCityTitleClick={onCityTitleClick}/>
+            {this._renderApp()}
           </Route>
-          <Route exact path="/dev-apartment-detail-info">
-            <ApartmentDetailInfo offer={offer}/>
+          <Route path="/offer">
+            <ApartmentDetailInfo offer={offer} />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -43,7 +69,7 @@ App.propTypes = {
     price: PropTypes.number,
     srcImg: PropTypes.string
   })).isRequired,
-  onCityTitleClick: PropTypes.func
+  onApartmentCardClick: PropTypes.func
 };
 
 export default App;

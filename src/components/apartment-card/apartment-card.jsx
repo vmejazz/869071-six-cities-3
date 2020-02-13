@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ApartmentCard = (props) => {
-  const {placeOffer, onCityTitleClick, onMouseHover} = props;
+  const {placeOffer, onApartmentCardClick, onMouseHover} = props;
   const {id, title, price, srcImg} = placeOffer;
   const DEACTIVATE_ID = -1;
 
   return (
     <article className="cities__place-card place-card"
       key={id}
-      onClick={onCityTitleClick}
+      onClick={() => onApartmentCardClick(id)}
       onMouseEnter={() => onMouseHover(id)}
       onMouseLeave={() => onMouseHover(DEACTIVATE_ID)}
     >
@@ -58,7 +58,7 @@ ApartmentCard.propTypes = {
     price: PropTypes.number,
     srcImg: PropTypes.string
   }).isRequired,
-  onCityTitleClick: PropTypes.func,
+  onApartmentCardClick: PropTypes.func,
   onMouseHover: PropTypes.func
 };
 

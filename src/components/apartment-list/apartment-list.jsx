@@ -20,7 +20,7 @@ class ApartmentList extends PureComponent {
   }
 
   render() {
-    const {offersArray, onCityTitleClick} = this.props;
+    const {offersArray, onApartmentCardClick} = this.props;
 
     return (
       <div className="cities__places-list places__list tabs__content">
@@ -29,7 +29,7 @@ class ApartmentList extends PureComponent {
             <ApartmentCard
               key={item.id}
               placeOffer={item}
-              onCityTitleClick={onCityTitleClick}
+              onApartmentCardClick={onApartmentCardClick}
               onMouseHover={this._setActiveCard}
             />
           );
@@ -41,7 +41,7 @@ class ApartmentList extends PureComponent {
 
 ApartmentList.propTypes = {
   offersArray: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onCityTitleClick: PropTypes.func
+  onApartmentCardClick: PropTypes.func
 };
 
 export default ApartmentList;
