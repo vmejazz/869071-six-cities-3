@@ -71,7 +71,7 @@ const offersArray = [
     apartmentStuff: [`wifi`, `Cable TV`, `Kitchen`],
     ownerInfo: {
       name: `Jon`,
-      super: true,
+      super: false,
       srcAvatar: `img/avatar-max.jpg`
     }
   }

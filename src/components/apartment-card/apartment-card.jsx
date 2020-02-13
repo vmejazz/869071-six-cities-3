@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 
 const ApartmentCard = (props) => {
   const {placeOffer, onApartmentCardClick, onMouseHover} = props;
-  const {id, title, price, srcImg} = placeOffer;
+  const {id, title, price, srcImg, premium, type, rate} = placeOffer;
+
   const DEACTIVATE_ID = -1;
 
   return (
@@ -13,9 +14,12 @@ const ApartmentCard = (props) => {
       onMouseEnter={() => onMouseHover(id)}
       onMouseLeave={() => onMouseHover(DEACTIVATE_ID)}
     >
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+      {premium ?
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+        : ``
+      }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={srcImg} width="260" height="200" alt="Place image"/>
@@ -36,8 +40,8 @@ const ApartmentCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}}></span>
-            <span className="visually-hidden">Rating</span>
+            <span style={{width: `${rate <= 4 ? rate * 20 : 100}%`}}></span>
+            <span className="visually-hidden">{rate}Rating</span>
           </div>
         </div>
         <h2
@@ -45,7 +49,7 @@ const ApartmentCard = (props) => {
         >
           <a href="#">{title}</a>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
@@ -56,7 +60,10 @@ ApartmentCard.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     price: PropTypes.number,
-    srcImg: PropTypes.string
+    srcImg: PropTypes.stringб,
+    premium: PropTypes.bool,
+    type: PropTypes.string,
+    rate: PropTypes.number
   }).isRequired,
   onApartmentCardClick: PropTypes.func,
   onMouseHover: PropTypes.func
