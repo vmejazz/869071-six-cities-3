@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 const ApartmentDetailInfo = (props) => {
   const {offer} = props;
   const {id, title, price, srcGallery, description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo} = offer;
-  const srcGalleryArray = srcGallery.filter((item, index) => index < 6);
 
   return (
     <div className="page" id={id}>
@@ -34,13 +33,15 @@ const ApartmentDetailInfo = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {srcGalleryArray.map((item, index) => {
-                return (
-                  <div className="property__image-wrapper" key={item + index}>
-                    <img className="property__image" src={item} alt="Photo studio" />
-                  </div>
-                );
-              })}
+              {srcGallery
+                .slice(0, 6)
+                .map((item, index) => {
+                  return (
+                    <div className="property__image-wrapper" key={item + index}>
+                      <img className="property__image" src={item} alt="Photo studio" />
+                    </div>
+                  );
+                })}
             </div>
           </div>
           <div className="property__container container">
