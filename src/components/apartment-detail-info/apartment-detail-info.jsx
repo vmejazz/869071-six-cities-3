@@ -296,14 +296,14 @@ ApartmentDetailInfo.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number,
-    srcGallery: PropTypes.array,
+    srcGallery: PropTypes.arrayOf(PropTypes.string),
     description: PropTypes.string,
     premium: PropTypes.bool,
     type: PropTypes.string,
     rate: PropTypes.number,
     bedrooms: PropTypes.number,
     maxGuests: PropTypes.number,
-    apartmentStuff: PropTypes.array,
+    apartmentStuff: PropTypes.arrayOf(PropTypes.string),
     ownerInfo: PropTypes. object
   }).isRequired
 };
