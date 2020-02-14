@@ -34,13 +34,11 @@ class App extends PureComponent {
         />
       );
     }
-    if (activeId >= 0) {
-      return (
-        <ApartmentDetailInfo offer={offersArray[activeId - 1]} />
-      );
-    }
 
-    return null;
+    return (
+      <ApartmentDetailInfo offer={offersArray[activeId - 1]} />
+    );
+
   }
 
   render() {
