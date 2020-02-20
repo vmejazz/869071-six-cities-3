@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
+import Map from "../map/map.jsx";
 
 const Main = (props) => {
   const {offerPlacesCount, offersArray, onApartmentCardClick} = props;
@@ -104,7 +105,9 @@ const Main = (props) => {
                   onApartmentCardClick={onApartmentCardClick}/>
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <Map
+                  offers={offersArray}
+                />
               </div>
             </div>
           </div>

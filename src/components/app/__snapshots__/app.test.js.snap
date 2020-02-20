@@ -326,6 +326,7 @@ exports[`Test render App component <App /> should render page 1`] = `
         >
           <section
             className="cities__map map"
+            id="mapId"
           />
         </div>
       </div>

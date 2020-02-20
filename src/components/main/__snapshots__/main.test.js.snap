@@ -230,6 +230,7 @@ exports[`Test Main page <Main /> should render all page 1`] = `
         >
           <section
             className="cities__map map"
+            id="mapId"
           />
         </div>
       </div>
@@ -468,6 +469,7 @@ exports[`Test Main page <Main /> should render page whith empty props 1`] = `
         >
           <section
             className="cities__map map"
+            id="mapId"
           />
         </div>
       </div>
