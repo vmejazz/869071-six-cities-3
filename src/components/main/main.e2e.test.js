@@ -2,6 +2,7 @@ import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main.jsx";
+jest.mock(`../map/map.jsx`, () => `Map`);
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -14,6 +15,10 @@ const offersArray = [
   }
 ];
 
+const cityes = {
+  AMSTERDAM: [52.38333, 4.9]
+};
+
 it(`Should button be pressed`, () => {
   const onApartmentCardClick = jest.fn();
 
@@ -21,6 +26,7 @@ it(`Should button be pressed`, () => {
       <Main
         offersArray={offersArray}
         onApartmentCardClick={onApartmentCardClick}
+        cityes={cityes}
       />
   );
 

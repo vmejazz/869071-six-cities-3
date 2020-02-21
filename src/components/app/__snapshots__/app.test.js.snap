@@ -324,9 +324,24 @@ exports[`Test render App component <App /> should render page 1`] = `
         <div
           className="cities__right-section"
         >
-          <section
-            className="cities__map map"
-            id="mapId"
+          <Map
+            cityes={
+              Object {
+                "AMSTERDAM": Array [
+                  52.38333,
+                  4.9,
+                ],
+              }
+            }
+            offers={
+              Array [
+                Object {
+                  "id": 1,
+                  "srcGallery": Array [],
+                  "title": "First title",
+                },
+              ]
+            }
           />
         </div>
       </div>

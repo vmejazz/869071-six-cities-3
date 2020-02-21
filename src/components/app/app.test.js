@@ -1,15 +1,21 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app.jsx";
+jest.mock(`../map/map.jsx`, () => `Map`);
 
 const OFFER_PLACES = 254;
 
 const offersArray = [
   {
     id: 1,
-    title: `First title`
+    title: `First title`,
+    srcGallery: []
   }
 ];
+
+const cityes = {
+  AMSTERDAM: [52.38333, 4.9]
+};
 
 describe(`Test render App component`, () => {
 
@@ -18,7 +24,9 @@ describe(`Test render App component`, () => {
       .create(
           <App
             offerPlacesCount={OFFER_PLACES}
-            offersArray={offersArray}/>
+            offersArray={offersArray}
+            cityes={cityes}
+          />
       )
       .toJSON();
 
