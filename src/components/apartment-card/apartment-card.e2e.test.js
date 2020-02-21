@@ -36,7 +36,6 @@ describe(``, () => {
 
     apartmentArticle.props().onClick();
 
-    // expect(onApartmentCardClick.mock.calls.length).toBe(1);
     expect(onApartmentCardClick).toHaveBeenCalledWith(5);
   });
 

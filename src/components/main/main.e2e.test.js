@@ -10,7 +10,7 @@ Enzyme.configure({
 
 const offersArray = [
   {
-    id: 1,
+    id: 3,
     title: `Title of apartment`
   }
 ];
@@ -35,4 +35,5 @@ it(`Should button be pressed`, () => {
   titleLink.props().onClick();
 
   expect(onApartmentCardClick.mock.calls.length).toBe(1);
+  expect(onApartmentCardClick).toHaveBeenCalledWith(3);
 });
