@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+const MAX_IMAGES = 6;
+
 const ApartmentDetailInfo = (props) => {
   const {offer} = props;
-  const {id, title, price, srcGallery, description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo} = offer;
+  const {id, title, price, srcGallery = [], description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo} = offer;
 
   return (
     <div className="page" id={id}>
@@ -34,7 +36,7 @@ const ApartmentDetailInfo = (props) => {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {srcGallery
-                .slice(0, 6)
+                .slice(0, MAX_IMAGES)
                 .map((item, index) => {
                   return (
                     <div className="property__image-wrapper" key={item + index}>
@@ -296,7 +298,7 @@ ApartmentDetailInfo.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number,
-    srcGallery: PropTypes.arrayOf(PropTypes.string),
+    srcGallery: PropTypes.arrayOf(PropTypes.string).isRequired,
     description: PropTypes.string,
     premium: PropTypes.bool,
     type: PropTypes.string,
