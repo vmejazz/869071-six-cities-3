@@ -4,7 +4,7 @@ import ApartmentList from "../apartment-list/apartment-list.jsx";
 import Map from "../map/map.jsx";
 
 const Main = (props) => {
-  const {offerPlacesCount, offersArray, onApartmentCardClick} = props;
+  const {offerPlacesCount, offersArray, onApartmentCardClick, cityes} = props;
 
   return (
     <React.Fragment>
@@ -107,6 +107,7 @@ const Main = (props) => {
               <div className="cities__right-section">
                 <Map
                   offers={offersArray}
+                  cityes={cityes}
                 />
               </div>
             </div>
@@ -126,7 +127,8 @@ Main.defaultProps = {
 Main.propTypes = {
   offerPlacesCount: PropTypes.number.isRequired,
   offersArray: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onApartmentCardClick: PropTypes.func
+  onApartmentCardClick: PropTypes.func,
+  cityes: PropTypes.object.isRequired
 };
 
 export default Main;

@@ -2,15 +2,6 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 
-const cityes = {
-  AMSTERDAM: [52.38333, 4.9],
-  PARIS: [48.856663, 2.351556],
-  COLOGNE: [50.930779, 6.938399],
-  BRUSSELS: [50.851309, 4.351718],
-  HAMBURG: [53.552645, 9.966287],
-  DUSSELDORF: [51.230569, 6.787428]
-};
-
 const ZOOM = 12;
 
 class Map extends PureComponent {
@@ -21,7 +12,7 @@ class Map extends PureComponent {
   componentDidMount() {
     const mapElement = document.getElementById(`mapId`);
     if (mapElement) {
-      const {offers} = this.props;
+      const {offers, cityes} = this.props;
       const myMap = leaflet.map(`mapId`, {
         center: cityes.AMSTERDAM,
         zoom: ZOOM,
@@ -61,8 +52,9 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
-    porition: PropTypes.array
-  })).isRequired
+    position: PropTypes.array
+  })).isRequired,
+  cityes: PropTypes.object.isRequired
 };
 
 export default Map;
