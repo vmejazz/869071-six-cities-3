@@ -126,9 +126,30 @@ Main.defaultProps = {
 
 Main.propTypes = {
   offerPlacesCount: PropTypes.number.isRequired,
-  offersArray: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offersArray: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    srcImg: PropTypes.string,
+    srcGallery: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
+    premium: PropTypes.bool,
+    type: PropTypes.string,
+    rate: PropTypes.number,
+    bedrooms: PropTypes.number.isRequired,
+    maxGuests: PropTypes.number.isRequired,
+    apartmentStuff: PropTypes.arrayOf(PropTypes.string),
+    ownerInfo: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool,
+      srcAvatar: PropTypes.string
+    }),
+    position: PropTypes.arrayOf(PropTypes.number).isRequired
+  })).isRequired,
   onApartmentCardClick: PropTypes.func,
-  cityes: PropTypes.object.isRequired
+  cityes: PropTypes.objectOf(
+      PropTypes.arrayOf(PropTypes.number)
+  ).isRequired
 };
 
 export default Main;
