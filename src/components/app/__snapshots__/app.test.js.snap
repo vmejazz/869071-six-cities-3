@@ -258,6 +258,7 @@ exports[`Test render App component <App /> should render page 1`] = `
                       className="place-card__price-value"
                     >
                       €
+                      156
                     </b>
                     <span
                       className="place-card__price-text"
@@ -337,6 +338,7 @@ exports[`Test render App component <App /> should render page 1`] = `
               Array [
                 Object {
                   "id": 1,
+                  "price": 156,
                   "srcGallery": Array [],
                   "title": "First title",
                 },

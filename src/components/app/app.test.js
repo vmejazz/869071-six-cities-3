@@ -8,6 +8,7 @@ const OFFER_PLACES = 254;
 const offersArray = [
   {
     id: 1,
+    price: 156,
     title: `First title`,
     srcGallery: []
   }
