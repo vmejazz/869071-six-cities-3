@@ -337,7 +337,10 @@ exports[`Test render App component <App /> should render page 1`] = `
             offers={
               Array [
                 Object {
+                  "bedrooms": 2,
                   "id": 1,
+                  "maxGuests": 5,
+                  "position": Array [],
                   "price": 156,
                   "srcGallery": Array [],
                   "title": "First title",

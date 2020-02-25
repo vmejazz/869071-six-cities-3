@@ -10,7 +10,10 @@ const offersArray = [
     id: 1,
     price: 156,
     title: `First title`,
-    srcGallery: []
+    srcGallery: [],
+    bedrooms: 2,
+    maxGuests: 5,
+    position: []
   }
 ];
 

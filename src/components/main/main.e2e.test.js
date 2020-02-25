@@ -11,7 +11,12 @@ Enzyme.configure({
 const offersArray = [
   {
     id: 3,
-    title: `Title of apartment`
+    price: 777,
+    title: `Title of apartment`,
+    srcGallery: [],
+    bedrooms: 2,
+    maxGuests: 5,
+    position: []
   }
 ];
 
