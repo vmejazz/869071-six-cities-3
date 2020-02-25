@@ -1,43 +1,29 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.jsx";
 import Main from "../main/main.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeId: -1
-    };
-
-    this._handleApartmentCardClick = this._handleApartmentCardClick.bind(this);
-  }
-
-  _handleApartmentCardClick(id) {
-    this.setState({
-      activeId: id
-    });
-  }
 
   _renderApp() {
-    const {offerPlacesCount, offersArray, cityes} = this.props;
-    const {activeId} = this.state;
+    const {offersArray, cityes, changeCity, activeOfferId} = this.props;
 
-    if (activeId < 0) {
+    if (activeOfferId < 0) {
       return (
         <Main
-          offerPlacesCount={offerPlacesCount}
+          offerPlacesCount={offersArray.length}
           offersArray={offersArray}
-          onApartmentCardClick={this._handleApartmentCardClick}
+          onApartmentCardClick={changeCity}
           cityes={cityes}
         />
       );
     }
 
     return (
-      <ApartmentDetailInfo offer={offersArray[activeId - 1]} />
+      <ApartmentDetailInfo offer={offersArray[activeOfferId - 1]} />
     );
 
   }
@@ -61,7 +47,6 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offerPlacesCount: PropTypes.number.isRequired,
   offersArray: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -72,4 +57,18 @@ App.propTypes = {
   cityes: PropTypes.object.isRequired
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  activeCity: state.activeCity,
+  activeOfferId: state.activeOfferId
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCity() {
+    dispatch(
+        ActionCreator.changeCity(`paris`)
+    );
+  }
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
