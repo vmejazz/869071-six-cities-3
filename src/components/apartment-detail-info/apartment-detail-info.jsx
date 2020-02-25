@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+const MAX_IMAGES = 6;
+
 const ApartmentDetailInfo = (props) => {
   const {offer} = props;
-  const {id, title, price, srcGallery, description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo} = offer;
-  const srcGalleryArray = srcGallery.filter((item, index) => index < 6);
+  const {id, title, price, srcGallery = [], description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo} = offer;
 
   return (
     <div className="page" id={id}>
@@ -34,13 +35,15 @@ const ApartmentDetailInfo = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {srcGalleryArray.map((item, index) => {
-                return (
-                  <div className="property__image-wrapper" key={item + index}>
-                    <img className="property__image" src={item} alt="Photo studio" />
-                  </div>
-                );
-              })}
+              {srcGallery
+                .slice(0, MAX_IMAGES)
+                .map((item, index) => {
+                  return (
+                    <div className="property__image-wrapper" key={item + index}>
+                      <img className="property__image" src={item} alt="Photo studio" />
+                    </div>
+                  );
+                })}
             </div>
           </div>
           <div className="property__container container">
@@ -295,14 +298,14 @@ ApartmentDetailInfo.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number,
-    srcGallery: PropTypes.array,
+    srcGallery: PropTypes.arrayOf(PropTypes.string).isRequired,
     description: PropTypes.string,
     premium: PropTypes.bool,
     type: PropTypes.string,
     rate: PropTypes.number,
     bedrooms: PropTypes.number,
     maxGuests: PropTypes.number,
-    apartmentStuff: PropTypes.array,
+    apartmentStuff: PropTypes.arrayOf(PropTypes.string),
     ownerInfo: PropTypes. object
   }).isRequired
 };

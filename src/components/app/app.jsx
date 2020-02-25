@@ -22,7 +22,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {offerPlacesCount, offersArray} = this.props;
+    const {offerPlacesCount, offersArray, cityes} = this.props;
     const {activeId} = this.state;
 
     if (activeId < 0) {
@@ -31,16 +31,15 @@ class App extends PureComponent {
           offerPlacesCount={offerPlacesCount}
           offersArray={offersArray}
           onApartmentCardClick={this._handleApartmentCardClick}
+          cityes={cityes}
         />
       );
     }
-    if (activeId >= 0) {
-      return (
-        <ApartmentDetailInfo offer={offersArray[activeId - 1]} />
-      );
-    }
 
-    return null;
+    return (
+      <ApartmentDetailInfo offer={offersArray[activeId - 1]} />
+    );
+
   }
 
   render() {
@@ -69,7 +68,8 @@ App.propTypes = {
     price: PropTypes.number,
     srcImg: PropTypes.string
   })).isRequired,
-  onApartmentCardClick: PropTypes.func
+  onApartmentCardClick: PropTypes.func,
+  cityes: PropTypes.object.isRequired
 };
 
 export default App;

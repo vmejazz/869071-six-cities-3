@@ -258,6 +258,7 @@ exports[`Test render App component <App /> should render page 1`] = `
                       className="place-card__price-value"
                     >
                       €
+                      156
                     </b>
                     <span
                       className="place-card__price-text"
@@ -324,8 +325,28 @@ exports[`Test render App component <App /> should render page 1`] = `
         <div
           className="cities__right-section"
         >
-          <section
-            className="cities__map map"
+          <Map
+            cityes={
+              Object {
+                "AMSTERDAM": Array [
+                  52.38333,
+                  4.9,
+                ],
+              }
+            }
+            offers={
+              Array [
+                Object {
+                  "bedrooms": 2,
+                  "id": 1,
+                  "maxGuests": 5,
+                  "position": Array [],
+                  "price": 156,
+                  "srcGallery": Array [],
+                  "title": "First title",
+                },
+              ]
+            }
           />
         </div>
       </div>

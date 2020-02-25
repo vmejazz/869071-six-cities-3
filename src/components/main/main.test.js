@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
+jest.mock(`../map/map.jsx`, () => `Map`);
 
 const OFFER_PLACES = 254;
 
@@ -11,29 +12,20 @@ const apartmentTitleArray = [
   `Another title`
 ];
 
+const cityes = {
+  AMSTERDAM: [52.38333, 4.9]
+};
 
-describe(`Test Main page`, () => {
-
-  it(`<Main /> should render all page`, () => {
-    const tree = renderer
+it(`<Main /> should render all page`, () => {
+  const tree = renderer
       .create(
           <Main
             offerPlacesCount={OFFER_PLACES}
-            apartmentTitleArray={apartmentTitleArray}/>
+            apartmentTitleArray={apartmentTitleArray}
+            cityes={cityes}
+          />
       )
       .toJSON();
 
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`<Main /> should render page whith empty props`, () => {
-    const tree = renderer
-      .create(
-          <Main />
-      )
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
+  expect(tree).toMatchSnapshot();
 });

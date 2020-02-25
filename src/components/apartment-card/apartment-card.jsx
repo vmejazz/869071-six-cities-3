@@ -9,7 +9,6 @@ const ApartmentCard = (props) => {
 
   return (
     <article className="cities__place-card place-card"
-      key={id}
       onClick={() => onApartmentCardClick(id)}
       onMouseEnter={() => onMouseHover(id)}
       onMouseLeave={() => onMouseHover(DEACTIVATE_ID)}
@@ -60,7 +59,7 @@ ApartmentCard.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     price: PropTypes.number,
-    srcImg: PropTypes.stringб,
+    srcImg: PropTypes.string,
     premium: PropTypes.bool,
     type: PropTypes.string,
     rate: PropTypes.number

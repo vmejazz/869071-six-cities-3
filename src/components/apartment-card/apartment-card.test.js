@@ -9,9 +9,9 @@ const placeOffer = {
   srcImg: `./img/apartment-03.jpg`
 };
 
-describe(`Test Apartment list`, () => {
+describe(`Test ApartmentCard component`, () => {
 
-  it(`<ApartmentList /> should render list`, () => {
+  it(`<ApartmentCard /> should render apartment card `, () => {
     const tree = renderer
       .create(
           <ApartmentCard

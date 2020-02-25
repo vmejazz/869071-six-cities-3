@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ApartmentList /> should render list 1`] = `
+exports[`<ApartmentDetailInfo /> should render apartment-detail-info page  1`] = `
 <div
   className="page"
   id={1}

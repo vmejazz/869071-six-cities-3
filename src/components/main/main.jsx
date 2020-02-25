@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
+import Map from "../map/map.jsx";
 
 const Main = (props) => {
-  const {offerPlacesCount, offersArray, onApartmentCardClick} = props;
+  const {offerPlacesCount, offersArray, onApartmentCardClick, cityes} = props;
 
   return (
     <React.Fragment>
@@ -104,7 +105,10 @@ const Main = (props) => {
                   onApartmentCardClick={onApartmentCardClick}/>
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <Map
+                  offers={offersArray}
+                  cityes={cityes}
+                />
               </div>
             </div>
           </div>
@@ -122,8 +126,30 @@ Main.defaultProps = {
 
 Main.propTypes = {
   offerPlacesCount: PropTypes.number.isRequired,
-  offersArray: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onApartmentCardClick: PropTypes.func
+  offersArray: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    srcImg: PropTypes.string,
+    srcGallery: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
+    premium: PropTypes.bool,
+    type: PropTypes.string,
+    rate: PropTypes.number,
+    bedrooms: PropTypes.number.isRequired,
+    maxGuests: PropTypes.number.isRequired,
+    apartmentStuff: PropTypes.arrayOf(PropTypes.string),
+    ownerInfo: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool,
+      srcAvatar: PropTypes.string
+    }),
+    position: PropTypes.arrayOf(PropTypes.number).isRequired
+  })).isRequired,
+  onApartmentCardClick: PropTypes.func,
+  cityes: PropTypes.objectOf(
+      PropTypes.arrayOf(PropTypes.number)
+  ).isRequired
 };
 
 export default Main;

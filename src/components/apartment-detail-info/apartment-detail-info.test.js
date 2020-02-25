@@ -22,7 +22,7 @@ const offer = {
   }
 };
 
-it(`<ApartmentList /> should render list`, () => {
+it(`<ApartmentDetailInfo /> should render apartment-detail-info page `, () => {
   const tree = renderer
       .create(
           <ApartmentDetailInfo
