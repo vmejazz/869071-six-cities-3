@@ -9,13 +9,13 @@ import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.
 class App extends PureComponent {
 
   _renderApp() {
-    const {offersArray, cityes, openOffer, activeOfferId} = this.props;
+    const {offers, offersShow, cityes, openOffer, activeOfferId} = this.props;
 
     if (activeOfferId < 0) {
       return (
         <Main
-          offerPlacesCount={offersArray.length}
-          offersArray={offersArray}
+          offerPlacesCount={offersShow.length}
+          offersArray={offersShow}
           onApartmentCardClick={openOffer}
           cityes={cityes}
         />
@@ -23,13 +23,13 @@ class App extends PureComponent {
     }
 
     return (
-      <ApartmentDetailInfo offer={offersArray[activeOfferId - 1]} />
+      <ApartmentDetailInfo offer={offers[activeOfferId - 1]} />
     );
 
   }
 
   render() {
-    const offer = this.props.offersArray[0];
+    const offer = this.props.offers[0];
 
     return (
       <BrowserRouter>
@@ -47,27 +47,41 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offersArray: PropTypes.arrayOf(PropTypes.shape({
+  offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number,
     srcImg: PropTypes.string
   })).isRequired,
+  offersShow: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number,
+    srcImg: PropTypes.string
+  })),
   onApartmentCardClick: PropTypes.func,
   cityes: PropTypes.object.isRequired,
   activeOfferId: PropTypes.number.isRequired,
-  openOffer: PropTypes.func
+  openOffer: PropTypes.func,
+  getOffers: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
   activeCity: state.activeCity,
-  activeOfferId: state.activeOfferId
+  activeOfferId: state.activeOfferId,
+  offers: state.offers,
+  offersShow: state.offersShow
 });
 
 const mapDispatchToProps = (dispatch) => ({
   openOffer(id) {
     dispatch(
         ActionCreator.openOffer(id)
+    );
+  },
+  getOffers() {
+    dispatch(
+        ActionCreator.getOffers()
     );
   }
 });
