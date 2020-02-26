@@ -38,7 +38,7 @@ const offersArray = [
       super: true,
       srcAvatar: `img/avatar-max.jpg`
     },
-    position: [52.369553943508, 4.85309666406198],
+    position: [50.938014, 6.958104],
     city: `Cologne`
   },
   {
@@ -80,7 +80,7 @@ const offersArray = [
       super: false,
       srcAvatar: `img/avatar-max.jpg`
     },
-    position: [52.3809553943508, 4.939309666406198],
+    position: [48.858764, 2.348802],
     city: `Paris`
   }
 ];
