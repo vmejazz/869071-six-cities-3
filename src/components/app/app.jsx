@@ -9,14 +9,14 @@ import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.
 class App extends PureComponent {
 
   _renderApp() {
-    const {offersArray, cityes, changeCity, activeOfferId} = this.props;
+    const {offersArray, cityes, openOffer, activeOfferId} = this.props;
 
     if (activeOfferId < 0) {
       return (
         <Main
           offerPlacesCount={offersArray.length}
           offersArray={offersArray}
-          onApartmentCardClick={changeCity}
+          onApartmentCardClick={openOffer}
           cityes={cityes}
         />
       );
@@ -54,7 +54,9 @@ App.propTypes = {
     srcImg: PropTypes.string
   })).isRequired,
   onApartmentCardClick: PropTypes.func,
-  cityes: PropTypes.object.isRequired
+  cityes: PropTypes.object.isRequired,
+  activeOfferId: PropTypes.number.isRequired,
+  openOffer: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -63,9 +65,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCity() {
+  openOffer(id) {
     dispatch(
-        ActionCreator.changeCity(`paris`)
+        ActionCreator.openOffer(id)
     );
   }
 });
