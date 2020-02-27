@@ -11,6 +11,9 @@ import SortOptions from "../sort-options/sort-options.jsx";
 const Main = (props) => {
   const {offerPlacesCount, offersShow, onApartmentCardClick, cityes, activeCity, changeCity, hoverCardId, setHoverCardId} = props;
   const emptyOffers = offerPlacesCount === 0;
+  offersShow.sort((a, b) => {
+    return (a.price - b.price);
+  });
 
   return (
     <React.Fragment>

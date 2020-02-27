@@ -42,7 +42,7 @@ class ApartmentList extends PureComponent {
 ApartmentList.propTypes = {
   offersShow: PropTypes.arrayOf(PropTypes.object).isRequired,
   onApartmentCardClick: PropTypes.func,
-  setHoverCardId: PropTypes.number
+  setHoverCardId: PropTypes.func
 };
 
 export default ApartmentList;
