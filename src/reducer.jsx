@@ -8,7 +8,8 @@ const initialState = {
   offers,
   offersShow: offers.filter((item) => {
     return item.city === Object.keys(cityes)[0];
-  })
+  }),
+  cityes
 };
 // const initialState = {
 //   activeCity: ``,
