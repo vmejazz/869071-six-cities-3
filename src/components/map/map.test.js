@@ -16,6 +16,30 @@ jest.mock(`leaflet`, () => ({
   }),
 }));
 
+const offers = [
+  {
+    id: 1,
+    title: ``,
+    price: 120,
+    srcImg: ``,
+    srcGallery: [],
+    description: ``,
+    premium: true,
+    type: ``,
+    rate: 1,
+    bedrooms: 1,
+    maxGuests: 1,
+    apartmentStuff: [],
+    ownerInfo: {
+      name: ``,
+      super: true,
+      srcAvatar: ``
+    },
+    position: [1, 1],
+    city: `Moscow`
+  }
+];
+
 const cityes = {
   AMSTERDAM: [52.38333, 4.9]
 };
@@ -25,7 +49,7 @@ it(`Map render`, () => {
     .create(
         <Map
           activeCity={`Moscow`}
-          offers={[]}
+          offers={offers}
           cityes={cityes}
         />)
     .toJSON();

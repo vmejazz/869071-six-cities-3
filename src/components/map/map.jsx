@@ -84,7 +84,8 @@ Map.propTypes = {
       super: PropTypes.bool,
       srcAvatar: PropTypes.string
     }),
-    position: PropTypes.arrayOf(PropTypes.number).isRequired
+    position: PropTypes.arrayOf(PropTypes.number).isRequired,
+    city: PropTypes.string.isRequired
   })).isRequired,
   cityes: PropTypes.objectOf(
       PropTypes.arrayOf(PropTypes.number)
