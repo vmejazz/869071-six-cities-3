@@ -71,6 +71,7 @@ exports[`<Main /> should render all page 1`] = `
         className="locations container"
       >
         <CityList
+          activeCity="Moscow"
           cityes={
             Object {
               "AMSTERDAM": Array [

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {CityList} from "./city-list";
+import CityList from "./city-list";
 
 const cityes = {
   Amsterdam: [52.38333, 4.9],

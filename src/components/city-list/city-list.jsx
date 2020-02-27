@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.jsx";
 
 const MAX_CITYES = 6;
 
@@ -39,17 +37,4 @@ CityList.propTypes = {
   activeCity: PropTypes.string.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  activeCity: state.activeCity
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  changeCity(city) {
-    dispatch(
-        ActionCreator.changeCity(city)
-    );
-  }
-});
-
-export {CityList};
-export default connect(mapStateToProps, mapDispatchToProps)(CityList);
+export default CityList;

@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.jsx";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
 import Map from "../map/map.jsx";
 import CityList from "../city-list/city-list.jsx";
 import EmptyOffers from "../empty-offers/empty-offers.jsx";
 
 const Main = (props) => {
-  const {offerPlacesCount, offersShow, onApartmentCardClick, cityes, activeCity} = props;
+  const {offerPlacesCount, offersShow, onApartmentCardClick, cityes, activeCity, changeCity} = props;
   const emptyOffers = offerPlacesCount === 0;
 
   return (
@@ -44,6 +45,8 @@ const Main = (props) => {
             <section className="locations container">
               <CityList
                 cityes={cityes}
+                activeCity={activeCity}
+                changeCity={changeCity}
               />
             </section>
           </div>
@@ -133,13 +136,22 @@ Main.propTypes = {
   cityes: PropTypes.objectOf(
       PropTypes.arrayOf(PropTypes.number)
   ).isRequired,
-  activeCity: PropTypes.string.isRequired
+  activeCity: PropTypes.string.isRequired,
+  changeCity: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
   activeCity: state.activeCity,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  changeCity(city) {
+    dispatch(
+        ActionCreator.changeCity(city)
+    );
+  }
+});
+
 export {Main};
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
 
