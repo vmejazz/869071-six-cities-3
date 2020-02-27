@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Map from "./map.jsx";
+import {Map} from "./map.jsx";
 
 jest.mock(`leaflet`, () => ({
   icon: jest.fn(),
@@ -24,6 +24,7 @@ it(`Map render`, () => {
   const tree = renderer
     .create(
         <Map
+          activeCity={`Moscow`}
           offers={[]}
           cityes={cityes}
         />)

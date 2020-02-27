@@ -1,15 +1,33 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import {Main} from "./main.jsx";
 jest.mock(`../map/map.jsx`, () => `Map`);
+jest.mock(`../city-list/city-list.jsx`, () => `CityList`);
 
 const OFFER_PLACES = 254;
 
-const apartmentTitleArray = [
-  `First title`,
-  `Second title`,
-  `Third title`,
-  `Another title`
+const offersArray = [
+  {
+    id: 1,
+    title: ``,
+    price: 120,
+    srcImg: ``,
+    srcGallery: [],
+    description: ``,
+    premium: true,
+    type: ``,
+    rate: 1,
+    bedrooms: 1,
+    maxGuests: 1,
+    apartmentStuff: [],
+    ownerInfo: {
+      name: ``,
+      super: true,
+      srcAvatar: ``
+    },
+    position: [1, 1],
+    city: ``
+  }
 ];
 
 const cityes = {
@@ -20,9 +38,11 @@ it(`<Main /> should render all page`, () => {
   const tree = renderer
       .create(
           <Main
+            activeCity={`Moscow`}
             offerPlacesCount={OFFER_PLACES}
-            apartmentTitleArray={apartmentTitleArray}
+            offersArray={offersArray}
             cityes={cityes}
+            onApartmentCardClick={() => {}}
           />
       )
       .toJSON();

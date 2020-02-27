@@ -1,19 +1,32 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import {App} from "./app.jsx";
 jest.mock(`../map/map.jsx`, () => `Map`);
+jest.mock(`../apartment-detail-info/apartment-detail-info.jsx`, () => `ApartmentDetailInfo`);
 
 const OFFER_PLACES = 254;
 
 const offersArray = [
   {
-    id: 1,
-    price: 156,
-    title: `First title`,
+    id: 2,
+    title: `Perfect apartment`,
+    price: 200,
+    srcImg: `img/apartment-02.jpg`,
     srcGallery: [],
-    bedrooms: 2,
-    maxGuests: 5,
-    position: []
+    description: ``,
+    premium: false,
+    type: `House`,
+    rate: 1,
+    bedrooms: 3,
+    maxGuests: 4,
+    apartmentStuff: [`wifi`, `Cable TV`, `Kitchen`],
+    ownerInfo: {
+      name: `Jon`,
+      super: true,
+      srcAvatar: `img/avatar-max.jpg`
+    },
+    position: [50.938014, 6.958104],
+    city: `Cologne`
   }
 ];
 
@@ -27,8 +40,10 @@ describe(`Test render App component`, () => {
     const tree = renderer
       .create(
           <App
+            activeOfferId={2}
             offerPlacesCount={OFFER_PLACES}
-            offersArray={offersArray}
+            offers={offersArray}
+            offersShow={offersArray}
             cityes={cityes}
           />
       )
