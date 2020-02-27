@@ -60,7 +60,9 @@ App.propTypes = {
     srcImg: PropTypes.string
   })),
   onApartmentCardClick: PropTypes.func,
-  cityes: PropTypes.object.isRequired,
+  cityes: PropTypes.objectOf(
+      PropTypes.arrayOf(PropTypes.number).isRequired
+  ),
   activeOfferId: PropTypes.number.isRequired,
   openOffer: PropTypes.func,
   getOffers: PropTypes.func
