@@ -72,7 +72,8 @@ const mapStateToProps = (state) => ({
   activeCity: state.activeCity,
   activeOfferId: state.activeOfferId,
   offers: state.offers,
-  offersShow: state.offersShow
+  offersShow: state.offersShow,
+  cityes: state.cityes
 });
 
 const mapDispatchToProps = (dispatch) => ({
