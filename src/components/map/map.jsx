@@ -10,12 +10,12 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offers, cityes} = this.props;
+    const {offersShow, cityes} = this.props;
     const myMap = this.myMap = leaflet.map(`mapId`, {
       zoomControl: false,
       marker: true
     });
-    const firstCity = offers[0].city;
+    const firstCity = offersShow[0].city;
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -30,7 +30,7 @@ class Map extends PureComponent {
         })
       .addTo(myMap);
 
-    offers.map((item) => {
+    offersShow.map((item) => {
       leaflet
           .marker(item.position, {icon})
           .addTo(myMap);
@@ -38,7 +38,7 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {activeCity, cityes, offers} = this.props;
+    const {activeCity, cityes, offersShow} = this.props;
     const activeCityPosition = cityes[activeCity];
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -47,7 +47,7 @@ class Map extends PureComponent {
 
     this.myMap.flyTo(activeCityPosition, ZOOM);
 
-    offers.map((item) => {
+    offersShow.map((item) => {
       leaflet
           .marker(item.position, {icon})
           .addTo(this.myMap);
@@ -66,7 +66,7 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
+  offersShow: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

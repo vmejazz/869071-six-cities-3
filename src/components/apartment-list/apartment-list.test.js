@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import ApartmentList from "./apartment-list.jsx";
 
-const offersArray = [
+const offersShow = [
   {
     id: 1,
     title: `First title`
@@ -19,7 +19,7 @@ describe(`Test Apartment list`, () => {
     const tree = renderer
       .create(
           <ApartmentList
-            offersArray={offersArray}/>
+            offersShow={offersShow}/>
       )
       .toJSON();
 

@@ -15,7 +15,7 @@ class App extends PureComponent {
       return (
         <Main
           offerPlacesCount={offersShow.length}
-          offersArray={offersShow}
+          offersShow={offersShow}
           onApartmentCardClick={openOffer}
           cityes={cityes}
         />

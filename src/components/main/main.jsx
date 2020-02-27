@@ -7,8 +7,8 @@ import CityList from "../city-list/city-list.jsx";
 import EmptyOffers from "../empty-offers/empty-offers.jsx";
 
 const Main = (props) => {
-  const {offerPlacesCount, offersArray, onApartmentCardClick, cityes, activeCity} = props;
-  const emptyOffers = offerPlacesCount === 0 ? true : false;
+  const {offerPlacesCount, offersShow, onApartmentCardClick, cityes, activeCity} = props;
+  const emptyOffers = offerPlacesCount === 0;
 
   return (
     <React.Fragment>
@@ -79,7 +79,7 @@ const Main = (props) => {
                   --> */}
                   </form>
                   <ApartmentList
-                    offersArray={offersArray}
+                    offersShow={offersShow}
                     onApartmentCardClick={onApartmentCardClick}/>
                 </section>
               }
@@ -88,7 +88,7 @@ const Main = (props) => {
                   ``
                   :
                   <Map
-                    offers={offersArray}
+                    offersShow={offersShow}
                     cityes={cityes}
                   />
                 }
@@ -103,13 +103,13 @@ const Main = (props) => {
 
 Main.defaultProps = {
   offerPlacesCount: 3,
-  offersArray: [],
+  offersShow: [],
   onCityTitleClick: () => {}
 };
 
 Main.propTypes = {
   offerPlacesCount: PropTypes.number.isRequired,
-  offersArray: PropTypes.arrayOf(PropTypes.shape({
+  offersShow: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

@@ -20,11 +20,11 @@ class ApartmentList extends PureComponent {
   }
 
   render() {
-    const {offersArray, onApartmentCardClick} = this.props;
+    const {offersShow, onApartmentCardClick} = this.props;
 
     return (
       <div className="cities__places-list places__list tabs__content">
-        {offersArray.map((item) => {
+        {offersShow.map((item) => {
           return (
             <ApartmentCard
               key={item.id}
@@ -40,7 +40,7 @@ class ApartmentList extends PureComponent {
 }
 
 ApartmentList.propTypes = {
-  offersArray: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offersShow: PropTypes.arrayOf(PropTypes.object).isRequired,
   onApartmentCardClick: PropTypes.func
 };
 
