@@ -7,20 +7,27 @@ const ZOOM = 12;
 class Map extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.state = {
+      iconBlue: leaflet.icon({
+        iconUrl: `img/pin.svg`,
+        iconSize: [30, 45]
+      }),
+      iconYellow: leaflet.icon({
+        iconUrl: `img/pin-active.svg`,
+        iconSize: [30, 45]
+      })
+    };
   }
 
   componentDidMount() {
     const {offersShow, cityes} = this.props;
+    const {iconBlue} = this.state;
     const myMap = this.myMap = leaflet.map(`mapId`, {
       zoomControl: false,
       marker: true
     });
     const firstCity = offersShow[0].city;
-
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 45]
-    });
 
     myMap.setView(cityes[firstCity], ZOOM);
 
@@ -32,26 +39,30 @@ class Map extends PureComponent {
 
     offersShow.map((item) => {
       leaflet
-          .marker(item.position, {icon})
+          .marker(item.position, {icon: iconBlue})
           .addTo(myMap);
     });
   }
 
   componentDidUpdate() {
-    const {activeCity, cityes, offersShow} = this.props;
+    const {activeCity, cityes, offersShow, hoverCardId} = this.props;
+    const {iconBlue, iconYellow} = this.state;
     const activeCityPosition = cityes[activeCity];
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 45]
-    });
 
     this.myMap.flyTo(activeCityPosition, ZOOM);
 
     offersShow.map((item) => {
       leaflet
-          .marker(item.position, {icon})
+          .marker(item.position, {icon: iconBlue})
           .addTo(this.myMap);
     });
+
+    const offerHovered = offersShow.filter((item) => {
+      return item.id === hoverCardId;
+    });
+    if (offerHovered.length >= 1) {
+      leaflet.marker(offerHovered[0].position, {icon: iconYellow}).addTo(this.myMap);
+    }
   }
 
   componentWillUnmount() {
@@ -90,7 +101,8 @@ Map.propTypes = {
   cityes: PropTypes.objectOf(
       PropTypes.arrayOf(PropTypes.number)
   ).isRequired,
-  activeCity: PropTypes.string.isRequired
+  activeCity: PropTypes.string.isRequired,
+  hoverCardId: PropTypes.number
 };
 
 const mapStateToProps = (state) => ({

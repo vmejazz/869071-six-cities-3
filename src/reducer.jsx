@@ -9,7 +9,8 @@ const initialState = {
   offersShow: offers.filter((item) => {
     return item.city === Object.keys(cityes)[0];
   }),
-  cityes
+  cityes,
+  hoverCardId: -1
 };
 // const initialState = {
 //   activeCity: ``,
@@ -21,7 +22,8 @@ const initialState = {
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   GET_OFFERS: `GET_OFFERS`,
-  OPEN_OFFER: `OPEN_OFFER`
+  OPEN_OFFER: `OPEN_OFFER`,
+  SET_HOVER_CARD_ID: `SET_HOVER_CARD_ID`
 };
 
 const ActionCreator = {
@@ -35,6 +37,10 @@ const ActionCreator = {
   }),
   openOffer: (id) => ({
     type: ActionType.OPEN_OFFER,
+    payload: id
+  }),
+  setHoverCardId: (id) => ({
+    type: ActionType.SET_HOVER_CARD_ID,
     payload: id
   })
 };
@@ -58,6 +64,10 @@ const reducer = (state = initialState, action) => {
         offersShow: offers.filter((item) =>{
           return action.payload === item.city;
         })
+      });
+    case ActionType.SET_HOVER_CARD_ID:
+      return extend(state, {
+        hoverCardId: action.payload
       });
     default:
       return state;
