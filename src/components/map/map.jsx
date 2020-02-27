@@ -15,7 +15,7 @@ class Map extends PureComponent {
       zoomControl: false,
       marker: true
     });
-    const firstCity = Object.keys(cityes)[0];
+    const firstCity = offers[0].city;
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
