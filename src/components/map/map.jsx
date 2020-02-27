@@ -1,9 +1,9 @@
 import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
 const ZOOM = 12;
-
 class Map extends PureComponent {
   constructor(props) {
     super(props);
@@ -11,17 +11,18 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const {offers, cityes} = this.props;
-    const myMap = leaflet.map(`mapId`, {
+    const myMap = this.myMap = leaflet.map(`mapId`, {
       zoomControl: false,
       marker: true
     });
+    const firstCity = offers[0].city;
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 45]
     });
 
-    myMap.setView(cityes.AMSTERDAM, ZOOM);
+    myMap.setView(cityes[firstCity], ZOOM);
 
     leaflet
         .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -34,6 +35,27 @@ class Map extends PureComponent {
           .marker(item.position, {icon})
           .addTo(myMap);
     });
+  }
+
+  componentDidUpdate() {
+    const {activeCity, cityes, offers} = this.props;
+    const activeCityPosition = cityes[activeCity];
+    const icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 45]
+    });
+
+    this.myMap.flyTo(activeCityPosition, ZOOM);
+
+    offers.map((item) => {
+      leaflet
+          .marker(item.position, {icon})
+          .addTo(this.myMap);
+    });
+  }
+
+  componentWillUnmount() {
+    this.myMap.remove();
   }
 
   render() {
@@ -62,11 +84,18 @@ Map.propTypes = {
       super: PropTypes.bool,
       srcAvatar: PropTypes.string
     }),
-    position: PropTypes.arrayOf(PropTypes.number).isRequired
+    position: PropTypes.arrayOf(PropTypes.number).isRequired,
+    city: PropTypes.string.isRequired
   })).isRequired,
   cityes: PropTypes.objectOf(
       PropTypes.arrayOf(PropTypes.number)
-  ).isRequired
+  ).isRequired,
+  activeCity: PropTypes.string.isRequired
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  activeCity: state.activeCity
+});
+
+export {Map};
+export default connect(mapStateToProps)(Map);

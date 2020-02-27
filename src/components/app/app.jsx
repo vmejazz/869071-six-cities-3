@@ -1,49 +1,35 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.jsx";
 import Main from "../main/main.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeId: -1
-    };
-
-    this._handleApartmentCardClick = this._handleApartmentCardClick.bind(this);
-  }
-
-  _handleApartmentCardClick(id) {
-    this.setState({
-      activeId: id
-    });
-  }
 
   _renderApp() {
-    const {offerPlacesCount, offersArray, cityes} = this.props;
-    const {activeId} = this.state;
+    const {offers, offersShow, cityes, openOffer, activeOfferId} = this.props;
 
-    if (activeId < 0) {
+    if (activeOfferId < 0) {
       return (
         <Main
-          offerPlacesCount={offerPlacesCount}
-          offersArray={offersArray}
-          onApartmentCardClick={this._handleApartmentCardClick}
+          offerPlacesCount={offersShow.length}
+          offersArray={offersShow}
+          onApartmentCardClick={openOffer}
           cityes={cityes}
         />
       );
     }
 
     return (
-      <ApartmentDetailInfo offer={offersArray[activeId - 1]} />
+      <ApartmentDetailInfo offer={offers[activeOfferId - 1]} />
     );
 
   }
 
   render() {
-    const offer = this.props.offersArray[0];
+    const offer = this.props.offers[0];
 
     return (
       <BrowserRouter>
@@ -61,15 +47,44 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offerPlacesCount: PropTypes.number.isRequired,
-  offersArray: PropTypes.arrayOf(PropTypes.shape({
+  offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number,
     srcImg: PropTypes.string
   })).isRequired,
+  offersShow: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number,
+    srcImg: PropTypes.string
+  })),
   onApartmentCardClick: PropTypes.func,
-  cityes: PropTypes.object.isRequired
+  cityes: PropTypes.object.isRequired,
+  activeOfferId: PropTypes.number.isRequired,
+  openOffer: PropTypes.func,
+  getOffers: PropTypes.func
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  activeCity: state.activeCity,
+  activeOfferId: state.activeOfferId,
+  offers: state.offers,
+  offersShow: state.offersShow
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  openOffer(id) {
+    dispatch(
+        ActionCreator.openOffer(id)
+    );
+  },
+  getOffers() {
+    dispatch(
+        ActionCreator.getOffers()
+    );
+  }
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

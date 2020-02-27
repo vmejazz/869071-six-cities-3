@@ -1,7 +1,7 @@
 import React from "react";
-import Enzyme, {mount} from "enzyme";
+import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Main from "./main.jsx";
+import {Main} from "./main.jsx";
 jest.mock(`../map/map.jsx`);
 
 Enzyme.configure({
@@ -27,18 +27,19 @@ const cityes = {
 it(`Should button be pressed`, () => {
   const onApartmentCardClick = jest.fn();
 
-  const mainScreen = mount(
+  const mainScreen = shallow(
       <Main
+        activeCity={`Moscow`}
         offersArray={offersArray}
         onApartmentCardClick={onApartmentCardClick}
         cityes={cityes}
       />
   );
 
-  const titleLink = mainScreen.find(`.place-card`);
+  const titleLink = mainScreen.find(`ApartmentList`);
 
-  titleLink.props().onClick();
+  titleLink.props().onApartmentCardClick();
 
   expect(onApartmentCardClick.mock.calls.length).toBe(1);
-  expect(onApartmentCardClick).toHaveBeenCalledWith(3);
+  // expect(onApartmentCardClick).toHaveBeenCalledWith(3);
 });
