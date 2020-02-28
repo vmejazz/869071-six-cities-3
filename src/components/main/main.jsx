@@ -17,7 +17,7 @@ const Main = (props) => {
     activeCity,
     changeCity,
     hoverCardId,
-    setHoverCardId,
+    onCardHover,
     sortOffersDirect,
     sortOffersReverse,
     getOffers
@@ -110,7 +110,7 @@ const Main = (props) => {
                   <ApartmentList
                     offersShow={offersShow}
                     onApartmentCardClick={onApartmentCardClick}
-                    setHoverCardId={setHoverCardId}
+                    onCardHover={onCardHover}
                   />
                 </section>
               }
@@ -168,7 +168,7 @@ Main.propTypes = {
   activeCity: PropTypes.string.isRequired,
   changeCity: PropTypes.func,
   hoverCardId: PropTypes.number,
-  setHoverCardId: PropTypes.func,
+  onCardHover: PropTypes.func,
   sortOffersDirect: PropTypes.func,
   sortOffersReverse: PropTypes.func,
   getOffers: PropTypes.func
@@ -185,9 +185,9 @@ const mapDispatchToProps = (dispatch) => ({
         ActionCreator.changeCity(city)
     );
   },
-  setHoverCardId(id) {
+  onCardHover(id) {
     dispatch(
-        ActionCreator.setHoverCardId(id)
+        ActionCreator.onCardHover(id)
     );
   },
   sortOffersDirect(param) {

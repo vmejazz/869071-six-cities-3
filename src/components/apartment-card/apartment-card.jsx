@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ApartmentCard = (props) => {
-  const {placeOffer, onApartmentCardClick, onMouseHover} = props;
+  const {placeOffer, onApartmentCardClick, onCardHover} = props;
   const {id, title, price, srcImg, premium, type, rate} = placeOffer;
 
   const DEACTIVATE_ID = -1;
@@ -10,8 +10,8 @@ const ApartmentCard = (props) => {
   return (
     <article className="cities__place-card place-card"
       onClick={() => onApartmentCardClick(id)}
-      onMouseEnter={() => onMouseHover(id)}
-      onMouseLeave={() => onMouseHover(DEACTIVATE_ID)}
+      onMouseEnter={() => onCardHover(id)}
+      onMouseLeave={() => onCardHover(DEACTIVATE_ID)}
     >
       {premium ?
         <div className="place-card__mark">
@@ -65,7 +65,7 @@ ApartmentCard.propTypes = {
     rate: PropTypes.number
   }).isRequired,
   onApartmentCardClick: PropTypes.func,
-  onMouseHover: PropTypes.func
+  onCardHover: PropTypes.func
 };
 
 export default ApartmentCard;

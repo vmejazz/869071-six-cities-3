@@ -5,11 +5,24 @@ import ApartmentList from "./apartment-list.jsx";
 const offersShow = [
   {
     id: 1,
-    title: `First title`
-  },
-  {
-    id: 2,
-    title: `Second title`
+    title: ``,
+    price: 120,
+    srcImg: ``,
+    srcGallery: [],
+    description: ``,
+    premium: true,
+    type: ``,
+    rate: 1,
+    bedrooms: 1,
+    maxGuests: 1,
+    apartmentStuff: [],
+    ownerInfo: {
+      name: ``,
+      super: true,
+      srcAvatar: ``
+    },
+    position: [1, 1],
+    city: ``
   }
 ];
 
