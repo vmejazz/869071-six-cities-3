@@ -5,14 +5,15 @@ class SortOptions extends PureComponent {
     super(props);
 
     this.state = {
-      activeOption: undefined,
-      optionList: [
-        `Popular`,
-        `Price: low to high`,
-        `Price: high to low`,
-        `Top rated first`
-      ]
+      activeOption: `Popular`,
     };
+
+    this.optionList = [
+      `Popular`,
+      `Price: low to high`,
+      `Price: high to low`,
+      `Top rated first`
+    ];
 
     this._clickOptionButtonHandler = this._clickOptionButtonHandler.bind(this);
   }
@@ -25,8 +26,7 @@ class SortOptions extends PureComponent {
 
   render() {
     const {onSortOptionsClick} = this.props;
-    const {optionList} = this.state;
-    const {activeOption = optionList[0]} = this.state;
+    const {activeOption} = this.state;
 
     return (
       <React.Fragment>
@@ -37,7 +37,7 @@ class SortOptions extends PureComponent {
           </svg>
         </span>
         <ul className="places__options places__options--custom places__options--opened">
-          {optionList.map((item, index) => {
+          {this.optionList.map((item, index) => {
             return (
               <li
                 tabIndex={0}

@@ -20,6 +20,7 @@ it(`Should SortOptions be pressed a`, () => {
 
   sortOption.props().onClick();
   expect(onSortOptionsClick.mock.calls.length).toBe(1);
+  expect(onSortOptionsClick).toHaveBeenCalledWith(`Popular`);
 });
 
 
