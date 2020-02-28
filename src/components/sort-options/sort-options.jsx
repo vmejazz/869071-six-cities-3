@@ -17,9 +17,9 @@ class SortOptions extends PureComponent {
     this._clickOptionButtonHandler = this._clickOptionButtonHandler.bind(this);
   }
 
-  _clickOptionButtonHandler(evt) {
+  _clickOptionButtonHandler(activeOption) {
     this.setState({
-      activeOption: evt.target.innerHTML
+      activeOption
     });
   }
 
@@ -43,9 +43,9 @@ class SortOptions extends PureComponent {
                 tabIndex={0}
                 className="places__option"
                 key={item + index}
-                onClick={(evt) => {
-                  this._clickOptionButtonHandler(evt);
-                  onSortOptionsClick(evt.target.innerHTML);
+                onClick={() => {
+                  this._clickOptionButtonHandler(`${item}`);
+                  onSortOptionsClick(`${item}`);
                 }
                 }
               >
