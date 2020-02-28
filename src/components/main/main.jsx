@@ -20,7 +20,6 @@ const Main = (props) => {
     onCardHover,
     sortOffersDirect,
     sortOffersReverse,
-    getOffers
   } = props;
   const emptyOffers = offerPlacesCount === 0;
 
@@ -50,7 +49,6 @@ const Main = (props) => {
     } else {
       sortOffersReverse(type);
     }
-    getOffers(activeCity);
   };
 
 
@@ -171,7 +169,6 @@ Main.propTypes = {
   onCardHover: PropTypes.func,
   sortOffersDirect: PropTypes.func,
   sortOffersReverse: PropTypes.func,
-  getOffers: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({

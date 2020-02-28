@@ -59,4 +59,34 @@ describe(`Test store-state change with Reducer `, () => {
     });
   });
 
+  it(`Reducer SORT_OFFERS_DIRECT `, () => {
+    expect(reducer({
+      activeCity: ``,
+      offers: [],
+      offersShow: [{id: 1, price: 110}, {id: 2, price: 90}]
+    }, {
+      type: ActionType.SORT_OFFERS_DIRECT,
+      payload: `price`
+    })).toEqual({
+      activeCity: ``,
+      offers: [],
+      offersShow: [{id: 2, price: 90}, {id: 1, price: 110}]
+    });
+  });
+
+  it(`Reducer SORT_OFFERS_REVERSE `, () => {
+    expect(reducer({
+      activeCity: ``,
+      offers: [],
+      offersShow: [{id: 1, price: 10}, {id: 2, price: 900}]
+    }, {
+      type: ActionType.SORT_OFFERS_REVERSE,
+      payload: `price`
+    })).toEqual({
+      activeCity: ``,
+      offers: [],
+      offersShow: [{id: 2, price: 900}, {id: 1, price: 10}]
+    });
+  });
+
 });

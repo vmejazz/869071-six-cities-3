@@ -81,16 +81,20 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.SORT_OFFERS_DIRECT:
       return extend(state, {
-        offersShow: offers.sort((a, b) => {
-          return a[action.payload] - b[action.payload];
-        })
+        offersShow: state.offersShow
+          .slice()
+          .sort((a, b) => {
+            return a[action.payload] - b[action.payload];
+          })
       });
     case ActionType.SORT_OFFERS_REVERSE:
       return (
         extend(state, {
-          offersShow: offers.sort((a, b) => {
-            return b[action.payload] - a[action.payload];
-          })
+          offersShow: state.offersShow
+            .slice()
+            .sort((a, b) => {
+              return b[action.payload] - a[action.payload];
+            })
         })
       );
     default:
