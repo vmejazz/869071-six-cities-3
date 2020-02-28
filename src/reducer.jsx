@@ -23,7 +23,9 @@ const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   GET_OFFERS: `GET_OFFERS`,
   OPEN_OFFER: `OPEN_OFFER`,
-  SET_HOVER_CARD_ID: `SET_HOVER_CARD_ID`
+  SET_HOVER_CARD_ID: `SET_HOVER_CARD_ID`,
+  SORT_OFFERS_DIRECT: `SORT_OFFERS_DIRECT`,
+  SORT_OFFERS_REVERSE: `SORT_OFFERS_REVERSE`
 };
 
 const ActionCreator = {
@@ -42,6 +44,14 @@ const ActionCreator = {
   setHoverCardId: (id) => ({
     type: ActionType.SET_HOVER_CARD_ID,
     payload: id
+  }),
+  sortOffersDirect: (param) => ({
+    type: ActionType.SORT_OFFERS_DIRECT,
+    payload: param
+  }),
+  sortOffersReverse: (param) => ({
+    type: ActionType.SORT_OFFERS_REVERSE,
+    payload: param
   })
 };
 
@@ -69,6 +79,20 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         hoverCardId: action.payload
       });
+    case ActionType.SORT_OFFERS_DIRECT:
+      return extend(state, {
+        offersShow: offers.sort((a, b) => {
+          return a[action.payload] - b[action.payload];
+        })
+      });
+    case ActionType.SORT_OFFERS_REVERSE:
+      return (
+        extend(state, {
+          offersShow: offers.sort((a, b) => {
+            return b[action.payload] - a[action.payload];
+          })
+        })
+      );
     default:
       return state;
   }

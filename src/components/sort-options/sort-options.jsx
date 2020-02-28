@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-
+import PropTypes from "prop-types";
 class SortOptions extends PureComponent {
   constructor(props) {
     super(props);
@@ -24,6 +24,7 @@ class SortOptions extends PureComponent {
   }
 
   render() {
+    const {onSortOptionsClick} = this.props;
     const {optionList} = this.state;
     const {activeOption = optionList[0]} = this.state;
 
@@ -42,7 +43,11 @@ class SortOptions extends PureComponent {
                 tabIndex={0}
                 className="places__option"
                 key={item + index}
-                onClick={this._clickOptionButtonHandler}
+                onClick={(evt) => {
+                  this._clickOptionButtonHandler(evt);
+                  onSortOptionsClick(evt.target.innerHTML);
+                }
+                }
               >
                 {item}
               </li>
@@ -60,5 +65,9 @@ class SortOptions extends PureComponent {
     );
   }
 }
+
+SortOptions.propTypes = {
+  onSortOptionsClick: PropTypes.func
+};
 
 export default SortOptions;

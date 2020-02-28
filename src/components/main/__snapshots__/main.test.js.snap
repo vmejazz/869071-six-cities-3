@@ -116,43 +116,49 @@ exports[`<Main /> should render all page 1`] = `
             </span>
             <span
               className="places__sorting-type"
-              tabIndex="0"
+              tabIndex={0}
             >
               Popular
               <svg
                 className="places__sorting-arrow"
-                height="4"
-                width="7"
+                height={4}
+                width={7}
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <use
                   xlinkHref="#icon-arrow-select"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
                 />
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom"
+              className="places__options places__options--custom places__options--opened"
             >
               <li
-                className="places__option places__option--active"
-                tabIndex="0"
+                className="places__option"
+                onClick={[Function]}
+                tabIndex={0}
               >
                 Popular
               </li>
               <li
                 className="places__option"
-                tabIndex="0"
+                onClick={[Function]}
+                tabIndex={0}
               >
                 Price: low to high
               </li>
               <li
                 className="places__option"
-                tabIndex="0"
+                onClick={[Function]}
+                tabIndex={0}
               >
                 Price: high to low
               </li>
               <li
                 className="places__option"
-                tabIndex="0"
+                onClick={[Function]}
+                tabIndex={0}
               >
                 Top rated first
               </li>

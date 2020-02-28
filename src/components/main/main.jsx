@@ -9,11 +9,50 @@ import EmptyOffers from "../empty-offers/empty-offers.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 
 const Main = (props) => {
-  const {offerPlacesCount, offersShow, onApartmentCardClick, cityes, activeCity, changeCity, hoverCardId, setHoverCardId} = props;
+  const {
+    offerPlacesCount,
+    offersShow,
+    onApartmentCardClick,
+    cityes,
+    activeCity,
+    changeCity,
+    hoverCardId,
+    setHoverCardId,
+    sortOffersDirect,
+    sortOffersReverse,
+    getOffers
+  } = props;
   const emptyOffers = offerPlacesCount === 0;
-  offersShow.sort((a, b) => {
-    return (a.price - b.price);
-  });
+
+  const sortTypes = {
+    [`Popular`]: {
+      type: `id`,
+      directionForward: true
+    },
+    [`Price: low to high`]: {
+      type: `price`,
+      directionForward: true
+    },
+    [`Price: high to low`]: {
+      type: `price`,
+      directionForward: false
+    },
+    [`Top rated first`]: {
+      type: `rate`,
+      directionForward: false
+    }
+  };
+
+  const onSortOptionsClick = (param) => {
+    const {type, directionForward} = sortTypes[param];
+    if (directionForward) {
+      sortOffersDirect(type);
+    } else {
+      sortOffersReverse(type);
+    }
+    getOffers(activeCity);
+  };
+
 
   return (
     <React.Fragment>
@@ -64,7 +103,9 @@ const Main = (props) => {
                   <b className="places__found">{offerPlacesCount} places to stay in {activeCity}</b>
                   <form className="places__sorting" action="#" method="get">
                     <span className="places__sorting-caption">Sort by</span>
-                    <SortOptions />
+                    <SortOptions
+                      onSortOptionsClick={onSortOptionsClick}
+                    />
                   </form>
                   <ApartmentList
                     offersShow={offersShow}
@@ -127,7 +168,10 @@ Main.propTypes = {
   activeCity: PropTypes.string.isRequired,
   changeCity: PropTypes.func,
   hoverCardId: PropTypes.number,
-  setHoverCardId: PropTypes.func
+  setHoverCardId: PropTypes.func,
+  sortOffersDirect: PropTypes.func,
+  sortOffersReverse: PropTypes.func,
+  getOffers: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -144,6 +188,21 @@ const mapDispatchToProps = (dispatch) => ({
   setHoverCardId(id) {
     dispatch(
         ActionCreator.setHoverCardId(id)
+    );
+  },
+  sortOffersDirect(param) {
+    dispatch(
+        ActionCreator.sortOffersDirect(param)
+    );
+  },
+  sortOffersReverse(param) {
+    dispatch(
+        ActionCreator.sortOffersReverse(param)
+    );
+  },
+  getOffers(city) {
+    dispatch(
+        ActionCreator.getOffers(city)
     );
   }
 });
