@@ -8,7 +8,7 @@ class Map extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.icons = {
       iconBlue: leaflet.icon({
         iconUrl: `img/pin.svg`,
         iconSize: [30, 45]
@@ -18,11 +18,13 @@ class Map extends PureComponent {
         iconSize: [30, 45]
       })
     };
+
+    this.layer = [];
   }
 
   componentDidMount() {
     const {offersShow, cityes} = this.props;
-    const {iconBlue} = this.state;
+    const {iconBlue} = this.icons;
     const myMap = this.myMap = leaflet.map(`mapId`, {
       zoomControl: false,
       marker: true
@@ -38,30 +40,40 @@ class Map extends PureComponent {
       .addTo(myMap);
 
     offersShow.map((item) => {
-      leaflet
+      this.layer.push(
+          leaflet
           .marker(item.position, {icon: iconBlue})
-          .addTo(myMap);
+          .addTo(myMap)
+      );
     });
   }
 
   componentDidUpdate() {
     const {activeCity, cityes, offersShow, hoverCardId} = this.props;
-    const {iconBlue, iconYellow} = this.state;
+    const {iconBlue, iconYellow} = this.icons;
     const activeCityPosition = cityes[activeCity];
 
     this.myMap.flyTo(activeCityPosition, ZOOM);
+    this.layer.forEach((item) => {
+      item.remove();
+    });
+    this.layer.length = 0;
 
     offersShow.map((item) => {
-      leaflet
-          .marker(item.position, {icon: iconBlue})
-          .addTo(this.myMap);
+      this.layer.push(
+          leaflet
+        .marker(item.position, {icon: iconBlue})
+        .addTo(this.myMap)
+      );
     });
 
-    const offerHovered = offersShow.filter((item) => {
+    const offerHovered = offersShow.find((item) => {
       return item.id === hoverCardId;
     });
-    if (offerHovered.length >= 1) {
-      leaflet.marker(offerHovered[0].position, {icon: iconYellow}).addTo(this.myMap);
+    if (offerHovered) {
+      this.layer.push(
+          leaflet.marker(offerHovered.position, {icon: iconYellow}).addTo(this.myMap)
+      );
     }
   }
 
