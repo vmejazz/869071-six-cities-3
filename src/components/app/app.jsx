@@ -15,7 +15,7 @@ class App extends PureComponent {
       return (
         <Main
           offerPlacesCount={offersShow.length}
-          offersArray={offersShow}
+          offersShow={offersShow}
           onApartmentCardClick={openOffer}
           cityes={cityes}
         />
@@ -60,7 +60,9 @@ App.propTypes = {
     srcImg: PropTypes.string
   })),
   onApartmentCardClick: PropTypes.func,
-  cityes: PropTypes.object.isRequired,
+  cityes: PropTypes.objectOf(
+      PropTypes.arrayOf(PropTypes.number).isRequired
+  ),
   activeOfferId: PropTypes.number.isRequired,
   openOffer: PropTypes.func,
   getOffers: PropTypes.func
@@ -70,7 +72,8 @@ const mapStateToProps = (state) => ({
   activeCity: state.activeCity,
   activeOfferId: state.activeOfferId,
   offers: state.offers,
-  offersShow: state.offersShow
+  offersShow: state.offersShow,
+  cityes: state.cityes
 });
 
 const mapDispatchToProps = (dispatch) => ({

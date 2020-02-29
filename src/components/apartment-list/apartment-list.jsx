@@ -20,17 +20,17 @@ class ApartmentList extends PureComponent {
   }
 
   render() {
-    const {offersArray, onApartmentCardClick} = this.props;
+    const {offersShow, onApartmentCardClick, onCardHover} = this.props;
 
     return (
       <div className="cities__places-list places__list tabs__content">
-        {offersArray.map((item) => {
+        {offersShow.map((item) => {
           return (
             <ApartmentCard
               key={item.id}
               placeOffer={item}
               onApartmentCardClick={onApartmentCardClick}
-              onMouseHover={this._setActiveCard}
+              onCardHover={onCardHover}
             />
           );
         })}
@@ -40,8 +40,28 @@ class ApartmentList extends PureComponent {
 }
 
 ApartmentList.propTypes = {
-  offersArray: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onApartmentCardClick: PropTypes.func
+  offersShow: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    srcImg: PropTypes.string,
+    srcGallery: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
+    premium: PropTypes.bool,
+    type: PropTypes.string,
+    rate: PropTypes.number,
+    bedrooms: PropTypes.number.isRequired,
+    maxGuests: PropTypes.number.isRequired,
+    apartmentStuff: PropTypes.arrayOf(PropTypes.string),
+    ownerInfo: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool,
+      srcAvatar: PropTypes.string
+    }),
+    position: PropTypes.arrayOf(PropTypes.number).isRequired
+  })).isRequired,
+  onApartmentCardClick: PropTypes.func,
+  onCardHover: PropTypes.func
 };
 
 export default ApartmentList;

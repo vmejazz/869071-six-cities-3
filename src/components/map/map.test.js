@@ -16,7 +16,7 @@ jest.mock(`leaflet`, () => ({
   }),
 }));
 
-const offers = [
+const offersShow = [
   {
     id: 1,
     title: ``,
@@ -49,7 +49,7 @@ it(`Map render`, () => {
     .create(
         <Map
           activeCity={`Moscow`}
-          offers={offers}
+          offersShow={offersShow}
           cityes={cityes}
         />)
     .toJSON();

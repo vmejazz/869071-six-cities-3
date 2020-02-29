@@ -1,14 +1,56 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.jsx";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
 import Map from "../map/map.jsx";
 import CityList from "../city-list/city-list.jsx";
 import EmptyOffers from "../empty-offers/empty-offers.jsx";
+import SortOptions from "../sort-options/sort-options.jsx";
 
 const Main = (props) => {
-  const {offerPlacesCount, offersArray, onApartmentCardClick, cityes, activeCity} = props;
-  const emptyOffers = offerPlacesCount === 0 ? true : false;
+  const {
+    offerPlacesCount,
+    offersShow,
+    onApartmentCardClick,
+    cityes,
+    activeCity,
+    changeCity,
+    hoverCardId,
+    onCardHover,
+    sortOffersDirect,
+    sortOffersReverse,
+  } = props;
+  const emptyOffers = offerPlacesCount === 0;
+
+  const sortTypes = {
+    [`Popular`]: {
+      type: `id`,
+      directionForward: true
+    },
+    [`Price: low to high`]: {
+      type: `price`,
+      directionForward: true
+    },
+    [`Price: high to low`]: {
+      type: `price`,
+      directionForward: false
+    },
+    [`Top rated first`]: {
+      type: `rate`,
+      directionForward: false
+    }
+  };
+
+  const onSortOptionsClick = (param) => {
+    const {type, directionForward} = sortTypes[param];
+    if (directionForward) {
+      sortOffersDirect(type);
+    } else {
+      sortOffersReverse(type);
+    }
+  };
+
 
   return (
     <React.Fragment>
@@ -44,6 +86,8 @@ const Main = (props) => {
             <section className="locations container">
               <CityList
                 cityes={cityes}
+                activeCity={activeCity}
+                changeCity={changeCity}
               />
             </section>
           </div>
@@ -57,30 +101,15 @@ const Main = (props) => {
                   <b className="places__found">{offerPlacesCount} places to stay in {activeCity}</b>
                   <form className="places__sorting" action="#" method="get">
                     <span className="places__sorting-caption">Sort by</span>
-                    <span className="places__sorting-type" tabIndex="0">
-                    Popular
-                      <svg className="places__sorting-arrow" width="7" height="4">
-                        <use xlinkHref="#icon-arrow-select"></use>
-                      </svg>
-                    </span>
-                    <ul className="places__options places__options--custom">
-                      <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                      <li className="places__option" tabIndex="0">Price: low to high</li>
-                      <li className="places__option" tabIndex="0">Price: high to low</li>
-                      <li className="places__option" tabIndex="0">Top rated first</li>
-                    </ul>
-                    {/* <!--
-                  <select class="places__sorting-type" id="places-sorting">
-                    <option class="places__option" value="popular" selected="">Popular</option>
-                    <option class="places__option" value="to-high">Price: low to high</option>
-                    <option class="places__option" value="to-low">Price: high to low</option>
-                    <option class="places__option" value="top-rated">Top rated first</option>
-                  </select>
-                  --> */}
+                    <SortOptions
+                      onSortOptionsClick={onSortOptionsClick}
+                    />
                   </form>
                   <ApartmentList
-                    offersArray={offersArray}
-                    onApartmentCardClick={onApartmentCardClick}/>
+                    offersShow={offersShow}
+                    onApartmentCardClick={onApartmentCardClick}
+                    onCardHover={onCardHover}
+                  />
                 </section>
               }
               <div className="cities__right-section">
@@ -88,8 +117,9 @@ const Main = (props) => {
                   ``
                   :
                   <Map
-                    offers={offersArray}
+                    offersShow={offersShow}
                     cityes={cityes}
+                    hoverCardId={hoverCardId}
                   />
                 }
               </div>
@@ -103,13 +133,13 @@ const Main = (props) => {
 
 Main.defaultProps = {
   offerPlacesCount: 3,
-  offersArray: [],
+  offersShow: [],
   onCityTitleClick: () => {}
 };
 
 Main.propTypes = {
   offerPlacesCount: PropTypes.number.isRequired,
-  offersArray: PropTypes.arrayOf(PropTypes.shape({
+  offersShow: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -133,13 +163,47 @@ Main.propTypes = {
   cityes: PropTypes.objectOf(
       PropTypes.arrayOf(PropTypes.number)
   ).isRequired,
-  activeCity: PropTypes.string.isRequired
+  activeCity: PropTypes.string.isRequired,
+  changeCity: PropTypes.func,
+  hoverCardId: PropTypes.number,
+  onCardHover: PropTypes.func,
+  sortOffersDirect: PropTypes.func,
+  sortOffersReverse: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   activeCity: state.activeCity,
+  hoverCardId: state.hoverCardId
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCity(city) {
+    dispatch(
+        ActionCreator.changeCity(city)
+    );
+  },
+  onCardHover(id) {
+    dispatch(
+        ActionCreator.onCardHover(id)
+    );
+  },
+  sortOffersDirect(param) {
+    dispatch(
+        ActionCreator.sortOffersDirect(param)
+    );
+  },
+  sortOffersReverse(param) {
+    dispatch(
+        ActionCreator.sortOffersReverse(param)
+    );
+  },
+  getOffers(city) {
+    dispatch(
+        ActionCreator.getOffers(city)
+    );
+  }
 });
 
 export {Main};
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
 

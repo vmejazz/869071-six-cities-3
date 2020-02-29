@@ -31,22 +31,22 @@ describe(``, () => {
   });
 
   it(`Should change ActideCardID when mouse hover and leave on card`, () => {
-    const onMouseHover = jest.fn();
+    const onCardHover = jest.fn();
 
     const tree = shallow(
         <ApartmentCard
           placeOffer={placeOffer}
-          onMouseHover={onMouseHover}
+          onCardHover={onCardHover}
         />
     );
 
     const apartmentArticle = tree.find(`.place-card`);
 
     apartmentArticle.props().onMouseEnter();
-    expect(onMouseHover).toHaveBeenCalledWith(5);
+    expect(onCardHover).toHaveBeenCalledWith(5);
 
     apartmentArticle.props().onMouseLeave();
-    expect(onMouseHover).toHaveBeenCalledWith(-1);
+    expect(onCardHover).toHaveBeenCalledWith(-1);
   });
 });
 

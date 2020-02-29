@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SortOption render 1`] = `
+Array [
+  <span
+    className="places__sorting-type"
+    tabIndex={0}
+  >
+    Popular
+    <svg
+      className="places__sorting-arrow"
+      height={4}
+      width={7}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <use
+        xlinkHref="#icon-arrow-select"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+      />
+    </svg>
+  </span>,
+  <ul
+    className="places__options places__options--custom places__options--opened"
+  >
+    <li
+      className="places__option"
+      onClick={[Function]}
+      tabIndex={0}
+    >
+      Popular
+    </li>
+    <li
+      className="places__option"
+      onClick={[Function]}
+      tabIndex={0}
+    >
+      Price: low to high
+    </li>
+    <li
+      className="places__option"
+      onClick={[Function]}
+      tabIndex={0}
+    >
+      Price: high to low
+    </li>
+    <li
+      className="places__option"
+      onClick={[Function]}
+      tabIndex={0}
+    >
+      Top rated first
+    </li>
+  </ul>,
+]
+`;
