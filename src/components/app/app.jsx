@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.jsx";
 import Main from "../main/main.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
+import offersNearby from "../../mocks/offers-nearby.js";
 
 class App extends PureComponent {
 
@@ -23,7 +24,12 @@ class App extends PureComponent {
     }
 
     return (
-      <ApartmentDetailInfo offer={offers[activeOfferId - 1]} />
+      <ApartmentDetailInfo
+        offer={offers[activeOfferId - 1]}
+        offersNearby={offersNearby}
+        cityes={cityes}
+        mapState={`mapDetail`}
+      />
     );
 
   }
@@ -38,7 +44,9 @@ class App extends PureComponent {
             {this._renderApp()}
           </Route>
           <Route path="/offer">
-            <ApartmentDetailInfo offer={offer} />
+            <ApartmentDetailInfo
+              offer={offer}
+            />
           </Route>
         </Switch>
       </BrowserRouter>

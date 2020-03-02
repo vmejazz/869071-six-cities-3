@@ -2,6 +2,10 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import ApartmentCard from "../apartment-card/apartment-card.jsx";
 
+const ApartmentListClassMap = {
+  MAIN_VIEW: `cities__places-list places__list tabs__content`,
+  DETAIL_VIEW: `near-places__list places__list`
+};
 class ApartmentList extends PureComponent {
   constructor(props) {
     super(props);
@@ -20,10 +24,11 @@ class ApartmentList extends PureComponent {
   }
 
   render() {
-    const {offersShow, onApartmentCardClick, onCardHover} = this.props;
+    const {offersShow, onApartmentCardClick, onCardHover, detailView} = this.props;
+    const apartmentListClass = detailView ? ApartmentListClassMap.DETAIL_VIEW : ApartmentListClassMap.MAIN_VIEW;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className={apartmentListClass}>
         {offersShow.map((item) => {
           return (
             <ApartmentCard
@@ -31,6 +36,7 @@ class ApartmentList extends PureComponent {
               placeOffer={item}
               onApartmentCardClick={onApartmentCardClick}
               onCardHover={onCardHover}
+              detailView={detailView}
             />
           );
         })}
@@ -61,7 +67,8 @@ ApartmentList.propTypes = {
     position: PropTypes.arrayOf(PropTypes.number).isRequired
   })).isRequired,
   onApartmentCardClick: PropTypes.func,
-  onCardHover: PropTypes.func
+  onCardHover: PropTypes.func,
+  detailView: PropTypes.bool
 };
 
 export default ApartmentList;

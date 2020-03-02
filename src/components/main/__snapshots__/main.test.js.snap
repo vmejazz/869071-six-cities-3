@@ -180,6 +180,7 @@ exports[`<Main /> should render all page 1`] = `
                 ],
               }
             }
+            mapDetail={false}
             offersShow={Array []}
           />
         </div>

@@ -109,6 +109,7 @@ const Main = (props) => {
                     offersShow={offersShow}
                     onApartmentCardClick={onApartmentCardClick}
                     onCardHover={onCardHover}
+                    detailView={false}
                   />
                 </section>
               }
@@ -120,6 +121,7 @@ const Main = (props) => {
                     offersShow={offersShow}
                     cityes={cityes}
                     hoverCardId={hoverCardId}
+                    mapDetail={false}
                   />
                 }
               </div>

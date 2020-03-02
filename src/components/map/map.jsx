@@ -4,6 +4,10 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 const ZOOM = 12;
+const MapClassList = {
+  MAIN_VIEW: `cities__map map`,
+  DETAIL_VIEW: `property__map map`
+};
 class Map extends PureComponent {
   constructor(props) {
     super(props);
@@ -82,8 +86,11 @@ class Map extends PureComponent {
   }
 
   render() {
+    const {mapDetail} = this.props;
+    const mapClass = mapDetail ? MapClassList.DETAIL_VIEW : MapClassList.MAIN_VIEW;
+
     return (
-      <section className="cities__map map" id="mapId"></section>
+      <section className={mapClass} id="mapId"></section>
     );
   }
 }
@@ -114,7 +121,8 @@ Map.propTypes = {
       PropTypes.arrayOf(PropTypes.number)
   ).isRequired,
   activeCity: PropTypes.string.isRequired,
-  hoverCardId: PropTypes.number
+  hoverCardId: PropTypes.number,
+  mapDetail: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({

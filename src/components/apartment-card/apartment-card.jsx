@@ -1,14 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+const ApartmentCardClassMap = {
+  MAIN_VIEW: `cities__place-card place-card`,
+  DETAIL_VIEW: `near-places__card places__card`
+};
+
 const ApartmentCard = (props) => {
-  const {placeOffer, onApartmentCardClick, onCardHover} = props;
+  const {placeOffer, onApartmentCardClick, onCardHover, detailView} = props;
   const {id, title, price, srcImg, premium, type, rate} = placeOffer;
 
   const DEACTIVATE_ID = -1;
+  const apartmentCardClass = detailView ? ApartmentCardClassMap.DETAIL_VIEW : ApartmentCardClassMap.MAIN_VIEW;
 
   return (
-    <article className="cities__place-card place-card"
+    <article className={apartmentCardClass}
       onClick={() => onApartmentCardClick(id)}
       onMouseEnter={() => onCardHover(id)}
       onMouseLeave={() => onCardHover(DEACTIVATE_ID)}
@@ -65,7 +71,8 @@ ApartmentCard.propTypes = {
     rate: PropTypes.number
   }).isRequired,
   onApartmentCardClick: PropTypes.func,
-  onCardHover: PropTypes.func
+  onCardHover: PropTypes.func,
+  detailView: PropTypes.bool
 };
 
 export default ApartmentCard;

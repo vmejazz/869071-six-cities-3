@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import ApartmentDetailInfo from "./apartment-detail-info.jsx";
+jest.mock(`./../map/map.jsx`, () => `Map`);
 
 const offer = {
   id: 1,
@@ -22,11 +23,20 @@ const offer = {
   }
 };
 
+const offersNearby = [
+  {},
+  {}
+];
+
 it(`<ApartmentDetailInfo /> should render apartment-detail-info page `, () => {
   const tree = renderer
       .create(
           <ApartmentDetailInfo
-            offer={offer}/>
+            offer={offer}
+            offersNearby={offersNearby}
+            cityes={{}}
+            mapState={`mapDetail`}
+          />
       )
       .toJSON();
 

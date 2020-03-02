@@ -1,3 +1,175 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test render App component <App /> should render page 1`] = `<ApartmentDetailInfo />`;
+exports[`Test render App component <App /> should render page 1`] = `
+<ApartmentDetailInfo
+  cityes={
+    Object {
+      "AMSTERDAM": Array [
+        52.38333,
+        4.9,
+      ],
+    }
+  }
+  mapState="mapDetail"
+  offersNearby={
+    Array [
+      Object {
+        "apartmentStuff": Array [
+          "Wifi",
+          "Cable TV",
+          "Kitchen",
+        ],
+        "bedrooms": 3,
+        "city": "Amsterdam",
+        "description": "All super long text about apartmmnet with cools stuffs",
+        "id": 1,
+        "maxGuests": 4,
+        "ownerInfo": Object {
+          "name": "Jon",
+          "srcAvatar": "img/avatar-max.jpg",
+          "super": true,
+        },
+        "position": Array [
+          52.3909553943508,
+          4.85309666406198,
+        ],
+        "premium": false,
+        "price": 120,
+        "rate": 4.8,
+        "reviews": Array [
+          Object {
+            "date": "2019-04-24",
+            "name": "Max",
+            "rate": 3.4,
+            "srcAvatar": "img/avatar-max.jpg",
+            "text": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.",
+          },
+          Object {
+            "date": "2018-04-24",
+            "name": "Nikola",
+            "rate": 4.6,
+            "srcAvatar": "img/avatar-max.jpg",
+            "text": "A very comfertable apartments for rest and relax.",
+          },
+        ],
+        "srcGallery": Array [
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+        ],
+        "srcImg": "img/apartment-01.jpg",
+        "title": "Beautiful apartment",
+        "type": "Room",
+      },
+      Object {
+        "apartmentStuff": Array [
+          "wifi",
+          "Cable TV",
+          "Kitchen",
+        ],
+        "bedrooms": 3,
+        "city": "Cologne",
+        "description": "All super long text about apartmmnet with cools stuffs",
+        "id": 2,
+        "maxGuests": 4,
+        "ownerInfo": Object {
+          "name": "Jon",
+          "srcAvatar": "img/avatar-max.jpg",
+          "super": true,
+        },
+        "position": Array [
+          50.938014,
+          6.958104,
+        ],
+        "premium": false,
+        "price": 200,
+        "rate": 1,
+        "reviews": Array [
+          Object {
+            "date": "2019-04-24",
+            "name": "Max",
+            "rate": 3.4,
+            "srcAvatar": "img/avatar-max.jpg",
+            "text": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.",
+          },
+          Object {
+            "date": "2018-04-24",
+            "name": "Nikola",
+            "rate": 4.6,
+            "srcAvatar": "img/avatar-max.jpg",
+            "text": "A very comfertable apartments for rest and relax.",
+          },
+        ],
+        "srcGallery": Array [
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+        ],
+        "srcImg": "img/apartment-02.jpg",
+        "title": "Perfect apartment",
+        "type": "House",
+      },
+      Object {
+        "apartmentStuff": Array [
+          "wifi",
+          "Cable TV",
+          "Kitchen",
+        ],
+        "bedrooms": 3,
+        "city": "Amsterdam",
+        "description": "All super long text about apartmmnet with cools stuffs",
+        "id": 3,
+        "maxGuests": 4,
+        "ownerInfo": Object {
+          "name": "Jon",
+          "srcAvatar": "img/avatar-max.jpg",
+          "super": true,
+        },
+        "position": Array [
+          52.3909553943508,
+          4.929309666406198,
+        ],
+        "premium": false,
+        "price": 250,
+        "rate": 3,
+        "reviews": Array [
+          Object {
+            "date": "2019-04-24",
+            "name": "Max",
+            "rate": 3.4,
+            "srcAvatar": "img/avatar-max.jpg",
+            "text": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.",
+          },
+          Object {
+            "date": "2018-04-24",
+            "name": "Nikola",
+            "rate": 4.6,
+            "srcAvatar": "img/avatar-max.jpg",
+            "text": "A very comfertable apartments for rest and relax.",
+          },
+        ],
+        "srcGallery": Array [
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+          "img/apartment-01.jpg",
+        ],
+        "srcImg": "img/apartment-03.jpg",
+        "title": "Imagine apartment",
+        "type": "Apartment",
+      },
+    ]
+  }
+/>
+`;
