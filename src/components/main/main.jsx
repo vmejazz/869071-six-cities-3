@@ -7,6 +7,7 @@ import Map from "../map/map.jsx";
 import CityList from "../city-list/city-list.jsx";
 import EmptyOffers from "../empty-offers/empty-offers.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
+import withActiveItem from "../../hocs/withActiveItem.jsx";
 
 const Main = (props) => {
   const {
@@ -50,6 +51,8 @@ const Main = (props) => {
       sortOffersReverse(type);
     }
   };
+
+  const SortOptionsAction = withActiveItem(SortOptions);
 
 
   return (
@@ -101,7 +104,7 @@ const Main = (props) => {
                   <b className="places__found">{offerPlacesCount} places to stay in {activeCity}</b>
                   <form className="places__sorting" action="#" method="get">
                     <span className="places__sorting-caption">Sort by</span>
-                    <SortOptions
+                    <SortOptionsAction
                       onSortOptionsClick={onSortOptionsClick}
                     />
                   </form>

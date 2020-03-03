@@ -8,12 +8,15 @@ const withActiveItem = (Component) => {
       this.state = {
         activeItem: null
       };
+
+      this._setActiveItem = this._setActiveItem.bind(this);
     }
 
     _setActiveItem(item) {
       this.setState({
         activeItem: item
-      });
+      }, () => console.log(item, this.state));
+      console.log(this.state);
     }
 
     render() {
