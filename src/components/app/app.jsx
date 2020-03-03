@@ -7,6 +7,9 @@ import Main from "../main/main.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
 
 class App extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
   _renderApp() {
     const {offers, offersShow, cityes, openOffer, activeOfferId} = this.props;

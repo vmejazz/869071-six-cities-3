@@ -1,43 +1,25 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import ApartmentCard from "../apartment-card/apartment-card.jsx";
 
-class ApartmentList extends PureComponent {
-  constructor(props) {
-    super(props);
+const ApartmentList = (props) => {
+  const {offersShow, onApartmentCardClick, onCardHover} = props;
 
-    this.state = {
-      activeCardId: -1
-    };
-
-    this._setActiveCard = this._setActiveCard.bind(this);
-  }
-
-  _setActiveCard(id) {
-    this.setState({
-      activeCardId: id
-    });
-  }
-
-  render() {
-    const {offersShow, onApartmentCardClick, onCardHover} = this.props;
-
-    return (
-      <div className="cities__places-list places__list tabs__content">
-        {offersShow.map((item) => {
-          return (
-            <ApartmentCard
-              key={item.id}
-              placeOffer={item}
-              onApartmentCardClick={onApartmentCardClick}
-              onCardHover={onCardHover}
-            />
-          );
-        })}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="cities__places-list places__list tabs__content">
+      {offersShow.map((item) => {
+        return (
+          <ApartmentCard
+            key={item.id}
+            placeOffer={item}
+            onApartmentCardClick={onApartmentCardClick}
+            onCardHover={onCardHover}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 ApartmentList.propTypes = {
   offersShow: PropTypes.arrayOf(PropTypes.shape({
