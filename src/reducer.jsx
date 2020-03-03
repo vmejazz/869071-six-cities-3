@@ -1,6 +1,8 @@
-import offers from "./mocks/offers.js";
+// import offers from "./mocks/offers.js";
 import cityes from "./mocks/cityes.js";
 import {extend} from "./utils.js";
+
+const offers = [];
 
 const initialState = {
   activeCity: Object.keys(cityes)[0],
