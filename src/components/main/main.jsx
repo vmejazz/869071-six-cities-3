@@ -9,6 +9,8 @@ import EmptyOffers from "../empty-offers/empty-offers.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import withActiveItem from "../../hocs/withActiveItem.jsx";
 
+const SortOptionsWrapped = withActiveItem(SortOptions);
+
 const Main = (props) => {
   const {
     offerPlacesCount,
@@ -51,9 +53,6 @@ const Main = (props) => {
       sortOffersReverse(type);
     }
   };
-
-  const SortOptionsAction = withActiveItem(SortOptions);
-
 
   return (
     <React.Fragment>
@@ -104,7 +103,7 @@ const Main = (props) => {
                   <b className="places__found">{offerPlacesCount} places to stay in {activeCity}</b>
                   <form className="places__sorting" action="#" method="get">
                     <span className="places__sorting-caption">Sort by</span>
-                    <SortOptionsAction
+                    <SortOptionsWrapped
                       onSortOptionsClick={onSortOptionsClick}
                     />
                   </form>
