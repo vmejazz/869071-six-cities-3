@@ -208,6 +208,27 @@ const offersArray = [
     },
     position: [50.934422, 6.974174],
     city: `Cologne`
+  },
+  {
+    id: 11,
+    title: `Perfect apartment`,
+    price: 126,
+    srcImg: `img/apartment-02.jpg`,
+    srcGallery: [`img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`],
+    description: `All super long text about apartmmnet with cools stuffs`,
+    premium: false,
+    type: `House`,
+    rate: 4,
+    bedrooms: 3,
+    maxGuests: 4,
+    apartmentStuff: [`wifi`, `Cable TV`, `Kitchen`],
+    ownerInfo: {
+      name: `Jon`,
+      super: true,
+      srcAvatar: `img/avatar-max.jpg`
+    },
+    position: [50.934422, 6.972457],
+    city: `Cologne`
   }
 ];
 

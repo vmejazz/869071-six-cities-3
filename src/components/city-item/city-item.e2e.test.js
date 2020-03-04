@@ -1,24 +1,22 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import CityList from "./city-list";
+import CityItem from "./city-item";
 
 Enzyme.configure({
   adapter: new Adapter()
 });
 
-const cityes = {
-  Moscow: [54, 43]
-};
+const city = `Moscow`;
 
 it(`Should City-button be pressed and set ActiveCity`, () => {
   const changeCity = jest.fn();
 
   const tree = shallow(
-      <CityList
+      <CityItem
         activeCity={`Paris`}
-        cityes={cityes}
-        changeCity={changeCity}
+        city={city}
+        onCityClick={changeCity}
       />
   );
 

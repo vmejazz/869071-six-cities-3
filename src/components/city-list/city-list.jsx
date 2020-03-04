@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import CityItem from "../city-item/city-item.jsx";
 
 const MAX_CITYES = 6;
 
@@ -10,18 +11,13 @@ const CityList = (props) => {
   return (
     <ul className="locations__list tabs__list">
       { cityesArray.map((item, index) => {
-        const activeClass = item === activeCity;
         return (
-          <li className="locations__item" key={item + index} onClick={() => changeCity(item)}>
-            <a
-              className={`locations__item-link tabs__item ${activeClass ? `tabs__item--active` : ``}`}
-              href="#"
-            >
-              <span>
-                {item}
-              </span>
-            </a>
-          </li>
+          <CityItem
+            city={item}
+            activeCity={activeCity}
+            onCityClick={changeCity}
+            key={item + index}
+          />
         );
       })}
     </ul>

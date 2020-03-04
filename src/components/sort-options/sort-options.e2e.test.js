@@ -13,6 +13,7 @@ it(`Should SortOptions be pressed a`, () => {
   const tree = shallow(
       <SortOptions
         onSortOptionsClick={onSortOptionsClick}
+        setActiveItem={() => {}}
       />
   );
 
