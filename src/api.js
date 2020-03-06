@@ -1,9 +1,12 @@
 import axios from "axios";
+import ParseData from "./reducer/data/parse-data.js";
 
 const ErrorMap = {
   NOT_FOUND: 404,
   UNAUTHORIZED: 401
 };
+
+const SUCCESS_CODE = 200;
 
 const createAPI = () => {
   const api = axios.create({
@@ -13,7 +16,21 @@ const createAPI = () => {
   });
 
   const onSuccess = (response) => {
-    return response;
+    if (response.status === SUCCESS_CODE) {
+      const ParseDataModel = new ParseData(response.data);
+      const offersParsed = ParseDataModel._toRaw();
+      const cityes = ParseDataModel._toCityes();
+      return ({
+        offers: offersParsed,
+        cityes,
+        activeCity: Object.keys(cityes)[0],
+        offersShow: offersParsed.filter((item) => {
+          return item.city === Object.keys(cityes)[0];
+        })
+      });
+    } else {
+      return response;
+    }
   };
 
   const onFail = (err) => {
@@ -21,10 +38,8 @@ const createAPI = () => {
 
     switch (response.status) {
       case ErrorMap.NOT_FOUND:
-        console.log(`Ответ не найден`);
         break;
       case ErrorMap.UNAUTHORIZED:
-        console.log(`Не авторизованный пользователь`);
         break;
       default:
         throw err;

@@ -1,42 +1,27 @@
-// import offers from "./mocks/offers.js";
-import cityes from "./mocks/cityes.js";
-import {extend} from "./utils.js";
-
-const offers = [];
+import {extend} from "../utils.js";
 
 const initialState = {
-  activeCity: Object.keys(cityes)[0],
+  offers: [],
   activeOfferId: -1,
-  offers,
-  offersShow: offers.filter((item) => {
-    return item.city === Object.keys(cityes)[0];
-  }),
-  cityes,
-  hoverCardId: -1
+  activeCity: `Paris`
 };
-// const initialState = {
-//   activeCity: ``,
-//   activeOfferId: -1,
-//   offers: [],
-//   offersShow: []
-// };
 
 const ActionType = {
+  LOAD_OFFERS: `LOAD_OFFERS`,
   CHANGE_CITY: `CHANGE_CITY`,
-  GET_OFFERS: `GET_OFFERS`,
   OPEN_OFFER: `OPEN_OFFER`,
   ON_CARD_HOVER: `ON_CARD_HOVER`,
   SORT_OFFERS_DIRECT: `SORT_OFFERS_DIRECT`,
-  SORT_OFFERS_REVERSE: `SORT_OFFERS_REVERSE`
+  SORT_OFFERS_REVERSE: `SORT_OFFERS_REVERSE`,
 };
 
 const ActionCreator = {
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers
+  }),
   changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
-    payload: city
-  }),
-  getOffers: (city) => ({
-    type: ActionType.GET_OFFERS,
     payload: city
   }),
   openOffer: (id) => ({
@@ -54,28 +39,25 @@ const ActionCreator = {
   sortOffersReverse: (param) => ({
     type: ActionType.SORT_OFFERS_REVERSE,
     payload: param
-  })
+  }),
+};
+
+const Operation = {
+  loadOffers: () => (dispatch, getState, api) => {
+    return api.get(`/hotels`)
+      .then((response) => {
+        dispatch(ActionCreator.loadOffers(response));
+      });
+  }
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.LOAD_OFFERS:
+      return extend(state, action.payload);
     case ActionType.OPEN_OFFER:
       return extend(state, {
         activeOfferId: action.payload
-      });
-    case ActionType.CHANGE_CITY:
-      return extend(state, {
-        activeCity: action.payload,
-        offersShow: offers.filter((item) => {
-          return action.payload === item.city;
-        })
-      });
-    case ActionType.GET_OFFERS:
-      return extend(state, {
-        activeCity: action.payload,
-        offersShow: offers.filter((item) =>{
-          return action.payload === item.city;
-        })
       });
     case ActionType.ON_CARD_HOVER:
       return extend(state, {
@@ -99,9 +81,16 @@ const reducer = (state = initialState, action) => {
             })
         })
       );
-    default:
-      return state;
+    case ActionType.CHANGE_CITY:
+      return extend(state, {
+        activeCity: action.payload,
+        offersShow: state.offers.filter((item) => {
+          return action.payload === item.city;
+        })
+      });
   }
+
+  return state;
 };
 
-export {reducer, ActionType, ActionCreator};
+export {reducer, Operation, ActionType, ActionCreator};
