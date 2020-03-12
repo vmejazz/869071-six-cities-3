@@ -21,7 +21,7 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offersShow, cityes} = this.props;
+    const {offersShow, cityes, activeCity} = this.props;
     const {iconBlue} = this.icons;
     const myMap = this.myMap = leaflet.map(`mapId`, {
       zoomControl: false,
@@ -29,7 +29,8 @@ class Map extends PureComponent {
     });
     // console.log( offersShow, typeof(cityes))
 
-    const firstCity = cityes[Object.keys(cityes)[0]];
+    // const firstCity = cityes[Object.keys(cityes)[0]];
+    const firstCity = cityes[activeCity];
     const mapArgument = [firstCity.latitude, firstCity.longitude];
 
     myMap.setView(mapArgument, firstCity.zoom);

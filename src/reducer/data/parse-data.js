@@ -3,7 +3,7 @@ export default class ParseData {
     this.offers = data;
   }
 
-  _toRaw() {
+  toRaw() {
     return (
       this.offers.map((item) => {
         return ({
@@ -32,7 +32,7 @@ export default class ParseData {
     );
   }
 
-  _toCityes() {
+  toCityes() {
     let cityesSet = {};
     this.offers.forEach((item) => {
       cityesSet[item.city.name] = item.city.location;

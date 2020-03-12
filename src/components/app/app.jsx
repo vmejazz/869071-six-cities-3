@@ -13,9 +13,13 @@ const App = (props) => {
   const _renderApp = () => {
 
     if (offers.length < 1) {
-      return null;
+      return (
+        <h2>
+          Предложения загружаются...
+        </h2>
+      );
     }
-    if (activeOfferId < 1 && offers.length > 1) {
+    if (activeOfferId < 1 && offers.length >= 1) {
       return (
         <Main
           offerPlacesCount={offersShow.length}
@@ -95,11 +99,11 @@ const mapDispatchToProps = (dispatch) => ({
         ActionCreator.getOffers()
     );
   },
-  parseCityes(offers) {
-    dispatch(
-        ActionCreator.parseCityes(offers)
-    );
-  }
+  // parseCityes(offers) {
+  //   dispatch(
+  //       ActionCreator.parseCityes(offers)
+  //   );
+  // }
 });
 
 export {App};

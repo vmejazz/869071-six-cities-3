@@ -8,8 +8,8 @@ import App from "./components/app/app.jsx";
 import {createAPI} from "./api.js";
 import {Operation as DataOperation} from "./reducer/data/data.jsx";
 
-const api = createAPI((...args) => {
-  store.dispatch(...args);
+const api = createAPI(() => {
+  store.dispatch();
 });
 
 const store = createStore(
