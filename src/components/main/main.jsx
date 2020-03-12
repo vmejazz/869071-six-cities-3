@@ -183,7 +183,7 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
+  activeCity: state.DATA.activeCity,
   hoverCardId: state.DATA.hoverCardId
 });
 

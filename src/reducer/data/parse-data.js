@@ -25,7 +25,7 @@ export default class ParseData {
             srcAvatar: item.host[`avatar_url`],
             id: item.host.id
           },
-          position: [item.city.location[`latitude`], item.city.location[`longitude`]],
+          position: [item.location[`latitude`], item.location[`longitude`]],
           city: item.city.name
         });
       })
