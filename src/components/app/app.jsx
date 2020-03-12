@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/data/data.jsx";
 import Main from "../main/main.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
-import {getOffersShow} from "./selectors.js";
+import {getOffers} from "../selectors.js";
 
 const App = (props) => {
   const {offers, offersShow, cityes, openOffer, activeOfferId} = props;
@@ -73,13 +73,15 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  pop: getOffersShow,
-  offers: state.DATA.offers,
+  // pop: getOffersShow,
+  // offers: state.DATA.offers,
+  offers: getOffers(state),
   // activeCity: state.activeCity,
   activeOfferId: state.DATA.activeOfferId,
   // offers: state.offers,
   offersShow: state.DATA.offersShow,
-  cityes: state.DATA.cityes
+  // offersShow: getOffersShow(state),
+  cityes: state.DATA.cityes,
 });
 
 const mapDispatchToProps = (dispatch) => ({
