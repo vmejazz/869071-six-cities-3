@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 const CityItem = (props) => {
   const {city, activeCity, onCityClick} = props;
   const activeClass = city === activeCity;
-  // console.log(props);
 
   return (
     <li className="locations__item" onClick={() => onCityClick(city)}>

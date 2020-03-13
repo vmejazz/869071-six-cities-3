@@ -2,8 +2,6 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-
-const ZOOM = 12;
 class Map extends PureComponent {
   constructor(props) {
     super(props);
@@ -23,15 +21,19 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offersShow, cityes} = this.props;
+    const {offersShow, cityes, activeCity} = this.props;
     const {iconBlue} = this.icons;
     const myMap = this.myMap = leaflet.map(`mapId`, {
       zoomControl: false,
       marker: true
     });
-    const firstCity = offersShow[0].city;
+    // console.log( offersShow, typeof(cityes))
 
-    myMap.setView(cityes[firstCity], ZOOM);
+    // const firstCity = cityes[Object.keys(cityes)[0]];
+    const firstCity = cityes[activeCity];
+    const mapArgument = [firstCity.latitude, firstCity.longitude];
+
+    myMap.setView(mapArgument, firstCity.zoom);
 
     leaflet
         .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -53,7 +55,9 @@ class Map extends PureComponent {
     const {iconBlue, iconYellow} = this.icons;
     const activeCityPosition = cityes[activeCity];
 
-    this.myMap.flyTo(activeCityPosition, ZOOM);
+    let mapArgument = [activeCityPosition.latitude, activeCityPosition.longitude];
+
+    this.myMap.flyTo(mapArgument, activeCityPosition.zoom);
     this.layer.forEach((item) => {
       item.remove();
     });
@@ -110,15 +114,24 @@ Map.propTypes = {
     position: PropTypes.arrayOf(PropTypes.number).isRequired,
     city: PropTypes.string.isRequired
   })).isRequired,
-  cityes: PropTypes.objectOf(
-      PropTypes.arrayOf(PropTypes.number)
-  ).isRequired,
+  cityes: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
+    })
+  ]),
   activeCity: PropTypes.string.isRequired,
   hoverCardId: PropTypes.number
 };
 
+// Map.defaultProps = {
+//   activeCity: `Paris`
+// }
+
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity
+  activeCity: state.DATA.activeCity
 });
 
 export {Map};

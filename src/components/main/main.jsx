@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.jsx";
+import {ActionCreator} from "../../reducer/data/data.jsx";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
 import Map from "../map/map.jsx";
 import CityList from "../city-list/city-list.jsx";
@@ -17,7 +17,7 @@ const Main = (props) => {
     offersShow,
     onApartmentCardClick,
     cityes,
-    activeCity,
+    activeCity = Object.keys(cityes)[0],
     changeCity,
     hoverCardId,
     onCardHover,
@@ -25,6 +25,10 @@ const Main = (props) => {
     sortOffersReverse,
   } = props;
   const emptyOffers = offerPlacesCount === 0;
+
+  // setTimeout(() => {
+  //   console.log(state)
+  // }, 1500);
 
   const sortTypes = {
     [`Popular`]: {
@@ -136,7 +140,7 @@ const Main = (props) => {
 Main.defaultProps = {
   offerPlacesCount: 3,
   offersShow: [],
-  onCityTitleClick: () => {}
+  onCityTitleClick: () => {},
 };
 
 Main.propTypes = {
@@ -162,10 +166,15 @@ Main.propTypes = {
     position: PropTypes.arrayOf(PropTypes.number).isRequired
   })).isRequired,
   onApartmentCardClick: PropTypes.func,
-  cityes: PropTypes.objectOf(
-      PropTypes.arrayOf(PropTypes.number)
-  ).isRequired,
-  activeCity: PropTypes.string.isRequired,
+  cityes: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
+    })
+  ]),
+  activeCity: PropTypes.string,
   changeCity: PropTypes.func,
   hoverCardId: PropTypes.number,
   onCardHover: PropTypes.func,
@@ -174,8 +183,8 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-  hoverCardId: state.hoverCardId
+  activeCity: state.DATA.activeCity,
+  hoverCardId: state.DATA.hoverCardId
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,3 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test render App component <App /> should render page 1`] = `<ApartmentDetailInfo />`;
+exports[`Test render App component <App /> should render page 1`] = `
+<ApartmentDetailInfo
+  offer={
+    Object {
+      "apartmentStuff": Array [
+        "wifi",
+        "Cable TV",
+        "Kitchen",
+      ],
+      "bedrooms": 3,
+      "city": "Cologne",
+      "description": "",
+      "id": 2,
+      "maxGuests": 4,
+      "ownerInfo": Object {
+        "name": "Jon",
+        "srcAvatar": "img/avatar-max.jpg",
+        "super": true,
+      },
+      "position": Array [
+        50.938014,
+        6.958104,
+      ],
+      "premium": false,
+      "price": 200,
+      "rate": 1,
+      "srcGallery": Array [],
+      "srcImg": "img/apartment-02.jpg",
+      "title": "Perfect apartment",
+      "type": "House",
+    }
+  }
+/>
+`;

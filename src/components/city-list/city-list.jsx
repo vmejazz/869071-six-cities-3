@@ -25,9 +25,14 @@ const CityList = (props) => {
 };
 
 CityList.propTypes = {
-  cityes: PropTypes.objectOf(
-      PropTypes.arrayOf(PropTypes.number)
-  ).isRequired,
+  cityes: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
+    })
+  ]),
   onCityClick: PropTypes.func,
   changeCity: PropTypes.func,
   activeCity: PropTypes.string.isRequired

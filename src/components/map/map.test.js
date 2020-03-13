@@ -41,14 +41,18 @@ const offersShow = [
 ];
 
 const cityes = {
-  AMSTERDAM: [52.38333, 4.9]
+  AMSTERDAM: {
+    latitude: 53.550341,
+    longitude: 10.000654,
+    zoom: 13
+  }
 };
 
 it(`Map render`, () => {
   const tree = renderer
     .create(
         <Map
-          activeCity={`Moscow`}
+          activeCity={`AMSTERDAM`}
           offersShow={offersShow}
           cityes={cityes}
         />)
