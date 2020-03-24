@@ -23,8 +23,10 @@ const Main = (props) => {
     onCardHover,
     sortOffersDirect,
     sortOffersReverse,
+    authorizationStatus
   } = props;
   const emptyOffers = offerPlacesCount === 0;
+  let authStatus = authorizationStatus === `AUTH` ? true : false;
 
   // setTimeout(() => {
   //   console.log(state)
@@ -75,8 +77,10 @@ const Main = (props) => {
                     <a className="header__nav-link header__nav-link--profile" href="#">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">
-                        Oliver.conner@gmail.com
+                      <span className=
+                        {`${authStatus ? `header__user-name user__name` : `header__login`}`}
+                      >
+                        { authStatus ? loginName : `Sing in`}
                       </span>
                     </a>
                   </li>
@@ -184,7 +188,8 @@ Main.propTypes = {
 
 const mapStateToProps = (state) => ({
   activeCity: state.DATA.activeCity,
-  hoverCardId: state.DATA.hoverCardId
+  hoverCardId: state.DATA.hoverCardId,
+  authorizationStatus: state.USER.authorizationStatus
 });
 
 const mapDispatchToProps = (dispatch) => ({

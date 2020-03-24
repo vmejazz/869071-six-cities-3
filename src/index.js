@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import App from "./components/app/app.jsx";
 import {createAPI} from "./api.js";
 import {Operation as DataOperation} from "./reducer/data/data.jsx";
+import {Operation as UserOperation} from "./reducer/user/user.jsx";
 
 const api = createAPI(() => {
   store.dispatch();
@@ -21,6 +22,13 @@ const store = createStore(
 );
 
 store.dispatch(DataOperation.loadOffers());
+store.dispatch(UserOperation.checkAuth());
+setTimeout(() => {
+  console.log(store.getState());
+}, 1500);
+store.dispatch(UserOperation.login(
+    {email: `pop@gmail.com`, password: `123`}
+));
 
 ReactDOM.render(
     <Provider store={store}>

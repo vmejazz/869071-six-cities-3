@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/data/data.jsx";
 import Main from "../main/main.jsx";
+import SingIng from "../sing-in/sing-in.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
 import {getOffers} from "../selectors.js";
 
@@ -39,7 +40,9 @@ const App = (props) => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          {_renderApp()}
+          {/* {_renderApp()} */}
+          <SingIng />
+
         </Route>
         <Route path="/offer">
           {/* <ApartmentDetailInfo offer={offer} /> */}

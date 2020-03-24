@@ -18,6 +18,7 @@ const createAPI = () => {
   const onSuccess = (response) => {
     if (response.status === SUCCESS_CODE) {
       const ParseDataModel = new ParseData(response.data);
+      console.log(response.data)
       const offersParsed = ParseDataModel.toRaw();
       const cityes = ParseDataModel.toCityes();
       return ({
