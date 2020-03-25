@@ -30,6 +30,10 @@ const offersArray = [
   }
 ];
 
+const userInfo = {
+  AuthorizationStatus: `NO_AUTH`
+};
+
 const cityes = {
   AMSTERDAM: [52.38333, 4.9]
 };
@@ -43,6 +47,7 @@ it(`<Main /> should render all page`, () => {
             offersArray={offersArray}
             cityes={cityes}
             onApartmentCardClick={() => {}}
+            userInfo={userInfo}
           />
       )
       .toJSON();

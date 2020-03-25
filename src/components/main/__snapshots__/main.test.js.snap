@@ -45,9 +45,9 @@ exports[`<Main /> should render all page 1`] = `
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
                 <span
-                  className="header__user-name user__name"
+                  className="header__login"
                 >
-                  Oliver.conner@gmail.com
+                  Sing in
                 </span>
               </a>
             </li>

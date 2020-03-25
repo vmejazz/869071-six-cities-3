@@ -2,15 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/data/data.jsx";
+import {ActionCreator as ActionCreatorData} from "../../reducer/data/data.jsx";
+import {Operation as OperationUser} from "../../reducer/user/user.jsx";
 import Main from "../main/main.jsx";
+import SingIng from "../sing-in/sing-in.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
-import {getOffers} from "../selectors.js";
+import {getOffers, getUser} from "../selectors.js";
 
 const App = (props) => {
-  const {offers, offersShow, cityes, openOffer, activeOfferId} = props;
+  const {offers, offersShow, cityes, openOffer, activeOfferId, userInfo, loginIn} = props;
 
   const _renderApp = () => {
+
+    if (userInfo.authorizationStatus !== `AUTH`) {
+      return (
+        <SingIng
+          loginIn={loginIn}
+        />
+      );
+    }
 
     if (offers.length < 1) {
       return (
@@ -30,7 +40,9 @@ const App = (props) => {
       );
     } else {
       return (
-        <ApartmentDetailInfo offer={offersShow.find((item) => item.id === activeOfferId)} />
+        <ApartmentDetailInfo
+          offer={offersShow.find((item) => item.id === activeOfferId)}
+        />
       );
     }
   };
@@ -40,6 +52,8 @@ const App = (props) => {
       <Switch>
         <Route exact path="/">
           {_renderApp()}
+          {/* <SingIng /> */}
+
         </Route>
         <Route path="/offer">
           {/* <ApartmentDetailInfo offer={offer} /> */}
@@ -73,7 +87,9 @@ App.propTypes = {
   ]),
   activeOfferId: PropTypes.number.isRequired,
   openOffer: PropTypes.func,
-  getOffers: PropTypes.func
+  getOffers: PropTypes.func,
+  loginIn: PropTypes.func,
+  userInfo: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
@@ -86,22 +102,28 @@ const mapStateToProps = (state) => ({
   offersShow: state.DATA.offersShow,
   // offersShow: getOffersShow(state),
   cityes: state.DATA.cityes,
+  userInfo: getUser(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   openOffer(id) {
     dispatch(
-        ActionCreator.openOffer(id)
+        ActionCreatorData.openOffer(id)
     );
   },
   getOffers() {
     dispatch(
-        ActionCreator.getOffers()
+        ActionCreatorData.getOffers()
     );
   },
+  loginIn(loginInfo) {
+    dispatch(
+        OperationUser.loginIn(loginInfo)
+    );
+  }
   // parseCityes(offers) {
   //   dispatch(
-  //       ActionCreator.parseCityes(offers)
+  //       ActionCreatorData.parseCityes(offers)
   //   );
   // }
 });
