@@ -1,4 +1,5 @@
 import {extend} from "../utils.js";
+import ParseData from "../parse-data.js";
 
 const initialState = {
   offers: [],
@@ -46,7 +47,17 @@ const Operation = {
   loadOffers: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
-        dispatch(ActionCreator.loadOffers(response));
+        const ParseDataModel = new ParseData(response);
+        const offersParsed = ParseDataModel.toRaw();
+        const cityes = ParseDataModel.toCityes();
+        dispatch(ActionCreator.loadOffers({
+          offers: offersParsed,
+          cityes,
+          activeCity: Object.keys(cityes)[0],
+          offersShow: offersParsed.filter((item) => {
+            return item.city === Object.keys(cityes)[0];
+          })
+        }));
       });
   }
 };

@@ -23,12 +23,13 @@ const store = createStore(
 
 store.dispatch(DataOperation.loadOffers());
 store.dispatch(UserOperation.checkAuth());
-setTimeout(() => {
-  console.log(store.getState());
-}, 1500);
-store.dispatch(UserOperation.login(
-    {email: `pop@gmail.com`, password: `123`}
-));
+// setTimeout(() => {
+//   console.log(store.getState());
+// }, 1500);
+
+// store.dispatch(UserOperation.login(
+//     {email: `pop@gmail.com`, password: `123`}
+// ));
 
 ReactDOM.render(
     <Provider store={store}>

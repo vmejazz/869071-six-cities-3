@@ -1,5 +1,4 @@
 import axios from "axios";
-import ParseData from "./reducer/data/parse-data.js";
 
 const ErrorMap = {
   NOT_FOUND: 404,
@@ -17,18 +16,7 @@ const createAPI = () => {
 
   const onSuccess = (response) => {
     if (response.status === SUCCESS_CODE) {
-      const ParseDataModel = new ParseData(response.data);
-      console.log(response.data)
-      const offersParsed = ParseDataModel.toRaw();
-      const cityes = ParseDataModel.toCityes();
-      return ({
-        offers: offersParsed,
-        cityes,
-        activeCity: Object.keys(cityes)[0],
-        offersShow: offersParsed.filter((item) => {
-          return item.city === Object.keys(cityes)[0];
-        })
-      });
+      return response.data;
     } else {
       return response;
     }

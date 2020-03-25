@@ -20,6 +20,10 @@ const offersArray = [
   }
 ];
 
+const userInfo = {
+  authorizationStatus: `AUTH`
+};
+
 const cityes = {
   AMSTERDAM: [52.38333, 4.9]
 };
@@ -33,6 +37,7 @@ it(`Should button be pressed`, () => {
         offersArray={offersArray}
         onApartmentCardClick={onApartmentCardClick}
         cityes={cityes}
+        userInfo={userInfo}
       />
   );
 

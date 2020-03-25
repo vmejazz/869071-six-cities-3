@@ -8,6 +8,7 @@ import CityList from "../city-list/city-list.jsx";
 import EmptyOffers from "../empty-offers/empty-offers.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import withActiveItem from "../../hocs/withActiveItem.jsx";
+import {getUser} from "../selectors.js";
 
 const SortOptionsWrapped = withActiveItem(SortOptions);
 
@@ -23,10 +24,11 @@ const Main = (props) => {
     onCardHover,
     sortOffersDirect,
     sortOffersReverse,
-    authorizationStatus
+    userInfo
   } = props;
+
   const emptyOffers = offerPlacesCount === 0;
-  let authStatus = authorizationStatus === `AUTH` ? true : false;
+  let authStatus = userInfo.authorizationStatus === `AUTH` ? true : false;
 
   // setTimeout(() => {
   //   console.log(state)
@@ -80,7 +82,7 @@ const Main = (props) => {
                       <span className=
                         {`${authStatus ? `header__user-name user__name` : `header__login`}`}
                       >
-                        { authStatus ? loginName : `Sing in`}
+                        { authStatus ? userInfo.name : `Sing in`}
                       </span>
                     </a>
                   </li>
@@ -184,12 +186,13 @@ Main.propTypes = {
   onCardHover: PropTypes.func,
   sortOffersDirect: PropTypes.func,
   sortOffersReverse: PropTypes.func,
+  userInfo: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
   activeCity: state.DATA.activeCity,
   hoverCardId: state.DATA.hoverCardId,
-  authorizationStatus: state.USER.authorizationStatus
+  userInfo: getUser(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

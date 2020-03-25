@@ -30,6 +30,10 @@ const offersArray = [
   }
 ];
 
+const userInfo = {
+  authorizationStatus: `AUTH`
+};
+
 const cityes = {
   AMSTERDAM: [52.38333, 4.9]
 };
@@ -45,6 +49,7 @@ describe(`Test render App component`, () => {
             offers={offersArray}
             offersShow={offersArray}
             cityes={cityes}
+            userInfo={userInfo}
           />
       )
       .toJSON();

@@ -2,6 +2,7 @@ import {extend} from "../utils.js";
 
 const ERROR_STATUS = {
   AUTH: 401,
+  BAD_REQUEST: 400
 };
 
 const AuthorizationStatus = {
@@ -29,7 +30,7 @@ const ActionCreator = {
     return {
       type: ActionType.AUTH_INFO,
       payload: authInfo
-    }
+    };
   }
 };
 
@@ -39,6 +40,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         authorizationStatus: action.payload,
       });
+    case ActionType.AUTH_INFO:
+      return extend(state, action.payload);
   }
 
   return state;
@@ -48,13 +51,15 @@ const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
       .then(() => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        // dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
-        console.log(err.response)
         switch (err.response.status) {
           case ERROR_STATUS.AUTH:
             // console.log(`Вы не авторизованы`);
+            break;
+          case ERROR_STATUS.BAD_REQUEST:
+            // console.log(`Переданны не все данные`);
             break;
           default:
             break;
@@ -63,18 +68,26 @@ const Operation = {
       });
   },
 
-  login: (authData) => (dispatch, getState, api) => {
+  loginIn: (authData) => (dispatch, getState, api) => {
     return api.post(`/login`, {
       email: authData.email,
       password: authData.password,
     })
       .then((response) => {
-        console.log(response);
-        
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setAuthInfo(response));
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
+        switch (err.response.status) {
+          case ERROR_STATUS.AUTH:
+            // console.log(`Вы не авторизованы`);
+            break;
+          case ERROR_STATUS.BAD_REQUEST:
+            // console.log(`Переданны не все данные`);
+            break;
+          default:
+            break;
+        }
         throw err;
       });
   },

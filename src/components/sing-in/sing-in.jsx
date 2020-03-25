@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 class SingIng extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -12,20 +12,22 @@ class SingIng extends React.PureComponent {
     this.onChangeLogin = this.onChangeLogin.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
   }
-  
+
   onChangeLogin(evt) {
     this.setState({
       email: evt.target.value
-    })
+    });
   }
 
   onChangePassword(evt) {
     this.setState({
       password: evt.target.value
-    })
+    });
   }
 
   render() {
+    const {loginIn} = this.props;
+
     return (
       <div className="page page--gray page--login">
         <header className="header">
@@ -54,29 +56,26 @@ class SingIng extends React.PureComponent {
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>
-              <form className="login__form form" action="#" method="post">
+              <form className="login__form form" action="/" method="post"
+                onSubmit={(evt) => {
+                  evt.preventDefault();
+                  loginIn(this.state);
+                }}
+              >
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
-                  <input className="login__input form__input" type="email" name="email" placeholder="Email" required 
+                  <input className="login__input form__input" type="email" name="email" placeholder="Email" required
                     onChange={this.onChangeLogin}
                   />
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">Password</label>
-                  <input className="login__input form__input" type="password" name="password" placeholder="Password" required 
+                  <input className="login__input form__input" type="password" name="password" placeholder="Password" required
                     onChange={this.onChangePassword}
                   />
                 </div>
-                <button className="login__submit form__submit button" type="submit"
-                  onClick={
-                    (evt) => {
-                      evt.defaultPrevented;
-                      console.log(this.state);
-
-                    }
-                  }
-                >
-                Sign in
+                <button className="login__submit form__submit button" type="submit">
+                  Sign in
                 </button>
               </form>
             </section>
@@ -93,5 +92,9 @@ class SingIng extends React.PureComponent {
     );
   }
 }
+
+SingIng.propTypes = {
+  loginIn: PropTypes.func
+};
 
 export default SingIng;

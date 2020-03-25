@@ -12,6 +12,10 @@ export const getCityes = (state) => {
   return state.DATA.cityes;
 };
 
+export const getUser = (state) => {
+  return state.USER;
+};
+
 // export const getOffersShow = createSelector(
 //     getOffers,
 //     getActiveCity,
