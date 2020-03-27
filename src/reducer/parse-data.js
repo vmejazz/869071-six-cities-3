@@ -26,7 +26,8 @@ export default class ParseData {
             id: item.host.id
           },
           position: [item.location[`latitude`], item.location[`longitude`]],
-          city: item.city.name
+          city: item.city.name,
+          favorite: item.is_favorite
         });
       })
     );

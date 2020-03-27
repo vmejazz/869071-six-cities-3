@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ApartmentCard from "../apartment-card/apartment-card.jsx";
+import {connect} from "react-redux";
+import {getOffersShow} from "../selectors.js";
 
 const ApartmentList = (props) => {
   const {offersShow, onApartmentCardClick, onCardHover} = props;
@@ -46,6 +48,11 @@ ApartmentList.propTypes = {
   onCardHover: PropTypes.func
 };
 
-export default ApartmentList;
+const mapStateToProps = (state) => ({
+  offersShow: getOffersShow(state)
+});
+
+export {ApartmentList};
+export default connect(mapStateToProps)(ApartmentList);
 
 

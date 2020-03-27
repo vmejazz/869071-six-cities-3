@@ -14,6 +14,7 @@ const ActionType = {
   ON_CARD_HOVER: `ON_CARD_HOVER`,
   SORT_OFFERS_DIRECT: `SORT_OFFERS_DIRECT`,
   SORT_OFFERS_REVERSE: `SORT_OFFERS_REVERSE`,
+  SET_FAVOTIRE: `SET_FAVORITE`
 };
 
 const ActionCreator = {
@@ -41,6 +42,10 @@ const ActionCreator = {
     type: ActionType.SORT_OFFERS_REVERSE,
     payload: param
   }),
+  changeBookmarkStatus: (offer) => ({
+    type: ActionType.SET_FAVOTIRE,
+    payload: offer
+  }),
 };
 
 const Operation = {
@@ -59,7 +64,17 @@ const Operation = {
           })
         }));
       });
-  }
+  },
+
+  changeBookmark: (offerId, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${offerId}/${status}`)
+      .then((response) => {
+        const ParseDataModel = new ParseData([response]);
+        const offerParsed = ParseDataModel.toRaw();
+
+        dispatch(ActionCreator.changeBookmarkStatus(offerParsed[0]));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -76,7 +91,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.SORT_OFFERS_DIRECT:
       return extend(state, {
-        offersShow: state.offersShow
+        offers: state.offers
           .slice()
           .sort((a, b) => {
             return a[action.payload] - b[action.payload];
@@ -85,7 +100,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.SORT_OFFERS_REVERSE:
       return (
         extend(state, {
-          offersShow: state.offersShow
+          offers: state.offers
             .slice()
             .sort((a, b) => {
               return b[action.payload] - a[action.payload];
@@ -98,6 +113,12 @@ const reducer = (state = initialState, action) => {
         offersShow: state.offers.filter((item) => {
           return action.payload === item.city;
         })
+      });
+    case ActionType.SET_FAVOTIRE:
+      const offersArray = state.offers.map((item) => item.id === action.payload.id ? action.payload : item);
+
+      return extend(state, {
+        offers: offersArray
       });
   }
 

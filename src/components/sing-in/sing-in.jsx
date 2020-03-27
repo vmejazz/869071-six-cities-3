@@ -1,51 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
-class SingIng extends React.PureComponent {
-  constructor(props) {
-    super(props);
+import {Link} from "react-router-dom";
+import UserProfile from "../user-profile/user-profile.jsx";
+import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+import {getUser} from "../selectors.js";
+import {Operation as OperationUser} from "../../reducer/user/user.jsx";
 
-    this.state = {
-      email: ``,
-      password: ``
-    };
+const SingIng = (props) => {
+  const {loginIn, userInfo} = props;
 
-    this.onChangeLogin = this.onChangeLogin.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-  }
-
-  onChangeLogin(evt) {
-    this.setState({
-      email: evt.target.value
-    });
-  }
-
-  onChangePassword(evt) {
-    this.setState({
-      password: evt.target.value
-    });
-  }
-
-  render() {
-    const {loginIn} = this.props;
-
+  if (userInfo.authorizationStatus === `AUTH`) {
+    return (
+      <Redirect to="/" />
+    );
+  } else {
     return (
       <div className="page page--gray page--login">
         <header className="header">
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <a className="header__logo-link" href="main.html">
+                <Link className="header__logo-link" to="/">
                   <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-                </a>
+                </Link>
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__login">Sign in</span>
-                    </a>
+                    <UserProfile />
                   </li>
                 </ul>
               </nav>
@@ -59,19 +42,22 @@ class SingIng extends React.PureComponent {
               <form className="login__form form" action="/" method="post"
                 onSubmit={(evt) => {
                   evt.preventDefault();
-                  loginIn(this.state);
+                  loginIn({
+                    email: evt.target.email.value,
+                    password: evt.target.password.value
+                  });
                 }}
               >
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
                   <input className="login__input form__input" type="email" name="email" placeholder="Email" required
-                    onChange={this.onChangeLogin}
+                    // onChange={this.onChangeLogin}
                   />
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">Password</label>
                   <input className="login__input form__input" type="password" name="password" placeholder="Password" required
-                    onChange={this.onChangePassword}
+                    // onChange={this.onChangePassword}
                   />
                 </div>
                 <button className="login__submit form__submit button" type="submit">
@@ -91,10 +77,28 @@ class SingIng extends React.PureComponent {
       </div>
     );
   }
-}
-
-SingIng.propTypes = {
-  loginIn: PropTypes.func
 };
 
-export default SingIng;
+SingIng.propTypes = {
+  loginIn: PropTypes.func,
+};
+
+const mapStateToProps = (state) => ({
+  userInfo: getUser(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loginIn(loginInfo) {
+    dispatch(
+        OperationUser.loginIn(loginInfo)
+    );
+  },
+  checkAuth() {
+    dispatch(
+        OperationUser.checkAuth()
+    );
+  }
+});
+
+export {SingIng};
+export default connect(mapStateToProps, mapDispatchToProps)(SingIng);

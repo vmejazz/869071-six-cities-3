@@ -1,4 +1,4 @@
-// import {createSelector} from "reselect";
+import {createSelector} from "reselect";
 
 export const getOffers = (state) => {
   return state.DATA.offers;
@@ -24,15 +24,15 @@ export const getUser = (state) => {
 //     }
 // );
 
-// export const getOffersShow = createSelector(
-//     getOffers,
-//     getActiveCity,
-//     (offers, activeCity) => {
-//       return offers.filter((item) => {
-//         return item.city === activeCity;
-//       });
-//     }
-// );
+export const getOffersShow = createSelector(
+    getOffers,
+    getActiveCity,
+    (offers, activeCity) => {
+      return offers.filter((item) => {
+        return item.city === activeCity;
+      });
+    }
+);
 
 // export const getPopularOffer = createSelector(
 //     getOffersShow,

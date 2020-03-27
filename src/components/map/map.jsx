@@ -27,9 +27,6 @@ class Map extends PureComponent {
       zoomControl: false,
       marker: true
     });
-    // console.log( offersShow, typeof(cityes))
-
-    // const firstCity = cityes[Object.keys(cityes)[0]];
     const firstCity = cityes[activeCity];
     const mapArgument = [firstCity.latitude, firstCity.longitude];
 
@@ -125,10 +122,6 @@ Map.propTypes = {
   activeCity: PropTypes.string.isRequired,
   hoverCardId: PropTypes.number
 };
-
-// Map.defaultProps = {
-//   activeCity: `Paris`
-// }
 
 const mapStateToProps = (state) => ({
   activeCity: state.DATA.activeCity
