@@ -12,11 +12,13 @@ const AuthorizationStatus = {
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  bookmarksRequired: false
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-  AUTH_INFO: `AUTH_INFO`
+  AUTH_INFO: `AUTH_INFO`,
+  REQUIRED_BOOKMARKS: `REQUIRED_BOOKMARKS`
 };
 
 const ActionCreator = {
@@ -31,7 +33,11 @@ const ActionCreator = {
       type: ActionType.AUTH_INFO,
       payload: authInfo
     };
-  }
+  },
+  requireBookmarks: (status) => ({
+    type: ActionType.REQUIRED_BOOKMARKS,
+    payload: status
+  })
 };
 
 const reducer = (state = initialState, action) => {
@@ -42,6 +48,10 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.AUTH_INFO:
       return extend(state, action.payload);
+    case ActionType.REQUIRED_BOOKMARKS:
+      return extend(state, {
+        bookmarksRequired: action.payload,
+      });
   }
 
   return state;
@@ -50,13 +60,14 @@ const reducer = (state = initialState, action) => {
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
-        // dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      .then((response) => {
+        dispatch(ActionCreator.setAuthInfo(response));
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
         switch (err.response.status) {
           case ERROR_STATUS.AUTH:
-            // console.log(`Вы не авторизованы`);
+            dispatch(ActionCreator.bookmarksDenied(``));
             break;
           case ERROR_STATUS.BAD_REQUEST:
             // console.log(`Переданны не все данные`);
@@ -74,6 +85,7 @@ const Operation = {
       password: authData.password,
     })
       .then((response) => {
+        dispatch(ActionCreator.requireBookmarks(true));
         dispatch(ActionCreator.setAuthInfo(response));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
@@ -91,6 +103,10 @@ const Operation = {
         throw err;
       });
   },
+
+  checkBookmarks: () => (dispatch) => {
+    return dispatch(ActionCreator.requireBookmarks(true));
+  }
 };
 
 

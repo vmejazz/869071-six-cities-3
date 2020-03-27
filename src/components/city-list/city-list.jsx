@@ -5,6 +5,8 @@ import CityItem from "../city-item/city-item.jsx";
 const MAX_CITYES = 6;
 
 const CityList = (props) => {
+  // console.log(props);
+
   const {cityes, changeCity, activeCity} = props;
   const cityesArray = Object.keys(cityes).slice(0, MAX_CITYES);
 

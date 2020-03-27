@@ -1,27 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator as ActionCreatorData} from "../../reducer/data/data.jsx";
 import {Operation as OperationUser} from "../../reducer/user/user.jsx";
 import Main from "../main/main.jsx";
 import SingIng from "../sing-in/sing-in.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
-import {getOffers, getUser} from "../selectors.js";
+import {getOffers, getOffersShow, getUser, getCityes} from "../selectors.js";
+import PrivateRoute from "../private-route/private-route.jsx";
+import Favorites from "../favorites/favorites.jsx";
+import customHistory from "../../history.js";
 
 const App = (props) => {
-  const {offers, offersShow, cityes, openOffer, activeOfferId, userInfo, loginIn} = props;
+  const {offers, offersShow, cityes, openOffer, activeOfferId, userInfo} = props;
 
   const _renderApp = () => {
 
-    if (userInfo.authorizationStatus !== `AUTH`) {
+    if (userInfo.bookmarksRequired === true && userInfo.authorizationStatus === `NO_AUTH`) {
       return (
-        <SingIng
-          loginIn={loginIn}
-        />
+        <Redirect to="/login" />
       );
     }
-
     if (offers.length < 1) {
       return (
         <h2>
@@ -48,18 +48,28 @@ const App = (props) => {
   };
 
   return (
-    <BrowserRouter>
+
+    <Router history={customHistory}>
       <Switch>
         <Route exact path="/">
           {_renderApp()}
-          {/* <SingIng /> */}
-
+          {/* <Main
+            offerPlacesCount={offersShow.length}
+            offersShow={offersShow}
+            onApartmentCardClick={openOffer}
+            cityes={cityes}
+          /> */}
         </Route>
+        <PrivateRoute exact path="/favorites" component={Favorites} />
+        {/* <Route exact path="/login" >
+          <SingIng />
+        </Route> */}
+        <Route exact path="/login" component={SingIng} />
         <Route path="/offer">
           {/* <ApartmentDetailInfo offer={offer} /> */}
         </Route>
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 
@@ -99,9 +109,10 @@ const mapStateToProps = (state) => ({
   // activeCity: state.activeCity,
   activeOfferId: state.DATA.activeOfferId,
   // offers: state.offers,
-  offersShow: state.DATA.offersShow,
-  // offersShow: getOffersShow(state),
-  cityes: state.DATA.cityes,
+  // offersShow: state.DATA.offersShow,
+  offersShow: getOffersShow(state),
+  // cityes: state.DATA.cityes,
+  cityes: getCityes(state),
   userInfo: getUser(state)
 });
 

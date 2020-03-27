@@ -9,6 +9,7 @@ import EmptyOffers from "../empty-offers/empty-offers.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import withActiveItem from "../../hocs/withActiveItem.jsx";
 import {getUser} from "../selectors.js";
+import UserProfile from "../user-profile/user-profile.jsx";
 
 const SortOptionsWrapped = withActiveItem(SortOptions);
 
@@ -28,7 +29,6 @@ const Main = (props) => {
   } = props;
 
   const emptyOffers = offerPlacesCount === 0;
-  let authStatus = userInfo.authorizationStatus === `AUTH` ? true : false;
 
   // setTimeout(() => {
   //   console.log(state)
@@ -76,15 +76,9 @@ const Main = (props) => {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className=
-                        {`${authStatus ? `header__user-name user__name` : `header__login`}`}
-                      >
-                        { authStatus ? userInfo.name : `Sing in`}
-                      </span>
-                    </a>
+                    <UserProfile
+                      userInfo={userInfo}
+                    />
                   </li>
                 </ul>
               </nav>
