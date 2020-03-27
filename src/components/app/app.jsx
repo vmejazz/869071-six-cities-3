@@ -24,7 +24,7 @@ const App = (props) => {
     }
     if (offers.length < 1) {
       return (
-        <h2>
+        <h2 style={{textAlign: `center`, marginTop: `50px`, fontSize: `28px`}}>
           Предложения загружаются...
         </h2>
       );
