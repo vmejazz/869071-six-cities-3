@@ -1,4 +1,5 @@
 import {extend} from "../utils.js";
+import ParseData from "../parse-data.js";
 
 const ERROR_STATUS = {
   AUTH: 401,
@@ -16,38 +17,43 @@ const initialState = {
 };
 
 const ActionType = {
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   AUTH_INFO: `AUTH_INFO`,
-  REQUIRED_BOOKMARKS: `REQUIRED_BOOKMARKS`
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  REQUIRED_BOOKMARKS: `REQUIRED_BOOKMARKS`,
+  REQUIRED_FAVORITES: `REQUIRED_FAVORITES`,
 };
 
 const ActionCreator = {
-  requireAuthorization: (status) => {
-    return {
-      type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: status,
-    };
-  },
   setAuthInfo: (authInfo) => {
     return {
       type: ActionType.AUTH_INFO,
       payload: authInfo
     };
   },
+  requireAuthorization: (status) => {
+    return {
+      type: ActionType.REQUIRED_AUTHORIZATION,
+      payload: status,
+    };
+  },
   requireBookmarks: (status) => ({
     type: ActionType.REQUIRED_BOOKMARKS,
     payload: status
-  })
+  }),
+  requireFavorites: (offers) => ({
+    type: ActionType.REQUIRED_FAVORITES,
+    payload: offers
+  }),
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.AUTH_INFO:
+      return extend(state, action.payload);
     case ActionType.REQUIRED_AUTHORIZATION:
       return extend(state, {
         authorizationStatus: action.payload,
       });
-    case ActionType.AUTH_INFO:
-      return extend(state, action.payload);
     case ActionType.REQUIRED_BOOKMARKS:
       return extend(state, {
         bookmarksRequired: action.payload,
@@ -67,7 +73,6 @@ const Operation = {
       .catch((err) => {
         switch (err.response.status) {
           case ERROR_STATUS.AUTH:
-            dispatch(ActionCreator.bookmarksDenied(``));
             break;
           case ERROR_STATUS.BAD_REQUEST:
             // console.log(`Переданны не все данные`);
@@ -106,7 +111,20 @@ const Operation = {
 
   checkBookmarks: () => (dispatch) => {
     return dispatch(ActionCreator.requireBookmarks(true));
-  }
+  },
+
+  getOffersFavorite: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        const ParseDataModel = new ParseData(response);
+        const offersParsed = ParseDataModel.toRaw();
+        const cityes = ParseDataModel.toCityes();
+        dispatch(ActionCreator.requireFavorites({
+          offers: offersParsed,
+          cityes,
+        }));
+      });
+  },
 };
 
 

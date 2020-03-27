@@ -23,6 +23,7 @@ const store = createStore(
 
 store.dispatch(DataOperation.loadOffers());
 store.dispatch(UserOperation.checkAuth());
+store.dispatch(UserOperation.getOffersFavorite());
 // setTimeout(() => {
 //   console.log(store.getState());
 // }, 1500);

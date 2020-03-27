@@ -4,7 +4,7 @@ import BookmarkButton from "../bookmark-button/bookmark-button.jsx";
 
 const ApartmentCard = (props) => {
   const {placeOffer, onApartmentCardClick, onCardHover} = props;
-  const {id, title, price, srcImg, premium, type, rate} = placeOffer;
+  const {id, title, price, srcImg, premium, type, rate, favorite} = placeOffer;
 
   // const bookmarkPush = () => {
 
@@ -35,7 +35,10 @@ const ApartmentCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton />
+          <BookmarkButton
+            offerId={id}
+            favorite={favorite}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -62,10 +65,11 @@ ApartmentCard.propTypes = {
     srcImg: PropTypes.string,
     premium: PropTypes.bool,
     type: PropTypes.string,
-    rate: PropTypes.number
+    rate: PropTypes.number,
+    favorite: PropTypes.bool
   }).isRequired,
   onApartmentCardClick: PropTypes.func,
-  onCardHover: PropTypes.func
+  onCardHover: PropTypes.func,
 };
 
 export default ApartmentCard;

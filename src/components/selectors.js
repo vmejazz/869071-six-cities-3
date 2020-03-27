@@ -16,7 +16,6 @@ export const getUser = (state) => {
   return state.USER;
 };
 
-
 // export const getOffersShow = createSelector(
 //     getOffers,
 //     getActiveCity,
