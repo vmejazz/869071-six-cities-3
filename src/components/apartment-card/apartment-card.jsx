@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import BookmarkButton from "../bookmark-button/bookmark-button.jsx";
+import {Link} from "react-router-dom";
 
 const ApartmentCard = (props) => {
-  const {placeOffer, onApartmentCardClick, onCardHover} = props;
+  const {placeOffer, onCardHover} = props;
   const {id, title, price, srcImg, premium, type, rate, favorite} = placeOffer;
 
   // const bookmarkPush = () => {
@@ -14,7 +15,6 @@ const ApartmentCard = (props) => {
 
   return (
     <article className="cities__place-card place-card"
-      onClick={() => onApartmentCardClick(id)}
       onMouseEnter={() => onCardHover(id)}
       onMouseLeave={() => onCardHover(DEACTIVATE_ID)}
     >
@@ -25,9 +25,9 @@ const ApartmentCard = (props) => {
         : ``
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={srcImg} width="260" height="200" alt="Place image"/>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">

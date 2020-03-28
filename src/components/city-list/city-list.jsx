@@ -43,7 +43,7 @@ CityList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  cityes: getCityes(state)
+  // cityes: getCityes(state)
 });
 
 export {CityList};

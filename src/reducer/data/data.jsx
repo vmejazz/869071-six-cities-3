@@ -4,7 +4,9 @@ import ParseData from "../parse-data.js";
 const initialState = {
   offers: [],
   activeOfferId: -1,
-  activeCity: `Paris`
+  activeCity: `Paris`,
+  offersFavorite: [],
+  cityesFavorite: [],
 };
 
 const ActionType = {
@@ -14,7 +16,8 @@ const ActionType = {
   ON_CARD_HOVER: `ON_CARD_HOVER`,
   SORT_OFFERS_DIRECT: `SORT_OFFERS_DIRECT`,
   SORT_OFFERS_REVERSE: `SORT_OFFERS_REVERSE`,
-  SET_FAVOTIRE: `SET_FAVORITE`
+  SET_FAVOTIRE: `SET_FAVORITE`,
+  LOAD_FAVORITES: `LOAD_FAVORITES`
 };
 
 const ActionCreator = {
@@ -46,6 +49,10 @@ const ActionCreator = {
     type: ActionType.SET_FAVOTIRE,
     payload: offer
   }),
+  loadFavorites: (offers) => ({
+    type: ActionType.LOAD_FAVORITES,
+    payload: offers
+  }),
 };
 
 const Operation = {
@@ -66,6 +73,19 @@ const Operation = {
       });
   },
 
+  loadFavorites: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        const ParseDataModel = new ParseData(response);
+        const offersParsed = ParseDataModel.toRaw();
+        const cityes = ParseDataModel.toCityes();
+        dispatch(ActionCreator.loadFavorites({
+          offersFavorite: offersParsed,
+          cityesFavorite: cityes,
+        }));
+      });
+  },
+
   changeBookmark: (offerId, status) => (dispatch, getState, api) => {
     return api.post(`/favorite/${offerId}/${status}`)
       .then((response) => {
@@ -80,6 +100,8 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_OFFERS:
+      return extend(state, action.payload);
+    case ActionType.LOAD_FAVORITES:
       return extend(state, action.payload);
     case ActionType.OPEN_OFFER:
       return extend(state, {

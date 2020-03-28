@@ -6,7 +6,6 @@ import {connect} from "react-redux";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 
 const PrivateRoute = (props) => {
-
   const {authorizationStatus} = props;
 
   return (

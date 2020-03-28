@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Router, Route, Switch, Redirect} from "react-router-dom";
+import {Route, Switch, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator as ActionCreatorData} from "../../reducer/data/data.jsx";
 import {Operation as OperationUser} from "../../reducer/user/user.jsx";
@@ -10,49 +10,60 @@ import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.
 import {getOffers, getOffersShow, getUser, getCityes} from "../selectors.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import Favorites from "../favorites/favorites.jsx";
-import customHistory from "../../history.js";
+import TestPage from "./test-page.jsx";
 
 const App = (props) => {
-  const {offers, offersShow, cityes, openOffer, activeOfferId, userInfo} = props;
+  const {
+    offers,
+    // offersShow,
+    // cityes,
+    // openOffer,
+    // activeOfferId,
+    // userInfo
+  } = props;
 
-  const _renderApp = () => {
+  // const _renderApp = () => {
 
-    if (userInfo.bookmarksRequired === true && userInfo.authorizationStatus === `NO_AUTH`) {
-      return (
-        <Redirect to="/login" />
-      );
-    }
-    if (offers.length < 1) {
-      return (
-        <h2 style={{textAlign: `center`, marginTop: `50px`, fontSize: `28px`}}>
-          Предложения загружаются...
-        </h2>
-      );
-    }
-    if (activeOfferId < 1 && offers.length >= 1) {
-      return (
-        <Main
-          offerPlacesCount={offersShow.length}
-          offersShow={offersShow}
-          onApartmentCardClick={openOffer}
-          cityes={cityes}
-        />
-      );
-    } else {
-      return (
-        <ApartmentDetailInfo
-          offer={offersShow.find((item) => item.id === activeOfferId)}
-        />
-      );
-    }
-  };
+  //   if (userInfo.bookmarksRequired === true && userInfo.authorizationStatus === `NO_AUTH`) {
+  //     return (
+  //       <Redirect to="/login" />
+  //     );
+  //   }
+  //   if (offers.length < 1) {
+  //     return (
+  //       <h2 style={{textAlign: `center`, marginTop: `50px`, fontSize: `28px`}}>
+  //         Предложения загружаются...
+  //       </h2>
+  //     );
+  //   }
+  //   if (activeOfferId < 1 && offers.length >= 1) {
+  //     // console.log(props);
+
+  //     return (
+  //       <Main
+  //         offerPlacesCount={offersShow.length}
+  //         offersShow={offersShow}
+  //         onApartmentCardClick={openOffer}
+  //         cityes={cityes}
+  //       />
+  //     );
+  //   }
+  //   return null;
+  //   // } else {
+  //   //   return (
+  //   //     <ApartmentDetailInfo
+  //   //       offer={offersShow.find((item) => item.id === activeOfferId)}
+  //   //     />
+  //   //   );
+  //   // }
+  // };
 
   return (
 
-    <Router history={customHistory}>
+    <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          {_renderApp()}
+        <Route exact path="/" component={Main}>
+          {/* {_renderApp()} */}
           {/* <Main
             offerPlacesCount={offersShow.length}
             offersShow={offersShow}
@@ -65,11 +76,20 @@ const App = (props) => {
           <SingIng />
         </Route> */}
         <Route exact path="/login" component={SingIng} />
-        <Route path="/offer">
-          {/* <ApartmentDetailInfo offer={offer} /> */}
+        <Route path="/offer/:offer?" render={(routeProps) =>
+          <ApartmentDetailInfo
+            activeOfferId={routeProps.match.params.offer}
+            offers={offers}
+            // offer={offersShow.find((item) => item.id === activeOfferId)}
+          />
+        }>
         </Route>
+        <Route path="/test/:testNew?" render={(testProps) =>
+          <TestPage routeProps={testProps}/>
+        } />
+        {/* <Route path="/offer/:offerId?" component={ApartmentDetailInfo}/> */}
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 };
 

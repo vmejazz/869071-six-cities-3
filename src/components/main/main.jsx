@@ -8,16 +8,16 @@ import CityList from "../city-list/city-list.jsx";
 import EmptyOffers from "../empty-offers/empty-offers.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import withActiveItem from "../../hocs/withActiveItem.jsx";
-import {getUser} from "../selectors.js";
+import {getUser, getCityes, getOffersShow} from "../selectors.js";
 import UserProfile from "../user-profile/user-profile.jsx";
+import LoadingPage from "../loading-page/loading-page.jsx";
 
 const SortOptionsWrapped = withActiveItem(SortOptions);
 
 const Main = (props) => {
   const {
-    offerPlacesCount,
     offersShow,
-    onApartmentCardClick,
+    // openOffer,
     cityes,
     activeCity = Object.keys(cityes)[0],
     changeCity,
@@ -25,14 +25,13 @@ const Main = (props) => {
     onCardHover,
     sortOffersDirect,
     sortOffersReverse,
-    userInfo
+    userInfo,
+    history
   } = props;
 
+  const offerPlacesCount = offersShow.length;
   const emptyOffers = offerPlacesCount === 0;
 
-  // setTimeout(() => {
-  //   console.log(state)
-  // }, 1500);
 
   const sortTypes = {
     [`Popular`]: {
@@ -62,84 +61,95 @@ const Main = (props) => {
     }
   };
 
-  return (
-    <React.Fragment>
-      <div className="page page--gray page--main">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                <a className="header__logo-link header__logo-link--active">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
-              </div>
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <UserProfile
-                      userInfo={userInfo}
-                    />
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
+  const redirectOffer = (id) => {
+    history.push(`/offer/${id}`);
+  };
 
-        <main className={`page__main page__main--index + ${emptyOffers ? `page__main--index-empty` : ``}`}>
-          <h1 className="visually-hidden">Cities</h1>
-          <div className="tabs">
-            <section className="locations container">
-              <CityList
-                cityes={cityes}
-                activeCity={activeCity}
-                changeCity={changeCity}
-              />
-            </section>
-          </div>
-          <div className="cities">
-            <div className="cities__places-container container">
-              {emptyOffers ?
-                <EmptyOffers />
-                :
-                <section className="cities__places places">
-                  <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{offerPlacesCount} places to stay in {activeCity}</b>
-                  <form className="places__sorting" action="#" method="get">
-                    <span className="places__sorting-caption">Sort by</span>
-                    <SortOptionsWrapped
-                      onSortOptionsClick={onSortOptionsClick}
-                    />
-                  </form>
-                  <ApartmentList
-                    offersShow={offersShow}
-                    onApartmentCardClick={onApartmentCardClick}
-                    onCardHover={onCardHover}
-                  />
-                </section>
-              }
-              <div className="cities__right-section">
-                {emptyOffers ?
-                  ``
-                  :
-                  <Map
-                    offersShow={offersShow}
-                    cityes={cityes}
-                    hoverCardId={hoverCardId}
-                  />
-                }
+  if (offersShow.length < 1) {
+    return (
+      <LoadingPage />
+    );
+  } else {
+    return (
+      <React.Fragment>
+        <div className="page page--gray page--main">
+          <header className="header">
+            <div className="container">
+              <div className="header__wrapper">
+                <div className="header__left">
+                  <a className="header__logo-link header__logo-link--active">
+                    <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                  </a>
+                </div>
+                <nav className="header__nav">
+                  <ul className="header__nav-list">
+                    <li className="header__nav-item user">
+                      <UserProfile
+                        userInfo={userInfo}
+                      />
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </div>
-          </div>
-        </main>
-      </div>
-    </React.Fragment>
-  );
+          </header>
+
+          <main className={`page__main page__main--index + ${emptyOffers ? `page__main--index-empty` : ``}`}>
+            <h1 className="visually-hidden">Cities</h1>
+            <div className="tabs">
+              <section className="locations container">
+                <CityList
+                  cityes={cityes}
+                  activeCity={activeCity}
+                  changeCity={changeCity}
+                />
+              </section>
+            </div>
+            <div className="cities">
+              <div className="cities__places-container container">
+                {emptyOffers ?
+                  <EmptyOffers />
+                  :
+                  <section className="cities__places places">
+                    <h2 className="visually-hidden">Places</h2>
+                    <b className="places__found">{offerPlacesCount} places to stay in {activeCity}</b>
+                    <form className="places__sorting" action="#" method="get">
+                      <span className="places__sorting-caption">Sort by</span>
+                      <SortOptionsWrapped
+                        onSortOptionsClick={onSortOptionsClick}
+                      />
+                    </form>
+                    <ApartmentList
+                      offersShow={offersShow}
+                      onApartmentCardClick={redirectOffer}
+                      onCardHover={onCardHover}
+                    />
+                  </section>
+                }
+                <div className="cities__right-section">
+                  {emptyOffers ?
+                    ``
+                    :
+                    <Map
+                      offersShow={offersShow}
+                      cityes={cityes}
+                      hoverCardId={hoverCardId}
+                    />
+                  }
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </React.Fragment>
+    );
+  }
 };
 
 Main.defaultProps = {
   offerPlacesCount: 3,
   offersShow: [],
+  cityes: `Paris`,
   onCityTitleClick: () => {},
 };
 
@@ -186,7 +196,9 @@ Main.propTypes = {
 const mapStateToProps = (state) => ({
   activeCity: state.DATA.activeCity,
   hoverCardId: state.DATA.hoverCardId,
-  userInfo: getUser(state)
+  userInfo: getUser(state),
+  cityes: getCityes(state),
+  offersShow: getOffersShow(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -214,7 +226,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(
         ActionCreator.getOffers(city)
     );
-  }
+  },
 });
 
 export {Main};

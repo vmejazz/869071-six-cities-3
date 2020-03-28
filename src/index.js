@@ -23,14 +23,7 @@ const store = createStore(
 
 store.dispatch(DataOperation.loadOffers());
 store.dispatch(UserOperation.checkAuth());
-store.dispatch(UserOperation.getOffersFavorite());
-// setTimeout(() => {
-//   console.log(store.getState());
-// }, 1500);
-
-// store.dispatch(UserOperation.login(
-//     {email: `pop@gmail.com`, password: `123`}
-// ));
+store.dispatch(DataOperation.loadFavorites());
 
 ReactDOM.render(
     <Provider store={store}>

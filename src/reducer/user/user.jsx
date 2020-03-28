@@ -1,5 +1,4 @@
 import {extend} from "../utils.js";
-import ParseData from "../parse-data.js";
 
 const ERROR_STATUS = {
   AUTH: 401,
@@ -20,7 +19,7 @@ const ActionType = {
   AUTH_INFO: `AUTH_INFO`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REQUIRED_BOOKMARKS: `REQUIRED_BOOKMARKS`,
-  REQUIRED_FAVORITES: `REQUIRED_FAVORITES`,
+  LOAD_FAVORITES: `LOAD_FAVORITES`,
 };
 
 const ActionCreator = {
@@ -39,10 +38,6 @@ const ActionCreator = {
   requireBookmarks: (status) => ({
     type: ActionType.REQUIRED_BOOKMARKS,
     payload: status
-  }),
-  requireFavorites: (offers) => ({
-    type: ActionType.REQUIRED_FAVORITES,
-    payload: offers
   }),
 };
 
@@ -113,18 +108,7 @@ const Operation = {
     return dispatch(ActionCreator.requireBookmarks(true));
   },
 
-  getOffersFavorite: () => (dispatch, getState, api) => {
-    return api.get(`/favorite`)
-      .then((response) => {
-        const ParseDataModel = new ParseData(response);
-        const offersParsed = ParseDataModel.toRaw();
-        const cityes = ParseDataModel.toCityes();
-        dispatch(ActionCreator.requireFavorites({
-          offers: offersParsed,
-          cityes,
-        }));
-      });
-  },
+
 };
 
 

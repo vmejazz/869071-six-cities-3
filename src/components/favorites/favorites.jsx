@@ -1,8 +1,17 @@
 import React from "react";
 import UserProfile from "../user-profile/user-profile.jsx";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer/data/data.jsx";
+import {getUser, getCityes, getOffersShow} from "../selectors.js";
 
-const Favorites = () => {
+const Favorites = (props) => {
+  const {loadFavorites, offersFavorite, cityesFavorite} = props;
+
+  console.log(props);
+
+  loadFavorites();
+
   return (
     <div className="page">
       <header className="header">
@@ -156,4 +165,24 @@ const Favorites = () => {
   );
 };
 
-export default Favorites;
+const mapStateToProps = (state) => ({
+  // activeCity: state.DATA.activeCity,
+  // hoverCardId: state.DATA.hoverCardId,
+  // userInfo: getUser(state),
+  // cityes: getCityes(state),
+  // offersShow: getOffersShow(state),
+  offersFavorite: state.DATA.offersFavorite,
+  cityesFavorite: state.DATA.cityesFavorite,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadFavorites() {
+    dispatch(
+        ActionCreator.loadFavorites()
+    );
+  },
+});
+
+export {Favorites};
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+

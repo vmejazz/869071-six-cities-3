@@ -9,6 +9,8 @@ import {Operation as OperationUser} from "../../reducer/user/user.jsx";
 
 const SingIng = (props) => {
   const {loginIn, userInfo} = props;
+  console.log(props);
+
 
   if (userInfo.authorizationStatus === `AUTH`) {
     return (
