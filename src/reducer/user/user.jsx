@@ -62,15 +62,14 @@ const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
       .then((response) => {
-        dispatch(ActionCreator.setAuthInfo(response));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.setAuthInfo(response));
       })
       .catch((err) => {
         switch (err.response.status) {
           case ERROR_STATUS.AUTH:
             break;
           case ERROR_STATUS.BAD_REQUEST:
-            // console.log(`Переданны не все данные`);
             break;
           default:
             break;
@@ -92,10 +91,8 @@ const Operation = {
       .catch((err) => {
         switch (err.response.status) {
           case ERROR_STATUS.AUTH:
-            // console.log(`Вы не авторизованы`);
             break;
           case ERROR_STATUS.BAD_REQUEST:
-            // console.log(`Переданны не все данные`);
             break;
           default:
             break;
@@ -107,8 +104,6 @@ const Operation = {
   checkBookmarks: () => (dispatch) => {
     return dispatch(ActionCreator.requireBookmarks(true));
   },
-
-
 };
 
 

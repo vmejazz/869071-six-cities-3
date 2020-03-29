@@ -4,9 +4,17 @@ import BookmarkButton from "../bookmark-button/bookmark-button.jsx";
 import {Link} from "react-router-dom";
 
 const ApartmentCard = (props) => {
-  const {placeOffer, onCardHover} = props;
+  const {placeOffer, onCardHover, isFavoriteList} = props;
   const {id, title, price, srcImg, premium, type, rate, favorite} = placeOffer;
 
+  let articleClassName = isFavoriteList ? `favorites__card` : `cities__place-card`;
+  articleClassName += ` place-card`;
+
+  let imageWrapperClass = isFavoriteList ? `favorites__image-wrapper` : `cities__image-wrapper`;
+  imageWrapperClass += ` place-card__image-wrapper`;
+
+  let cardInfoClassName = isFavoriteList ? `favorites__card-info` : ``;
+  cardInfoClassName += ` place-card__info`;
   // const bookmarkPush = () => {
 
   // };
@@ -14,7 +22,7 @@ const ApartmentCard = (props) => {
   const DEACTIVATE_ID = -1;
 
   return (
-    <article className="cities__place-card place-card"
+    <article className={articleClassName}
       onMouseEnter={() => onCardHover(id)}
       onMouseLeave={() => onCardHover(DEACTIVATE_ID)}
     >
@@ -24,12 +32,12 @@ const ApartmentCard = (props) => {
         </div>
         : ``
       }
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={imageWrapperClass}>
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={srcImg} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={srcImg} width={isFavoriteList ? `150` : `260`} height={isFavoriteList ? `110` : `200`} alt="Place image"/>
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={cardInfoClassName}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -70,6 +78,7 @@ ApartmentCard.propTypes = {
   }).isRequired,
   onApartmentCardClick: PropTypes.func,
   onCardHover: PropTypes.func,
+  isFavoriteList: PropTypes.bool
 };
 
 export default ApartmentCard;

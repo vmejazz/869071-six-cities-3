@@ -7,7 +7,7 @@ import {Operation as OperationUser} from "../../reducer/user/user.jsx";
 import Main from "../main/main.jsx";
 import SingIng from "../sing-in/sing-in.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
-import {getOffers, getOffersShow, getUser, getCityes} from "../selectors.js";
+import {getOffers, getOffersShow, getUser, getCityes, getActiveOfferId} from "../selectors.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import Favorites from "../favorites/favorites.jsx";
 import TestPage from "./test-page.jsx";
@@ -63,31 +63,30 @@ const App = (props) => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Main}>
-          {/* {_renderApp()} */}
-          {/* <Main
-            offerPlacesCount={offersShow.length}
-            offersShow={offersShow}
-            onApartmentCardClick={openOffer}
-            cityes={cityes}
-          /> */}
         </Route>
-        <PrivateRoute exact path="/favorites" component={Favorites} />
-        {/* <Route exact path="/login" >
-          <SingIng />
-        </Route> */}
+        <PrivateRoute
+          exact
+          path="/favorites"
+          component={Favorites}
+          render={() => {
+            return (
+              <Favorites />
+            );
+          }}
+        />
         <Route exact path="/login" component={SingIng} />
-        <Route path="/offer/:offer?" render={(routeProps) =>
-          <ApartmentDetailInfo
-            activeOfferId={routeProps.match.params.offer}
-            offers={offers}
-            // offer={offersShow.find((item) => item.id === activeOfferId)}
-          />
+        <Route path="/offer/:offer?" render={
+          (routeProps) =>
+            <ApartmentDetailInfo
+              activeOfferId={routeProps.match.params.offer}
+              offers={offers}
+            />
         }>
         </Route>
-        <Route path="/test/:testNew?" render={(testProps) =>
-          <TestPage routeProps={testProps}/>
+        <Route path="/test/:testNew?" render={
+          (testProps) =>
+            <TestPage routeProps={testProps}/>
         } />
-        {/* <Route path="/offer/:offerId?" component={ApartmentDetailInfo}/> */}
       </Switch>
     </BrowserRouter>
   );
@@ -123,15 +122,9 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  // pop: getOffersShow,
-  // offers: state.DATA.offers,
   offers: getOffers(state),
-  // activeCity: state.activeCity,
-  activeOfferId: state.DATA.activeOfferId,
-  // offers: state.offers,
-  // offersShow: state.DATA.offersShow,
+  activeOfferId: getActiveOfferId(state),
   offersShow: getOffersShow(state),
-  // cityes: state.DATA.cityes,
   cityes: getCityes(state),
   userInfo: getUser(state)
 });

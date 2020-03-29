@@ -7,7 +7,7 @@ const ErrorMap = {
 
 const SUCCESS_CODE = 200;
 
-const createAPI = () => {
+const createAPI = (onUnauthorized) => {
   const api = axios.create({
     baseURL: `https://htmlacademy-react-3.appspot.com/six-cities`,
     timeout: 5000,
@@ -29,7 +29,8 @@ const createAPI = () => {
       case ErrorMap.NOT_FOUND:
         break;
       case ErrorMap.UNAUTHORIZED:
-        break;
+        onUnauthorized();
+        throw err;
       default:
         throw err;
     }

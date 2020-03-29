@@ -16,6 +16,18 @@ export const getUser = (state) => {
   return state.USER;
 };
 
+export const getActiveOfferId = (state) => {
+  return state.DATA.activeOfferId;
+};
+
+export const getOffersFavorite = (state) => {
+  return state.DATA.offersFavorite;
+};
+
+export const getCityesFavorite = (state) => {
+  return state.DATA.cityesFavorite;
+};
+
 // export const getOffersShow = createSelector(
 //     getOffers,
 //     getActiveCity,
