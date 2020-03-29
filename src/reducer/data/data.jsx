@@ -25,6 +25,10 @@ const ActionCreator = {
     type: ActionType.LOAD_OFFERS,
     payload: offers
   }),
+  loadFavorites: (offers) => ({
+    type: ActionType.LOAD_FAVORITES,
+    payload: offers
+  }),
   changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
     payload: city
@@ -48,10 +52,6 @@ const ActionCreator = {
   changeBookmarkStatus: (offer) => ({
     type: ActionType.SET_FAVOTIRE,
     payload: offer
-  }),
-  loadFavorites: (offers) => ({
-    type: ActionType.LOAD_FAVORITES,
-    payload: offers
   }),
 };
 

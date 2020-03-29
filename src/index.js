@@ -25,7 +25,8 @@ const store = createStore(
 
 store.dispatch(UserOperation.checkAuth());
 store.dispatch(DataOperation.loadOffers());
-store.dispatch(DataOperation.loadFavorites());
+// это пока лишнее
+// store.dispatch(DataOperation.loadFavorites());
 
 ReactDOM.render(
     <Provider store={store}>

@@ -7,89 +7,53 @@ import {Operation as OperationUser} from "../../reducer/user/user.jsx";
 import Main from "../main/main.jsx";
 import SingIng from "../sing-in/sing-in.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
-import {getOffers, getOffersShow, getUser, getCityes, getActiveOfferId} from "../selectors.js";
+import {getOffers} from "../selectors.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import Favorites from "../favorites/favorites.jsx";
 import TestPage from "./test-page.jsx";
+import LoadingPage from "../loading-page/loading-page.jsx";
 
 const App = (props) => {
   const {
     offers,
-    // offersShow,
-    // cityes,
-    // openOffer,
-    // activeOfferId,
-    // userInfo
   } = props;
 
-  // const _renderApp = () => {
-
-  //   if (userInfo.bookmarksRequired === true && userInfo.authorizationStatus === `NO_AUTH`) {
-  //     return (
-  //       <Redirect to="/login" />
-  //     );
-  //   }
-  //   if (offers.length < 1) {
-  //     return (
-  //       <h2 style={{textAlign: `center`, marginTop: `50px`, fontSize: `28px`}}>
-  //         Предложения загружаются...
-  //       </h2>
-  //     );
-  //   }
-  //   if (activeOfferId < 1 && offers.length >= 1) {
-  //     // console.log(props);
-
-  //     return (
-  //       <Main
-  //         offerPlacesCount={offersShow.length}
-  //         offersShow={offersShow}
-  //         onApartmentCardClick={openOffer}
-  //         cityes={cityes}
-  //       />
-  //     );
-  //   }
-  //   return null;
-  //   // } else {
-  //   //   return (
-  //   //     <ApartmentDetailInfo
-  //   //       offer={offersShow.find((item) => item.id === activeOfferId)}
-  //   //     />
-  //   //   );
-  //   // }
-  // };
-
-  return (
-
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Main}>
-        </Route>
-        <PrivateRoute
-          exact
-          path="/favorites"
-          component={Favorites}
-          render={() => {
-            return (
-              <Favorites />
-            );
-          }}
-        />
-        <Route exact path="/login" component={SingIng} />
-        <Route path="/offer/:offer?" render={
-          (routeProps) =>
-            <ApartmentDetailInfo
-              activeOfferId={routeProps.match.params.offer}
-              offers={offers}
-            />
-        }>
-        </Route>
-        <Route path="/test/:testNew?" render={
-          (testProps) =>
-            <TestPage routeProps={testProps}/>
-        } />
-      </Switch>
-    </BrowserRouter>
-  );
+  if (offers.length < 1) {
+    return (
+      <LoadingPage />
+    );
+  } else {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Main}>
+          </Route>
+          <PrivateRoute
+            exact
+            path="/favorites"
+            render={() => {
+              return (
+                <Favorites />
+              );
+            }}
+          />
+          <Route exact path="/login" component={SingIng} />
+          <Route path="/offer/:offer?" render={
+            (routeProps) =>
+              <ApartmentDetailInfo
+                activeOfferId={routeProps.match.params.offer}
+                offers={offers}
+              />
+          }>
+          </Route>
+          <Route path="/test/:testNew?" render={
+            (testProps) =>
+              <TestPage routeProps={testProps}/>
+          } />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 };
 
 App.propTypes = {
@@ -123,10 +87,10 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
-  activeOfferId: getActiveOfferId(state),
-  offersShow: getOffersShow(state),
-  cityes: getCityes(state),
-  userInfo: getUser(state)
+  // activeOfferId: getActiveOfferId(state),
+  // offersShow: getOffersShow(state),
+  // cityes: getCityes(state),
+  // userInfo: getUser(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -145,11 +109,6 @@ const mapDispatchToProps = (dispatch) => ({
         OperationUser.loginIn(loginInfo)
     );
   }
-  // parseCityes(offers) {
-  //   dispatch(
-  //       ActionCreatorData.parseCityes(offers)
-  //   );
-  // }
 });
 
 export {App};

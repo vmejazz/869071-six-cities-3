@@ -4,26 +4,50 @@ import {Operation as OperationData} from "../../reducer/data/data.jsx";
 import {Operation as OperationUser} from "../../reducer/user/user.jsx";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const BookmarkButton = (props) => {
-  const {checkBookmarks, changeBookmark, offerId, favorite} = props;
+  const {checkBookmarks, changeBookmark, offerId, userInfo} = props;
+  let {favorite} = props;
 
-  return (
-    <button className={`place-card__bookmark-button ${favorite ? `place-card__bookmark-button--active` : ``} button`} type="button"
-      onClick={
-        (evt) => {
-          evt.stopPropagation();
-          checkBookmarks();
-          changeBookmark(offerId, favorite ? 0 : 1);
+  let buttonClassname = `place-card__bookmark-button${favorite ? `--active` : ``} button`;
+
+  if (userInfo.authorizationStatus === `AUTH`) {
+    return (
+      <button className={buttonClassname} type="button"
+        onClick={
+          (evt) => {
+            evt.stopPropagation();
+            checkBookmarks();
+            changeBookmark(offerId, favorite ? 0 : 1);
+          }
         }
-      }
-    >
-      <svg className="place-card__bookmark-icon" width="18" height="19">
-        <use xlinkHref="#icon-bookmark"></use>
-      </svg>
-      <span className="visually-hidden">To bookmarks</span>
-    </button>
-  );
+      >
+        <svg className="place-card__bookmark-icon" width="18" height="19">
+          <use xlinkHref="#icon-bookmark"></use>
+        </svg>
+        <span className="visually-hidden">To bookmarks</span>
+      </button>
+    );
+  } else {
+    return (
+      <Link className={buttonClassname} type="button"
+        to={`/login`}
+        onClick={
+          (evt) => {
+            evt.stopPropagation();
+            checkBookmarks();
+            changeBookmark(offerId, favorite ? 0 : 1);
+          }
+        }
+      >
+        <svg className="place-card__bookmark-icon" width="18" height="19">
+          <use xlinkHref="#icon-bookmark"></use>
+        </svg>
+        <span className="visually-hidden">To bookmarks</span>
+      </Link>
+    );
+  }
 };
 
 
