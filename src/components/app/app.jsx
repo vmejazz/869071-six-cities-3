@@ -42,6 +42,7 @@ const App = (props) => {
             (routeProps) =>
               <ApartmentDetailInfo
                 activeOfferId={routeProps.match.params.offer}
+                history={routeProps}
                 offers={offers}
               />
           }>
@@ -78,7 +79,7 @@ App.propTypes = {
       zoom: PropTypes.number
     })
   ]),
-  activeOfferId: PropTypes.number.isRequired,
+  activeOfferId: PropTypes.number,
   openOffer: PropTypes.func,
   getOffers: PropTypes.func,
   loginIn: PropTypes.func,

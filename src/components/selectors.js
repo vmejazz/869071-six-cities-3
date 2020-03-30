@@ -28,6 +28,14 @@ export const getCityesFavorite = (state) => {
   return state.DATA.cityesFavorite;
 };
 
+export const getOffersNearby = (state) => {
+  return state.DATA.offersNearby;
+};
+
+export const gethoverCardId = (state) => {
+  return state.DATA.hoverCardId;
+};
+
 // export const getOffersShow = createSelector(
 //     getOffers,
 //     getActiveCity,
@@ -45,6 +53,11 @@ export const getOffersShow = createSelector(
       });
     }
 );
+
+export const getComments = (state) => {
+  return state.OFFER.reviews;
+};
+
 
 // export const getPopularOffer = createSelector(
 //     getOffersShow,

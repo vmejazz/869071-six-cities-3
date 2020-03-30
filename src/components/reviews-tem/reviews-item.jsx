@@ -3,32 +3,41 @@ import PropTypes from "prop-types";
 
 const ReviewsItem = (props) => {
   const {review} = props;
-  const {srcAvatar, name, rate, text, date} = review;
 
-  return (
-    <li className="reviews__item">
-      <div className="reviews__user user">
-        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img width={54} height={54} className="reviews__avatar user__avatar" alt="Reviews avatar" src={srcAvatar} />
-        </div>
-        <span className="reviews__user-name">
-          {name}
-        </span>
-      </div>
-      <div className="reviews__info">
-        <div className="reviews__rating rating">
-          <div className="reviews__stars rating__stars">
-            <span style={{width: `${rate <= 4 ? rate * 20 : 100}%`}} />
-            <span className="visually-hidden">Rating</span>
+  const {user = {}, rating, comment, date} = review;
+  const {avatar_url: avatarUrl, name} = user;
+
+  if (Object.keys(review).length < 1) {
+    return (
+      <p>Проверка отзывов ...</p>
+    );
+  } else {
+
+    return (
+      <li className="reviews__item">
+        <div className="reviews__user user">
+          <div className="reviews__avatar-wrapper user__avatar-wrapper">
+            <img width={54} height={54} className="reviews__avatar user__avatar" alt="Reviews avatar" src={avatarUrl} />
           </div>
+          <span className="reviews__user-name">
+            {name}
+          </span>
         </div>
-        <p className="reviews__text">
-          {text}
-        </p>
-        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
-      </div>
-    </li>
-  );
+        <div className="reviews__info">
+          <div className="reviews__rating rating">
+            <div className="reviews__stars rating__stars">
+              <span style={{width: `${rating <= 4 ? rating * 20 : 100}%`}} />
+              <span className="visually-hidden">Rating</span>
+            </div>
+          </div>
+          <p className="reviews__text">
+            {comment}
+          </p>
+          <time className="reviews__time" dateTime="2019-04-24">{date.substr(0, 10)}</time>
+        </div>
+      </li>
+    );
+  }
 };
 
 ReviewsItem.propTypes = {

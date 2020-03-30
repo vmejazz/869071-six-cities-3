@@ -25,7 +25,7 @@ const Main = (props) => {
     sortOffersDirect,
     sortOffersReverse,
     userInfo,
-    history
+    // history
   } = props;
 
   const offerPlacesCount = offersShow.length;
@@ -60,9 +60,9 @@ const Main = (props) => {
     }
   };
 
-  const redirectOffer = (id) => {
-    history.push(`/offer/${id}`);
-  };
+  // const redirectOffer = (id) => {
+  //   history.push(`/offer/${id}`);
+  // };
 
   return (
     <React.Fragment>
@@ -115,7 +115,7 @@ const Main = (props) => {
                   </form>
                   <ApartmentList
                     offersShow={offersShow}
-                    onApartmentCardClick={redirectOffer}
+                    // onApartmentCardClick={redirectOffer}
                     onCardHover={onCardHover}
                   />
                 </section>

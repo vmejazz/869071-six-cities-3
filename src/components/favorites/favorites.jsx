@@ -6,7 +6,6 @@ import {Operation} from "../../reducer/data/data.jsx";
 import {getOffersFavorite, getCityesFavorite} from "../selectors.js";
 import FavoritesList from "../favorites-list/favorites-list.jsx";
 import PropTypes from "prop-types";
-
 class Favorites extends PureComponent {
   constructor(props) {
     super(props);

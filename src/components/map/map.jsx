@@ -2,17 +2,18 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {getCityes, getActiveCity, gethoverCardId} from "../selectors.js";
 class Map extends PureComponent {
   constructor(props) {
     super(props);
 
     this.icons = {
       iconBlue: leaflet.icon({
-        iconUrl: `img/pin.svg`,
+        iconUrl: `/img/pin.svg`,
         iconSize: [30, 45]
       }),
       iconYellow: leaflet.icon({
-        iconUrl: `img/pin-active.svg`,
+        iconUrl: `/img/pin-active.svg`,
         iconSize: [30, 45]
       })
     };
@@ -21,7 +22,7 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offersShow, cityes, activeCity} = this.props;
+    const {offersShow = [], cityes, activeCity} = this.props;
     const {iconBlue} = this.icons;
     const myMap = this.myMap = leaflet.map(`mapId`, {
       zoomControl: false,
@@ -83,8 +84,12 @@ class Map extends PureComponent {
   }
 
   render() {
+    const {isDetail} = this.props;
+
+    let mapClassName = isDetail ? `property__map map` : `cities__map map`;
+
     return (
-      <section className="cities__map map" id="mapId"></section>
+      <section className={mapClassName} id="mapId"></section>
     );
   }
 }
@@ -110,7 +115,7 @@ Map.propTypes = {
     }),
     position: PropTypes.arrayOf(PropTypes.number).isRequired,
     city: PropTypes.string.isRequired
-  })).isRequired,
+  })),
   cityes: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({
@@ -120,11 +125,14 @@ Map.propTypes = {
     })
   ]),
   activeCity: PropTypes.string.isRequired,
-  hoverCardId: PropTypes.number
+  hoverCardId: PropTypes.number,
+  isDetail: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.DATA.activeCity
+  activeCity: getActiveCity(state),
+  cityes: getCityes(state),
+  hoverCardId: gethoverCardId(state)
 });
 
 export {Map};

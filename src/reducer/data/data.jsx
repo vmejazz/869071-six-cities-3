@@ -17,7 +17,9 @@ const ActionType = {
   SORT_OFFERS_DIRECT: `SORT_OFFERS_DIRECT`,
   SORT_OFFERS_REVERSE: `SORT_OFFERS_REVERSE`,
   SET_FAVOTIRE: `SET_FAVORITE`,
-  LOAD_FAVORITES: `LOAD_FAVORITES`
+  LOAD_FAVORITES: `LOAD_FAVORITES`,
+  GET_REVIEWS: `GET_REVIEWS`,
+  LOAD_NEARBY: `LOAD_NEARBY`
 };
 
 const ActionCreator = {
@@ -53,6 +55,14 @@ const ActionCreator = {
     type: ActionType.SET_FAVOTIRE,
     payload: offer
   }),
+  setReviews: (reviews) => ({
+    type: ActionType.GET_REVIEWS,
+    payload: reviews
+  }),
+  loadNearby: (offersNearby) => ({
+    type: ActionType.LOAD_NEARBY,
+    payload: offersNearby
+  })
 };
 
 const Operation = {
@@ -93,6 +103,28 @@ const Operation = {
         const offerParsed = ParseDataModel.toRaw();
 
         dispatch(ActionCreator.changeBookmarkStatus(offerParsed[0]));
+      });
+  },
+
+  getReviews: (offerId) => (dispatch, getState, api) => {
+    return api.get(`/comments/${offerId}`)
+      .then((response) => {
+        dispatch(ActionCreator.setReviews({
+          reviews: response
+        }));
+      });
+  },
+
+  loadNearby: (offerId) => (dispatch, getState, api) => {
+    return api.get(`/hotels/${offerId}/nearby`)
+      .then((response) => {
+        const ParseDataModel = new ParseData(response);
+        const offersParsed = ParseDataModel.toRaw();
+        // const cityes = ParseDataModel.toCityes();
+        dispatch(ActionCreator.loadNearby({
+          offersNearby: offersParsed,
+          // cityesFavorite: cityes,
+        }));
       });
   },
 };
@@ -142,6 +174,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         offers: offersArray
       });
+    case ActionType.GET_REVIEWS:
+      return extend(state, action.payload);
+    case ActionType.LOAD_NEARBY:
+      return extend(state, action.payload);
   }
 
   return state;
