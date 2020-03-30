@@ -19,7 +19,8 @@ const ActionType = {
   SET_FAVOTIRE: `SET_FAVORITE`,
   LOAD_FAVORITES: `LOAD_FAVORITES`,
   GET_REVIEWS: `GET_REVIEWS`,
-  LOAD_NEARBY: `LOAD_NEARBY`
+  LOAD_NEARBY: `LOAD_NEARBY`,
+  POST_COMMENT: `POST_COMMENT`,
 };
 
 const ActionCreator = {
@@ -109,6 +110,7 @@ const Operation = {
   getReviews: (offerId) => (dispatch, getState, api) => {
     return api.get(`/comments/${offerId}`)
       .then((response) => {
+        response.sort((a, b) => b.date - a.date);
         dispatch(ActionCreator.setReviews({
           reviews: response
         }));
@@ -126,6 +128,19 @@ const Operation = {
           // cityesFavorite: cityes,
         }));
       });
+  },
+
+  commentPost: (comment, offerId) => (dispatch, getState, api) =>{
+    return api.post(`/comments/${offerId}`, {
+      comment: comment.comment,
+      rating: comment.rating
+    })
+      .then((response) => {
+        dispatch(ActionCreator.setReviews({
+          reviews: response
+        }));
+      });
+
   },
 };
 

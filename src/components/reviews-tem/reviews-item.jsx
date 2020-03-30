@@ -7,6 +7,12 @@ const ReviewsItem = (props) => {
   const {user = {}, rating, comment, date} = review;
   const {avatar_url: avatarUrl, name} = user;
 
+  const dateOptions = {
+    month: `long`,
+    year: `numeric`,
+  };
+  let userDate = new Date(date).toLocaleDateString(`en-US`, dateOptions);
+
   if (Object.keys(review).length < 1) {
     return (
       <p>Проверка отзывов ...</p>
@@ -33,7 +39,7 @@ const ReviewsItem = (props) => {
           <p className="reviews__text">
             {comment}
           </p>
-          <time className="reviews__time" dateTime="2019-04-24">{date.substr(0, 10)}</time>
+          <time className="reviews__time" dateTime="2019-04-24">{userDate}</time>
         </div>
       </li>
     );

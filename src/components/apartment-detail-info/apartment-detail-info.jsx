@@ -146,7 +146,7 @@ class ApartmentDetailInfo extends PureComponent {
                       // reviews={reviews}
                     />
                     {authorizationStatus === AuthorizationStatus.AUTH
-                      ? <ReviewsForm />
+                      ? <ReviewsForm offerId={id} />
                       : null
                     }
                   </section>
