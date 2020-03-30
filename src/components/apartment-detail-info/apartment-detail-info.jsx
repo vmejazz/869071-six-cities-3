@@ -8,6 +8,9 @@ import {connect} from "react-redux";
 import Map from "../map/map.jsx";
 import {getOffersNearby} from "../selectors.js";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
+import ReviewsForm from "../reviews-form/reviews-form.jsx";
+import {getAutorisationStatus} from "../selectors.js";
+import {AuthorizationStatus} from "../../reducer/user/user.jsx";
 
 const MAX_IMAGES = 6;
 
@@ -27,7 +30,7 @@ class ApartmentDetailInfo extends PureComponent {
   // }
 
   render() {
-    const {offers, activeOfferId, offersNearby} = this.props;
+    const {offers, activeOfferId, offersNearby, authorizationStatus} = this.props;
 
     const offer = offers.find((item) => item.id === Number(activeOfferId));
     const {id, title, price, srcGallery = [], description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo} = offer;
@@ -142,48 +145,10 @@ class ApartmentDetailInfo extends PureComponent {
                       offerId={id}
                       // reviews={reviews}
                     />
-                    <form className="reviews__form form" action="#" method="post">
-                      <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                      <div className="reviews__rating-form form__rating">
-                        <input className="form__rating-input visually-hidden" name="rating" defaultValue={5} id="5-stars" type="radio" />
-                        <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-                          <svg className="form__star-image" width={37} height={33}>
-                            <use xlinkHref="#icon-star" />
-                          </svg>
-                        </label>
-                        <input className="form__rating-input visually-hidden" name="rating" defaultValue={4} id="4-stars" type="radio" />
-                        <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-                          <svg className="form__star-image" width={37} height={33}>
-                            <use xlinkHref="#icon-star" />
-                          </svg>
-                        </label>
-                        <input className="form__rating-input visually-hidden" name="rating" defaultValue={3} id="3-stars" type="radio" />
-                        <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-                          <svg className="form__star-image" width={37} height={33}>
-                            <use xlinkHref="#icon-star" />
-                          </svg>
-                        </label>
-                        <input className="form__rating-input visually-hidden" name="rating" defaultValue={2} id="2-stars" type="radio" />
-                        <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-                          <svg className="form__star-image" width={37} height={33}>
-                            <use xlinkHref="#icon-star" />
-                          </svg>
-                        </label>
-                        <input className="form__rating-input visually-hidden" name="rating" defaultValue={1} id="1-star" type="radio" />
-                        <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-                          <svg className="form__star-image" width={37} height={33}>
-                            <use xlinkHref="#icon-star" />
-                          </svg>
-                        </label>
-                      </div>
-                      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={``} />
-                      <div className="reviews__button-wrapper">
-                        <p className="reviews__help">
-                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-                        </p>
-                        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
-                      </div>
-                    </form>
+                    {authorizationStatus === AuthorizationStatus.AUTH
+                      ? <ReviewsForm />
+                      : null
+                    }
                   </section>
                 </div>
               </div>
@@ -229,7 +194,8 @@ ApartmentDetailInfo.propTypes = {
   loadNearby: PropTypes.func,
   activeOfferId: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object),
-  offersNearby: PropTypes.arrayOf(PropTypes.object)
+  offersNearby: PropTypes.arrayOf(PropTypes.object),
+  authorizationStatus: PropTypes.string.isRequired
 };
 
 // export default ApartmentDetailInfo;
@@ -237,7 +203,8 @@ ApartmentDetailInfo.propTypes = {
 
 const mapStateToProps = (state) => ({
   reviews: state.OFFER.reviews,
-  offersNearby: getOffersNearby(state)
+  offersNearby: getOffersNearby(state),
+  authorizationStatus: getAutorisationStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

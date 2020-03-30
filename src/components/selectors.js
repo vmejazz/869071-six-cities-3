@@ -36,6 +36,10 @@ export const gethoverCardId = (state) => {
   return state.DATA.hoverCardId;
 };
 
+export const getAutorisationStatus = (state) => {
+  return state.USER.authorizationStatus;
+};
+
 // export const getOffersShow = createSelector(
 //     getOffers,
 //     getActiveCity,

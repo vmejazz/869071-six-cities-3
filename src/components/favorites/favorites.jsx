@@ -6,6 +6,7 @@ import {Operation} from "../../reducer/data/data.jsx";
 import {getOffersFavorite, getCityesFavorite} from "../selectors.js";
 import FavoritesList from "../favorites-list/favorites-list.jsx";
 import PropTypes from "prop-types";
+import FavoritesEmpty from "../favorites-empty/favorites-empty.jsx";
 class Favorites extends PureComponent {
   constructor(props) {
     super(props);
@@ -24,6 +25,8 @@ class Favorites extends PureComponent {
   // loadFavorites();
   render() {
     const {offersFavorite, cityesFavorite} = this.props;
+
+    let isEmptyList = offersFavorite.length < 1;
 
     return (
       <div className="page">
@@ -47,13 +50,16 @@ class Favorites extends PureComponent {
         </header>
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
-            <section className="favorites">
-              <h1 className="favorites__title">Saved listing</h1>
-              <FavoritesList
-                offersFavorite={offersFavorite}
-                cityesFavorite={Object.keys(cityesFavorite)}
-              />
-            </section>
+            {isEmptyList ?
+              <FavoritesEmpty />
+              : <section className="favorites">
+                <h1 className="favorites__title">Saved listing</h1>
+                <FavoritesList
+                  offersFavorite={offersFavorite}
+                  cityesFavorite={Object.keys(cityesFavorite)}
+                />
+              </section>
+            }
           </div>
         </main>
         <footer className="footer container">
