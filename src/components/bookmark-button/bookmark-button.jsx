@@ -12,11 +12,9 @@ const BookmarkButton = (props) => {
 
   let buttonClassname = `place-card__bookmark-button${favorite ? `--active` : ``} button`;
 
-  // property__bookmark-button button
-
   if (userInfo.authorizationStatus === `AUTH`) {
     return (
-      <button className={detailPage ? `${buttonClassname} property__bookmark-button` : `${buttonClassname}`} type="button"
+      <button className={detailPage ? `property__bookmark-button button` : `${buttonClassname}`} type="button"
         onClick={
           (evt) => {
             evt.stopPropagation();
@@ -33,7 +31,7 @@ const BookmarkButton = (props) => {
     );
   } else {
     return (
-      <Link className={buttonClassname} type="button"
+      <Link className={detailPage ? `property__bookmark-button button` : `${buttonClassname}`} type="button"
         to={`/login`}
         onClick={
           (evt) => {
