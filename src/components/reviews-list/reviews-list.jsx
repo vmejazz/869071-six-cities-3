@@ -4,7 +4,6 @@ import ReviewsItem from "../reviews-tem/reviews-item.jsx";
 import {connect} from "react-redux";
 import {getComments} from "../selectors.js";
 import {Operation} from "../../reducer/data/data.jsx";
-const MAX_REVIEWS = 10;
 class ReviewsList extends PureComponent {
   constructor(props) {
     super(props);
@@ -15,14 +14,13 @@ class ReviewsList extends PureComponent {
     getReviews(offerId);
   }
 
-  componentDidUpdate() {
-    const {getReviews, offerId} = this.props;
-    // getReviews(offerId);
-  }
+  // componentDidUpdate() {
+  //   const {getReviews, offerId} = this.props;
+  //   // getReviews(offerId);
+  // }
 
   render() {
     let {reviews} = this.props;
-    reviews.slice(0, MAX_REVIEWS);
 
     return (
       <React.Fragment>

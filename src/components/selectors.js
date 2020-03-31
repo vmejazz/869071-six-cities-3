@@ -59,7 +59,18 @@ export const getOffersShow = createSelector(
 );
 
 export const getComments = (state) => {
-  return state.OFFER.reviews;
+  const MAX_REVIEWS = 10;
+
+  let {reviews} = state.OFFER;
+  reviews.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateB - dateA;
+  });
+
+  reviews.splice(MAX_REVIEWS);
+
+  return reviews;
 };
 
 
