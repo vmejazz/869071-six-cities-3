@@ -12,6 +12,8 @@ const BookmarkButton = (props) => {
 
   let buttonClassname = `place-card__bookmark-button${favorite ? `--active` : ``} button`;
 
+  // property__bookmark-button button
+
   if (userInfo.authorizationStatus === `AUTH`) {
     return (
       <button className={detailPage ? `${buttonClassname} property__bookmark-button` : `${buttonClassname}`} type="button"

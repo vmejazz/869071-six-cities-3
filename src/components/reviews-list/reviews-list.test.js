@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import ReviewsList from "./reviews-list.jsx";
+import {ReviewsList} from "./reviews-list.jsx";
 
 const reviews = [
   {
@@ -12,11 +12,16 @@ const reviews = [
   }
 ];
 
+const getReviews = () => {};
+const offerId = 2;
+
 it(`Review section render`, () => {
   const tree = renderer
     .create(
         <ReviewsList
           reviews={reviews}
+          getReviews={getReviews}
+          offerId={offerId}
         />
     )
     .toJSON();

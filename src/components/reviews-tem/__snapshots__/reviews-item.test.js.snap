@@ -14,15 +14,12 @@ exports[`Review section render 1`] = `
         alt="Reviews avatar"
         className="reviews__avatar user__avatar"
         height={54}
-        src=""
         width={54}
       />
     </div>
     <span
       className="reviews__user-name"
-    >
-      Bob
-    </span>
+    />
   </div>
   <div
     className="reviews__info"
@@ -36,7 +33,7 @@ exports[`Review section render 1`] = `
         <span
           style={
             Object {
-              "width": "40%",
+              "width": "100%",
             }
           }
         />
@@ -49,14 +46,12 @@ exports[`Review section render 1`] = `
     </div>
     <p
       className="reviews__text"
-    >
-      Test mock text
-    </p>
+    />
     <time
       className="reviews__time"
       dateTime="2019-04-24"
     >
-      2018-02-25
+      February 2018
     </time>
   </div>
 </li>

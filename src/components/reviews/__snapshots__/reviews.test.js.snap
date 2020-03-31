@@ -14,69 +14,19 @@ exports[`Review section render 1`] = `
       1
     </span>
   </h2>
-  <ul
-    className="reviews__list"
-  >
-    <li
-      className="reviews__item"
-    >
-      <div
-        className="reviews__user user"
-      >
-        <div
-          className="reviews__avatar-wrapper user__avatar-wrapper"
-        >
-          <img
-            alt="Reviews avatar"
-            className="reviews__avatar user__avatar"
-            height={54}
-            src=""
-            width={54}
-          />
-        </div>
-        <span
-          className="reviews__user-name"
-        >
-          Bob
-        </span>
-      </div>
-      <div
-        className="reviews__info"
-      >
-        <div
-          className="reviews__rating rating"
-        >
-          <div
-            className="reviews__stars rating__stars"
-          >
-            <span
-              style={
-                Object {
-                  "width": "40%",
-                }
-              }
-            />
-            <span
-              className="visually-hidden"
-            >
-              Rating
-            </span>
-          </div>
-        </div>
-        <p
-          className="reviews__text"
-        >
-          Test mock text
-        </p>
-        <time
-          className="reviews__time"
-          dateTime="2019-04-24"
-        >
-          2018-02-25
-        </time>
-      </div>
-    </li>
-  </ul>
+  <ReviewsList
+    reviews={
+      Array [
+        Object {
+          "date": "2018-02-25",
+          "name": "Bob",
+          "rate": 2,
+          "srcAvatar": "",
+          "text": "Test mock text",
+        },
+      ]
+    }
+  />
   <form
     action="#"
     className="reviews__form form"

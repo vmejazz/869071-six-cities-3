@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {ApartmentDetailInfo} from "./apartment-detail-info.jsx";
+import {Favorites} from "./favorites.jsx";
 import customHistory from "../../history.js";
 import {Router} from "react-router-dom";
 jest.mock(`../bookmark-button/bookmark-button.jsx`, () => `BookmarkButton`);
@@ -10,7 +10,7 @@ jest.mock(`../map/map.jsx`, () => `Map`);
 jest.mock(`../apartment-list/apartment-list.jsx`, () => `ApartmentList`);
 jest.mock(`../reviews-form/reviews-form.jsx`, () => `ReviewsForm`);
 
-const offer = {
+const offersFavorite = [{
   id: 1,
   title: `Beautiful apartment`,
   price: 120,
@@ -28,43 +28,29 @@ const offer = {
     super: true,
     srcAvatar: `img/avatar-max.jpg`
   }
-};
-
-const activeOfferId = `1`;
-const offersNearby = [
-  {},
-  {}
-];
-const authorizationStatus = `NO_AUTH`;
-const reviews = [{
-  comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-  date: `2019-05-08T14:13:56.569Z`,
-  id: 1,
-  rating: 4,
-  user: {
-    url: `img/1.png`,
-    id: 4,
-    isPro: false,
-    name: `Max`
-  }
 }];
-const getReviews = () => {};
-const loadNearby = () => {};
-const onCardHover = () => {};
 
-it(`<ApartmentDetailInfo /> should render apartment-detail-info page `, () => {
+const cityesFavorite = {
+  Dusseldorf: {
+
+  },
+  Amsterdam: {
+
+  },
+  Cologne: {
+
+  }
+};
+const loadFavorites = () => {};
+
+it(`<Favorites /> should render favorites page `, () => {
   const tree = renderer
       .create(
           <Router history={customHistory} >
-            <ApartmentDetailInfo
-              offers={[offer]}
-              activeOfferId={activeOfferId}
-              offersNearby={offersNearby}
-              authorizationStatus={authorizationStatus}
-              reviews={reviews}
-              getReviews={getReviews}
-              loadNearby={loadNearby}
-              onCardHover={onCardHover}
+            <Favorites
+              offersFavorite={offersFavorite}
+              cityesFavorite={cityesFavorite}
+              loadFavorites={loadFavorites}
             />
           </Router>
       )

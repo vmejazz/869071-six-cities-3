@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test render App component <App /> should render page 1`] = `
+exports[`<LoadingPage /> should render LoadingPage page  1`] = `
 <h1
   style={
     Object {

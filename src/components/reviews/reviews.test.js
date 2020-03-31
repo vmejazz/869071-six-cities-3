@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Reviews from "./reviews.jsx";
+jest.mock(`../reviews-list/reviews-list.jsx`, () => `ReviewsList`);
+
 
 const reviews = [
   {

@@ -10,7 +10,6 @@ import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.
 import {getOffers, getCheckedStatus} from "../selectors.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import Favorites from "../favorites/favorites.jsx";
-import TestPage from "./test-page.jsx";
 import LoadingPage from "../loading-page/loading-page.jsx";
 
 const App = (props) => {
@@ -48,10 +47,6 @@ const App = (props) => {
               />
           }>
           </Route>
-          <Route path="/test/:testNew?" render={
-            (testProps) =>
-              <TestPage routeProps={testProps}/>
-          } />
         </Switch>
       </BrowserRouter>
     );
