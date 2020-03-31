@@ -40,6 +40,10 @@ export const getAutorisationStatus = (state) => {
   return state.USER.authorizationStatus;
 };
 
+export const getCheckedStatus = (state) => {
+  return state.USER.isCheckedStatus;
+};
+
 // export const getOffersShow = createSelector(
 //     getOffers,
 //     getActiveCity,

@@ -7,14 +7,14 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 const BookmarkButton = (props) => {
-  const {checkBookmarks, changeBookmark, offerId, userInfo} = props;
+  const {checkBookmarks, changeBookmark, offerId, userInfo, detailPage} = props;
   let {favorite} = props;
 
   let buttonClassname = `place-card__bookmark-button${favorite ? `--active` : ``} button`;
 
   if (userInfo.authorizationStatus === `AUTH`) {
     return (
-      <button className={buttonClassname} type="button"
+      <button className={detailPage ? `${buttonClassname} property__bookmark-button` : `${buttonClassname}`} type="button"
         onClick={
           (evt) => {
             evt.stopPropagation();
@@ -23,7 +23,7 @@ const BookmarkButton = (props) => {
           }
         }
       >
-        <svg className="place-card__bookmark-icon" width="18" height="19">
+        <svg className="place-card__bookmark-icon" width={detailPage ? `31` : `18`} height={detailPage ? `33` : `19`}>
           <use xlinkHref="#icon-bookmark"></use>
         </svg>
         <span className="visually-hidden">To bookmarks</span>
@@ -41,7 +41,7 @@ const BookmarkButton = (props) => {
           }
         }
       >
-        <svg className="place-card__bookmark-icon" width="18" height="19">
+        <svg className="place-card__bookmark-icon" width={detailPage ? `31` : `18`} height={detailPage ? `33` : `19`}>
           <use xlinkHref="#icon-bookmark"></use>
         </svg>
         <span className="visually-hidden">To bookmarks</span>

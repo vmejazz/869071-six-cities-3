@@ -46,6 +46,7 @@ const ApartmentCard = (props) => {
           <BookmarkButton
             offerId={id}
             favorite={favorite}
+            buttonClass={`place-card__bookmark`}
           />
         </div>
         <div className="place-card__rating rating">

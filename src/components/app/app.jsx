@@ -7,7 +7,7 @@ import {Operation as OperationUser} from "../../reducer/user/user.jsx";
 import Main from "../main/main.jsx";
 import SingIng from "../sing-in/sing-in.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
-import {getOffers} from "../selectors.js";
+import {getOffers, getCheckedStatus} from "../selectors.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import Favorites from "../favorites/favorites.jsx";
 import TestPage from "./test-page.jsx";
@@ -16,9 +16,10 @@ import LoadingPage from "../loading-page/loading-page.jsx";
 const App = (props) => {
   const {
     offers,
+    isCheckedStatus
   } = props;
 
-  if (offers.length < 1) {
+  if (offers.length < 1 || !isCheckedStatus) {
     return (
       <LoadingPage />
     );
@@ -28,6 +29,7 @@ const App = (props) => {
         <Switch>
           <Route exact path="/" component={Main}>
           </Route>
+          <Route exact path="/login" component={SingIng} />
           <PrivateRoute
             exact
             path="/favorites"
@@ -37,11 +39,10 @@ const App = (props) => {
               );
             }}
           />
-          <Route exact path="/login" component={SingIng} />
-          <Route path="/offer/:offer?" render={
+          <Route path="/offer/:id?" render={
             (routeProps) =>
               <ApartmentDetailInfo
-                activeOfferId={routeProps.match.params.offer}
+                activeOfferId={routeProps.match.params.id}
                 history={routeProps}
                 offers={offers}
               />
@@ -88,6 +89,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
+  isCheckedStatus: getCheckedStatus(state)
   // activeOfferId: getActiveOfferId(state),
   // offersShow: getOffersShow(state),
   // cityes: getCityes(state),

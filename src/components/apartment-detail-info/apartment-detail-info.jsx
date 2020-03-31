@@ -11,6 +11,7 @@ import ApartmentList from "../apartment-list/apartment-list.jsx";
 import ReviewsForm from "../reviews-form/reviews-form.jsx";
 import {getAutorisationStatus} from "../selectors.js";
 import {AuthorizationStatus} from "../../reducer/user/user.jsx";
+import BookmarkButton from "../bookmark-button/bookmark-button.jsx";
 
 const MAX_IMAGES = 6;
 
@@ -33,7 +34,7 @@ class ApartmentDetailInfo extends PureComponent {
     const {offers, activeOfferId, offersNearby, authorizationStatus} = this.props;
 
     const offer = offers.find((item) => item.id === Number(activeOfferId));
-    const {id, title, price, srcGallery = [], description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo} = offer;
+    const {id, title, price, srcGallery = [], description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo, favorite} = offer;
 
     return (
       <React.Fragment>
@@ -83,12 +84,18 @@ class ApartmentDetailInfo extends PureComponent {
                     <h1 className="property__name">
                       {title}
                     </h1>
-                    <button className="property__bookmark-button button" type="button">
+                    <BookmarkButton
+                      buttonClass={`property__bookmark`}
+                      detailPage={true}
+                      offerId={id}
+                      favorite={favorite}
+                    />
+                    {/* <button className="property__bookmark-button button" type="button">
                       <svg className="property__bookmark-icon" width={31} height={33}>
                         <use xlinkHref="#icon-bookmark" />
                       </svg>
                       <span className="visually-hidden">To bookmarks</span>
-                    </button>
+                    </button> */}
                   </div>
                   <div className="property__rating rating">
                     <div className="property__stars rating__stars">

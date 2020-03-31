@@ -102,9 +102,9 @@ ReviewsForm.propTypes = {
   offerId: PropTypes.number
 };
 
-const mapStateToProps = (state) => ({
-  // userInfo: getUser(state)
-});
+// const mapStateToProps = (state) => ({
+//   // userInfo: getUser(state)
+// });
 
 const mapDispatchToProps = (dispatch) => ({
 
@@ -116,4 +116,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {ReviewsForm};
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewsForm);
+export default connect(null, mapDispatchToProps)(ReviewsForm);
