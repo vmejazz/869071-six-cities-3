@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getCityes, getActiveCity, gethoverCardId} from "../selectors.js";
+import {getCityes, gethoverCardId} from "../selectors.js";
 class Map extends PureComponent {
   constructor(props) {
     super(props);

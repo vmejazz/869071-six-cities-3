@@ -13,6 +13,7 @@ class ReviewsForm extends PureComponent {
     };
 
     this._changeCommentInfo = this._changeCommentInfo.bind(this);
+    this._resetState = this._resetState.bind(this);
   }
 
   _changeCommentInfo(evt) {
@@ -21,11 +22,18 @@ class ReviewsForm extends PureComponent {
     });
   }
 
+  _resetState() {
+    this.setState({
+      comment: ``,
+      rating: 0
+    });
+  }
+
   render() {
     let buttonDisabledStatus = true;
     const {commentPost, offerId} = this.props;
     const {comment, rating} = this.state;
-    if (comment.length > 49 && rating > 0) {
+    if (comment.length > 49 && comment.length <= 300 && rating > 0) {
       buttonDisabledStatus = false;
     }
 
@@ -34,6 +42,7 @@ class ReviewsForm extends PureComponent {
         onSubmit={(evt) => {
           evt.preventDefault();
           commentPost(this.state, offerId);
+          this._resetState();
           evt.target.reset();
         }}
       >

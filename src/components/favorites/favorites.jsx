@@ -74,7 +74,10 @@ class Favorites extends PureComponent {
 
 Favorites.propTypes = {
   offersFavorite: PropTypes.array,
-  cityesFavorite: PropTypes.object,
+  cityesFavorite: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]),
   loadFavorites: PropTypes.func
 };
 

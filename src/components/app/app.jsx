@@ -11,6 +11,7 @@ import {getOffers, getCheckedStatus} from "../selectors.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import Favorites from "../favorites/favorites.jsx";
 import LoadingPage from "../loading-page/loading-page.jsx";
+import PageNotFound from "../page-not-found/page-not-forund.jsx";
 
 const App = (props) => {
   const {
@@ -46,6 +47,9 @@ const App = (props) => {
                 offers={offers}
               />
           }>
+          </Route>
+          <Route >
+            <PageNotFound />
           </Route>
         </Switch>
       </BrowserRouter>

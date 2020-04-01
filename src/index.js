@@ -23,8 +23,8 @@ const store = createStore(
     )
 );
 
-store.dispatch(DataOperation.loadOffers());
 store.dispatch(UserOperation.checkAuth());
+store.dispatch(DataOperation.loadOffers());
 // это пока лишнее
 // store.dispatch(DataOperation.loadFavorites());
 

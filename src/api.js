@@ -2,7 +2,8 @@ import axios from "axios";
 
 const ErrorMap = {
   NOT_FOUND: 404,
-  UNAUTHORIZED: 401
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 400
 };
 
 const SUCCESS_CODE = 200;
@@ -31,9 +32,13 @@ const createAPI = (onUnauthorized) => {
       case ErrorMap.UNAUTHORIZED:
         onUnauthorized();
         break;
+      case ErrorMap.BAD_REQUEST:
+        console.log(`не полный запрос`);
+        break;
       default:
         throw err;
     }
+    throw err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

@@ -20,7 +20,6 @@ const ApartmentCard = (props) => {
   // };
 
   const DEACTIVATE_ID = -1;
-
   return (
     <article className={articleClassName}
       onMouseEnter={() => onCardHover(id)}
@@ -51,7 +50,9 @@ const ApartmentCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rate <= 4 ? rate * 20 : 100}%`}}></span>
+            {/* <span style={{width: `${rate <= 4 ? rate * 20 : 100}%`}}></span> */}
+            <span style={{width: `${20 * Math.round(rate)}%`}}></span>
+            Math.round
             <span className="visually-hidden">{rate}Rating</span>
           </div>
         </div>

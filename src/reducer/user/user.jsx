@@ -72,9 +72,13 @@ const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
       .then((response) => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setAuthInfo(response));
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setCheckedStatus(true));
+      })
+      .catch((err) => {
+        dispatch(ActionCreator.setCheckedStatus(true));
+        // throw err;
       });
   },
 
@@ -88,6 +92,10 @@ const Operation = {
         dispatch(ActionCreator.setAuthInfo(response));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setCheckedStatus(true));
+      })
+      .catch((err) => {
+        dispatch(ActionCreator.setCheckedStatus(true));
+        // throw err;
       });
   },
 
