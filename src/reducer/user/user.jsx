@@ -75,19 +75,6 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setAuthInfo(response));
         dispatch(ActionCreator.setCheckedStatus(true));
-      })
-      .catch((err) => {
-        switch (err.response.status) {
-          case ERROR_STATUS.AUTH:
-            dispatch(ActionCreator.setCheckedStatus(true));
-            break;
-          case ERROR_STATUS.BAD_REQUEST:
-            dispatch(ActionCreator.setCheckedStatus(true));
-            break;
-          default:
-            break;
-        }
-        throw err;
       });
   },
 
@@ -101,19 +88,6 @@ const Operation = {
         dispatch(ActionCreator.setAuthInfo(response));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setCheckedStatus(true));
-      })
-      .catch((err) => {
-        switch (err.response.status) {
-          case ERROR_STATUS.AUTH:
-            dispatch(ActionCreator.setCheckedStatus(true));
-            break;
-          case ERROR_STATUS.BAD_REQUEST:
-            dispatch(ActionCreator.setCheckedStatus(true));
-            break;
-          default:
-            break;
-        }
-        throw err;
       });
   },
 

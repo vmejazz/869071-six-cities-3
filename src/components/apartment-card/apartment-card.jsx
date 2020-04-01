@@ -58,7 +58,9 @@ const ApartmentCard = (props) => {
         <h2
           className="place-card__name"
         >
-          <a href="#">{title}</a>
+          <Link to={`/offer/${id}`}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

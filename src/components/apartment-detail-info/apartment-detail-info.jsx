@@ -26,9 +26,9 @@ class ApartmentDetailInfo extends PureComponent {
     loadNearby(activeOfferId);
   }
 
-  // componentDidUpdate() {
-
-  // }
+  componentDidUpdate() {
+    window.scrollTo(0, 0);
+  }
 
   render() {
     const {offers, activeOfferId, offersNearby, authorizationStatus} = this.props;

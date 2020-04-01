@@ -30,11 +30,10 @@ const createAPI = (onUnauthorized) => {
         break;
       case ErrorMap.UNAUTHORIZED:
         onUnauthorized();
-        throw err;
+        break;
       default:
         throw err;
     }
-    throw err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);
