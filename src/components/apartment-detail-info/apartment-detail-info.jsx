@@ -34,7 +34,7 @@ class ApartmentDetailInfo extends PureComponent {
     const {offers, activeOfferId, offersNearby, authorizationStatus} = this.props;
 
     const offer = offers.find((item) => item.id === Number(activeOfferId));
-    const {id, title, price, srcGallery = [], description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo, favorite} = offer;
+    const {id, title, price, srcGallery = [], description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo, favorite, city} = offer;
 
     return (
       <React.Fragment>
@@ -162,6 +162,7 @@ class ApartmentDetailInfo extends PureComponent {
               <Map
                 offersShow={offersNearby}
                 isDetail={true}
+                activeCity={city}
               />
               {/* <section className="property__map map" /> */}
             </section>

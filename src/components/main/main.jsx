@@ -63,6 +63,8 @@ const Main = (props) => {
   // const redirectOffer = (id) => {
   //   history.push(`/offer/${id}`);
   // };
+  console.log(activeCity);
+
 
   return (
     <React.Fragment>
@@ -128,6 +130,7 @@ const Main = (props) => {
                     offersShow={offersShow}
                     cityes={cityes}
                     hoverCardId={hoverCardId}
+                    activeCity={activeCity}
                   />
                 }
               </div>
