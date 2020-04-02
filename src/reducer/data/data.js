@@ -7,6 +7,7 @@ const initialState = {
   activeCity: `Paris`,
   offersFavorite: [],
   cityesFavorite: [],
+  commentPostError: false
 };
 
 const ActionType = {
@@ -21,6 +22,7 @@ const ActionType = {
   GET_REVIEWS: `GET_REVIEWS`,
   LOAD_NEARBY: `LOAD_NEARBY`,
   POST_COMMENT: `POST_COMMENT`,
+  COMMENT_ERROR: `COMMENT_ERROR`
 };
 
 const ActionCreator = {
@@ -63,6 +65,10 @@ const ActionCreator = {
   loadNearby: (offersNearby) => ({
     type: ActionType.LOAD_NEARBY,
     payload: offersNearby
+  }),
+  setPostError: (status) => ({
+    type: ActionType.COMMENT_ERROR,
+    payload: status
   })
 };
 
@@ -144,6 +150,9 @@ const Operation = {
         dispatch(ActionCreator.setReviews({
           reviews: response
         }));
+      })
+      .catch(() => {
+        dispatch(ActionCreator.setPostError(true));
       });
 
   },
@@ -198,6 +207,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, action.payload);
     case ActionType.LOAD_NEARBY:
       return extend(state, action.payload);
+    case ActionType.COMMENT_ERROR:
+      return extend(state, {
+        commentPostError: action.payload
+      });
   }
 
   return state;

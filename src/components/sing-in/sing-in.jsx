@@ -1,14 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
-import UserProfile from "../user-profile/user-profile.jsx";
+// import {Link} from "react-router-dom";
+// import UserProfile from "../user-profile/user-profile.jsx";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {getUser} from "../selectors.js";
+import {getStatusRequestModal} from "../../reducer/user/selectors.js";
 import {Operation as OperationUser} from "../../reducer/user/user.js";
+import PageHeader from "../page-header/page-header.jsx";
 
 const SingIng = (props) => {
-  const {loginIn, userInfo} = props;
+  const {loginIn, userInfo, showRequestModal} = props;
 
   if (userInfo.authorizationStatus === `AUTH`) {
     return (
@@ -17,28 +19,15 @@ const SingIng = (props) => {
   } else {
     return (
       <div className="page page--gray page--login">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                <Link className="header__logo-link" to="/">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-                </Link>
-              </div>
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <UserProfile />
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
+        <PageHeader />
         <main className="page__main page__main--login">
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>
+              {showRequestModal
+                ? <h3>Некорректно введены данные!</h3>
+                : null
+              }
               <form className="login__form form" action="/" method="post"
                 onSubmit={(evt) => {
                   evt.preventDefault();
@@ -84,7 +73,8 @@ SingIng.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  userInfo: getUser(state)
+  userInfo: getUser(state),
+  showRequestModal: getStatusRequestModal(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

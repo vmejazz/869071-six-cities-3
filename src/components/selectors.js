@@ -44,6 +44,10 @@ export const getCheckedStatus = (state) => {
   return state.USER.isCheckedStatus;
 };
 
+export const getOpenOffer = (state, id) => {
+  return state.DATA.offers.find((item) => item.id === Number(id.activeOfferId));
+};
+
 // export const getOffersShow = createSelector(
 //     getOffers,
 //     getActiveCity,

@@ -13,7 +13,11 @@ const onUnauthorized = () => {
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
 };
 
-const api = createAPI(onUnauthorized);
+const onBadRequest = () => {
+  store.dispatch(ActionCreator.toggleRequestModal(true));
+};
+
+const api = createAPI(onUnauthorized, onBadRequest);
 
 const store = createStore(
     reducer,

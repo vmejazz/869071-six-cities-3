@@ -90,9 +90,10 @@ class Map extends PureComponent {
     const {isDetail} = this.props;
 
     let mapClassName = isDetail ? `property__map map` : `cities__map map`;
+    let mapStyle = isDetail ? {width: `1145px`, marginLeft: `auto`, marginRight: `auto`, display: `block`} : {};
 
     return (
-      <section className={mapClassName} id="mapId"></section>
+      <section className={mapClassName} style={mapStyle} id="mapId"></section>
     );
   }
 }

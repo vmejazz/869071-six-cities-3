@@ -7,21 +7,27 @@ const ApartmentCard = (props) => {
   const {placeOffer, onCardHover, isFavoriteList} = props;
   const {id, title, price, srcImg, premium, type, rate, favorite} = placeOffer;
 
-  let articleClassName = isFavoriteList ? `favorites__card` : `cities__place-card`;
-  articleClassName += ` place-card`;
+  const СlassNameType = {
+    FAVORITE: `FAVORITE`,
+    USUAL: `USUAL`
+  };
 
-  let imageWrapperClass = isFavoriteList ? `favorites__image-wrapper` : `cities__image-wrapper`;
-  imageWrapperClass += ` place-card__image-wrapper`;
-
-  let cardInfoClassName = isFavoriteList ? `favorites__card-info` : ``;
-  cardInfoClassName += ` place-card__info`;
-  // const bookmarkPush = () => {
-
-  // };
+  const classNameMap = {
+    [СlassNameType.FAVORITE]: {
+      article: `favorites__card place-card`,
+      imageWrapper: `favorites__image-wrapper place-card__image-wrapper`,
+      cardInfo: `favorites__card-info place-card__info`
+    },
+    [СlassNameType.USUAL]: {
+      article: `cities__place-card place-card`,
+      imageWrapper: `cities__image-wrapper place-card__image-wrapper`,
+      cardInfo: `place-card__info`
+    }
+  };
 
   const DEACTIVATE_ID = -1;
   return (
-    <article className={articleClassName}
+    <article className={isFavoriteList ? classNameMap.FAVORITE.article : classNameMap.USUAL.article}
       onMouseEnter={() => onCardHover(id)}
       onMouseLeave={() => onCardHover(DEACTIVATE_ID)}
     >
@@ -31,12 +37,12 @@ const ApartmentCard = (props) => {
         </div>
         : ``
       }
-      <div className={imageWrapperClass}>
+      <div className={isFavoriteList ? classNameMap.FAVORITE.imageWrapper : classNameMap.USUAL.imageWrapper}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={srcImg} width={isFavoriteList ? `150` : `260`} height={isFavoriteList ? `110` : `200`} alt="Place image"/>
         </Link>
       </div>
-      <div className={cardInfoClassName}>
+      <div className={isFavoriteList ? classNameMap.FAVORITE.cardInfo : classNameMap.USUAL.cardInfo}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -50,7 +56,6 @@ const ApartmentCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            {/* <span style={{width: `${rate <= 4 ? rate * 20 : 100}%`}}></span> */}
             <span style={{width: `${20 * Math.round(rate)}%`}}></span>
             Math.round
             <span className="visually-hidden">{rate}Rating</span>
@@ -80,7 +85,6 @@ ApartmentCard.propTypes = {
     rate: PropTypes.number,
     favorite: PropTypes.bool
   }).isRequired,
-  onApartmentCardClick: PropTypes.func,
   onCardHover: PropTypes.func,
   isFavoriteList: PropTypes.bool
 };

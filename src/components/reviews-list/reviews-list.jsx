@@ -4,6 +4,9 @@ import ReviewsItem from "../reviews-tem/reviews-item.jsx";
 import {connect} from "react-redux";
 import {getComments} from "../selectors.js";
 import {Operation} from "../../reducer/data/data.js";
+import {getCommentPostStatus} from "../../reducer/data/selectors.js";
+import {ActionCreator} from "../../reducer/data/data.js";
+import ErrorModal from "../error-modal/error-modal.jsx";
 class ReviewsList extends PureComponent {
   constructor(props) {
     super(props);
@@ -20,11 +23,16 @@ class ReviewsList extends PureComponent {
   // }
 
   render() {
-    let {reviews} = this.props;
+    let {reviews, commentPostError, closeModal} = this.props;
 
     return (
       <React.Fragment>
         <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
+        {
+          commentPostError
+            ? <ErrorModal closeModal={closeModal}/>
+            : null
+        }
         <ul className="reviews__list">
           {reviews.map((item, index) => {
             return (
@@ -49,7 +57,9 @@ ReviewsList.propTypes = {
     date: PropTypes.string,
   })),
   getReviews: PropTypes.func,
-  offerId: PropTypes.number
+  offerId: PropTypes.number,
+  commentPostError: PropTypes.bool,
+  closeModal: PropTypes.func
 };
 
 ReviewsList.defaultProps = {
@@ -60,6 +70,7 @@ ReviewsList.defaultProps = {
 
 const mapStateToProps = (state) => ({
   reviews: getComments(state),
+  commentPostError: getCommentPostStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -73,6 +84,11 @@ const mapDispatchToProps = (dispatch) => ({
         Operation.loadFavorites()
     );
   },
+  closeModal() {
+    dispatch(
+        ActionCreator.setPostError(false)
+    );
+  }
 });
 
 export {ReviewsList};

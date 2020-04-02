@@ -8,7 +8,7 @@ const ErrorMap = {
 
 const SUCCESS_CODE = 200;
 
-const createAPI = (onUnauthorized) => {
+const createAPI = (onUnauthorized, onBadRequest) => {
   const api = axios.create({
     baseURL: `https://htmlacademy-react-3.appspot.com/six-cities`,
     timeout: 5000,
@@ -32,7 +32,7 @@ const createAPI = (onUnauthorized) => {
         onUnauthorized();
         throw err;
       case ErrorMap.BAD_REQUEST:
-        console.log(`не полный запрос`);
+        onBadRequest();
         throw err;
       // default:
       //   throw err;

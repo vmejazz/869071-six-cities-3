@@ -8,15 +8,14 @@ import CityList from "../city-list/city-list.jsx";
 import EmptyOffers from "../empty-offers/empty-offers.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import withActiveItem from "../../hocs/withActiveItem.jsx";
-import {getUser, getCityes, getOffersShow} from "../selectors.js";
-import UserProfile from "../user-profile/user-profile.jsx";
+import {getCityes, getOffersShow} from "../selectors.js";
+import PageHeader from "../page-header/page-header.jsx";
 
 const SortOptionsWrapped = withActiveItem(SortOptions);
 
 const Main = (props) => {
   const {
     offersShow,
-    // openOffer,
     cityes,
     activeCity = Object.keys(cityes)[0],
     changeCity,
@@ -24,8 +23,6 @@ const Main = (props) => {
     onCardHover,
     sortOffersDirect,
     sortOffersReverse,
-    userInfo,
-    // history
   } = props;
 
   const offerPlacesCount = offersShow.length;
@@ -67,27 +64,7 @@ const Main = (props) => {
   return (
     <React.Fragment>
       <div className="page page--gray page--main">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                <a className="header__logo-link header__logo-link--active">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
-              </div>
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <UserProfile
-                      userInfo={userInfo}
-                    />
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
-
+        <PageHeader />
         <main className={`page__main page__main--index + ${emptyOffers ? `page__main--index-empty` : ``}`}>
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
@@ -191,7 +168,6 @@ Main.propTypes = {
 const mapStateToProps = (state) => ({
   activeCity: state.DATA.activeCity,
   hoverCardId: state.DATA.hoverCardId,
-  userInfo: getUser(state),
   cityes: getCityes(state),
   offersShow: getOffersShow(state),
 });

@@ -1,48 +1,43 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
-import UserProfile from "../user-profile/user-profile.jsx";
+// import {Link} from "react-router-dom";
+// import UserProfile from "../user-profile/user-profile.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import {Operation, ActionCreator} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
 import Map from "../map/map.jsx";
 import {getOffersNearby} from "../selectors.js";
-import ApartmentList from "../apartment-list/apartment-list.jsx";
+// import ApartmentList from "../apartment-list/apartment-list.jsx";
 import ReviewsForm from "../reviews-form/reviews-form.jsx";
-import {getAutorisationStatus} from "../selectors.js";
+import {getAutorisationStatus, getOpenOffer} from "../selectors.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import BookmarkButton from "../bookmark-button/bookmark-button.jsx";
 import PageNotFound from "../page-not-found/page-not-forund.jsx";
+import PageHeader from "../page-header/page-header.jsx";
+import withReviewForm from "../../hocs/with-review-form/with-review-form.jsx";
+import OffersNearby from "../offers-nearby/offers-nearby.jsx";
+
+const ReviewsFormWrapped = withReviewForm(ReviewsForm);
 
 const MAX_IMAGES = 6;
 
 class ApartmentDetailInfo extends PureComponent {
   constructor(props) {
     super(props);
-
-    this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
 
-  componentDidMount() {
-    const {loadNearby, activeOfferId} = this.props;
+  // componentDidMount() {
+  //   const {loadNearby, activeOfferId} = this.props;
 
-    loadNearby(activeOfferId);
-  }
+  //   loadNearby(activeOfferId);
+  // }
 
   componentDidUpdate() {
     window.scrollTo(0, 0);
   }
 
-  forceUpdateHandler() {
-    this.forceUpdate();
-    console.log(`lshdflkjsdf`);
-
-  }
-
   render() {
-    const {offers, activeOfferId, offersNearby = [], authorizationStatus} = this.props;
-
-    const offer = offers.find((item) => item.id === Number(activeOfferId));
+    const {offersNearby = [], authorizationStatus, offer, activeOfferId} = this.props;
 
     if (offer === undefined) {
       return <PageNotFound />;
@@ -54,24 +49,7 @@ class ApartmentDetailInfo extends PureComponent {
       return (
         <React.Fragment>
           <div className="page" id={id}>
-            <header className="header">
-              <div className="container">
-                <div className="header__wrapper">
-                  <div className="header__left">
-                    <Link className="header__logo-link" to="/">
-                      <img className="header__logo" src="../img/logo.svg" alt="6 cities logo" width={81} height={41} />
-                    </Link>
-                  </div>
-                  <nav className="header__nav">
-                    <ul className="header__nav-list">
-                      <li className="header__nav-item user">
-                        <UserProfile />
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-            </header>
+            <PageHeader />
             <main className="page__main page__main--property">
               <section className="property">
                 <div className="property__gallery-container container">
@@ -168,7 +146,7 @@ class ApartmentDetailInfo extends PureComponent {
                       // reviews={reviews}
                       />
                       {authorizationStatus === AuthorizationStatus.AUTH
-                        ? <ReviewsForm offerId={id} />
+                        ? <ReviewsFormWrapped offerId={id} />
                         : null
                       }
                     </section>
@@ -186,9 +164,9 @@ class ApartmentDetailInfo extends PureComponent {
                 <section className="near-places places">
                   <h2 className="near-places__title">Other places in the neighbourhood</h2>
                   <div className="near-places__list places__list">
-                    <ApartmentList
-                      offersShow={offersNearby}
-                      onClick={this.forceUpdateHandler}
+                    <OffersNearby
+                      activeOfferId={activeOfferId}
+                      history={history}
                     />
                   </div>
                 </section>
@@ -215,7 +193,9 @@ ApartmentDetailInfo.propTypes = {
     bedrooms: PropTypes.number,
     maxGuests: PropTypes.number,
     apartmentStuff: PropTypes.arrayOf(PropTypes.string),
-    ownerInfo: PropTypes. object
+    ownerInfo: PropTypes. object,
+    favorite: PropTypes.bool,
+    city: PropTypes.string
   }),
   loadNearby: PropTypes.func,
   activeOfferId: PropTypes.string.isRequired,
@@ -227,10 +207,11 @@ ApartmentDetailInfo.propTypes = {
 // export default ApartmentDetailInfo;
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, activeOfferId) => ({
   reviews: state.OFFER.reviews,
   offersNearby: getOffersNearby(state),
-  authorizationStatus: getAutorisationStatus(state)
+  authorizationStatus: getAutorisationStatus(state),
+  offer: getOpenOffer(state, activeOfferId),
 });
 
 const mapDispatchToProps = (dispatch) => ({

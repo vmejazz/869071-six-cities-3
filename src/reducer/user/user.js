@@ -1,9 +1,9 @@
 import {extend} from "../utils.js";
 
-// const ErrorStatus = {
-//   AUTH: 401,
-//   BAD_REQUEST: 400
-// };
+const ErrorStatus = {
+  AUTH: 401,
+  BAD_REQUEST: 400
+};
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -14,6 +14,7 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   bookmarksRequired: false,
   setCheckedStatus: false,
+  showRequestModal: false
 };
 
 const ActionType = {
@@ -21,7 +22,8 @@ const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REQUIRED_BOOKMARKS: `REQUIRED_BOOKMARKS`,
   LOAD_FAVORITES: `LOAD_FAVORITES`,
-  IS_CHECKED: `IS_CHECKED`
+  IS_CHECKED: `IS_CHECKED`,
+  SHOW_REQUEST_MODAL: `SHOW_REQUEST_MODAL`
 };
 
 const ActionCreator = {
@@ -44,7 +46,12 @@ const ActionCreator = {
   setCheckedStatus: (status) => ({
     type: ActionType.IS_CHECKED,
     payload: status
+  }),
+  toggleRequestModal: (status) => ({
+    type: ActionType.SHOW_REQUEST_MODAL,
+    payload: status
   })
+
 };
 
 const reducer = (state = initialState, action) => {
@@ -62,6 +69,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.IS_CHECKED:
       return extend(state, {
         isCheckedStatus: action.payload
+      });
+    case ActionType.SHOW_REQUEST_MODAL:
+      return extend(state, {
+        showRequestModal: action.payload
       });
   }
 
@@ -92,8 +103,16 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setCheckedStatus(true));
       })
-      .catch(() => {
+      .catch((err) => {
         dispatch(ActionCreator.setCheckedStatus(true));
+
+        switch (err.status) {
+          case ErrorStatus.BAD_REQUEST:
+            dispatch(ActionCreator.toggleRequestModal(true));
+            break;
+          default:
+            break;
+        }
         // throw err;
       });
   },
@@ -101,6 +120,10 @@ const Operation = {
   checkBookmarks: () => (dispatch) => {
     return dispatch(ActionCreator.requireBookmarks(true));
   },
+
+  hideRequestModal: () => (dispatch) => {
+    return dispatch(ActionCreator.toggleRequestModal(false));
+  }
 };
 
 
