@@ -81,7 +81,8 @@ const Operation = {
             return item.city === Object.keys(cityes)[0];
           })
         }));
-      });
+      })
+      .catch(() => {});
   },
 
   loadFavorites: () => (dispatch, getState, api) => {
@@ -94,7 +95,8 @@ const Operation = {
           offersFavorite: offersParsed,
           cityesFavorite: cityes,
         }));
-      });
+      })
+      .catch(() => {});
   },
 
   changeBookmark: (offerId, status) => (dispatch, getState, api) => {
@@ -104,7 +106,8 @@ const Operation = {
         const offerParsed = ParseDataModel.toRaw();
 
         dispatch(ActionCreator.changeBookmarkStatus(offerParsed[0]));
-      });
+      })
+      .catch(() => {});
   },
 
   getReviews: (offerId) => (dispatch, getState, api) => {
@@ -114,7 +117,8 @@ const Operation = {
         dispatch(ActionCreator.setReviews({
           reviews: response
         }));
-      });
+      })
+      .catch(() => {});
   },
 
   loadNearby: (offerId) => (dispatch, getState, api) => {
@@ -127,7 +131,8 @@ const Operation = {
           offersNearby: offersParsed,
           // cityesFavorite: cityes,
         }));
-      });
+      })
+      .catch(() => {});
   },
 
   commentPost: (comment, offerId) => (dispatch, getState, api) =>{

@@ -24,19 +24,18 @@ const createAPI = (onUnauthorized) => {
   };
 
   const onFail = (err) => {
-    const {response} = err;
-
+    const {response = ``} = err;
     switch (response.status) {
       case ErrorMap.NOT_FOUND:
-        break;
+        throw err;
       case ErrorMap.UNAUTHORIZED:
         onUnauthorized();
-        break;
+        throw err;
       case ErrorMap.BAD_REQUEST:
         console.log(`не полный запрос`);
-        break;
-      default:
         throw err;
+      // default:
+      //   throw err;
     }
     throw err;
   };

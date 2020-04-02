@@ -1,9 +1,9 @@
 import {extend} from "../utils.js";
 
-const ERROR_STATUS = {
-  AUTH: 401,
-  BAD_REQUEST: 400
-};
+// const ErrorStatus = {
+//   AUTH: 401,
+//   BAD_REQUEST: 400
+// };
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -76,9 +76,8 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setCheckedStatus(true));
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch(ActionCreator.setCheckedStatus(true));
-        // throw err;
       });
   },
 
@@ -93,7 +92,7 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setCheckedStatus(true));
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch(ActionCreator.setCheckedStatus(true));
         // throw err;
       });
