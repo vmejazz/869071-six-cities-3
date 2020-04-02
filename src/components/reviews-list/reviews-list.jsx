@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ReviewsItem from "../reviews-tem/reviews-item.jsx";
 import {connect} from "react-redux";
 import {getComments} from "../selectors.js";
-import {Operation} from "../../reducer/data/data.jsx";
+import {Operation} from "../../reducer/data/data.js";
 class ReviewsList extends PureComponent {
   constructor(props) {
     super(props);

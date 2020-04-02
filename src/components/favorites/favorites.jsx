@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import UserProfile from "../user-profile/user-profile.jsx";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {Operation} from "../../reducer/data/data.jsx";
+import {Operation} from "../../reducer/data/data.js";
 import {getOffersFavorite, getCityesFavorite} from "../selectors.js";
 import FavoritesList from "../favorites-list/favorites-list.jsx";
 import PropTypes from "prop-types";

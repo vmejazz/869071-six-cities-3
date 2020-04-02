@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Operation as OperationData} from "../../reducer/data/data.jsx";
+import {Operation as OperationData} from "../../reducer/data/data.js";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 

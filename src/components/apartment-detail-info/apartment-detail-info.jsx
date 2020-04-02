@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import UserProfile from "../user-profile/user-profile.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
-import {Operation, ActionCreator} from "../../reducer/data/data.jsx";
+import {Operation, ActionCreator} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
 import Map from "../map/map.jsx";
 import {getOffersNearby} from "../selectors.js";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
 import ReviewsForm from "../reviews-form/reviews-form.jsx";
 import {getAutorisationStatus} from "../selectors.js";
-import {AuthorizationStatus} from "../../reducer/user/user.jsx";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 import BookmarkButton from "../bookmark-button/bookmark-button.jsx";
 import PageNotFound from "../page-not-found/page-not-forund.jsx";
 
@@ -19,6 +19,8 @@ const MAX_IMAGES = 6;
 class ApartmentDetailInfo extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
 
   componentDidMount() {
@@ -31,8 +33,14 @@ class ApartmentDetailInfo extends PureComponent {
     window.scrollTo(0, 0);
   }
 
+  forceUpdateHandler() {
+    this.forceUpdate();
+    console.log(`lshdflkjsdf`);
+
+  }
+
   render() {
-    const {offers, activeOfferId, offersNearby, authorizationStatus} = this.props;
+    const {offers, activeOfferId, offersNearby = [], authorizationStatus} = this.props;
 
     const offer = offers.find((item) => item.id === Number(activeOfferId));
 
@@ -40,6 +48,8 @@ class ApartmentDetailInfo extends PureComponent {
       return <PageNotFound />;
     } else {
       const {id, title, price, srcGallery = [], description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo, favorite, city} = offer;
+      let offersNearbyForMap = offersNearby.slice();
+      offersNearbyForMap.push(offer);
 
       return (
         <React.Fragment>
@@ -165,9 +175,10 @@ class ApartmentDetailInfo extends PureComponent {
                   </div>
                 </div>
                 <Map
-                  offersShow={offersNearby}
+                  offersShow={offersNearbyForMap}
                   isDetail={true}
                   activeCity={city}
+                  isDetailHoverId={id}
                 />
                 {/* <section className="property__map map" /> */}
               </section>
@@ -177,6 +188,7 @@ class ApartmentDetailInfo extends PureComponent {
                   <div className="near-places__list places__list">
                     <ApartmentList
                       offersShow={offersNearby}
+                      onClick={this.forceUpdateHandler}
                     />
                   </div>
                 </section>

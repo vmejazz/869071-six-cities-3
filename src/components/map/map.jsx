@@ -49,7 +49,8 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {activeCity, cityes, offersShow, hoverCardId} = this.props;
+    const {activeCity, cityes, offersShow, isDetail, isDetailHoverId} = this.props;
+    let {hoverCardId} = this.props;
     const {iconBlue, iconYellow} = this.icons;
     const activeCityPosition = cityes[activeCity];
 
@@ -68,6 +69,8 @@ class Map extends PureComponent {
         .addTo(this.myMap)
       );
     });
+
+    hoverCardId = isDetail ? isDetailHoverId : hoverCardId;
 
     const offerHovered = offersShow.find((item) => {
       return item.id === hoverCardId;

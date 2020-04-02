@@ -1,7 +1,7 @@
 import React from "react";
 import {getUser} from "../selectors.js";
-import {Operation as OperationData} from "../../reducer/data/data.jsx";
-import {Operation as OperationUser} from "../../reducer/user/user.jsx";
+import {Operation as OperationData} from "../../reducer/data/data.js";
+import {Operation as OperationUser} from "../../reducer/user/user.js";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
@@ -14,7 +14,11 @@ const BookmarkButton = (props) => {
 
   if (userInfo.authorizationStatus === `AUTH`) {
     return (
-      <button className={detailPage ? `property__bookmark-button button` : `${buttonClassname}`} type="button"
+      <button
+        className={detailPage
+          ? `property__bookmark-button button ${favorite ? `property__bookmark-button--active` : ``}`
+          : `${buttonClassname}`}
+        type="button"
         onClick={
           (evt) => {
             evt.stopPropagation();
@@ -31,8 +35,11 @@ const BookmarkButton = (props) => {
     );
   } else {
     return (
-      <Link className={detailPage ? `property__bookmark-button button` : `${buttonClassname}`} type="button"
-        to={`/login`}
+      <Link
+        className={detailPage
+          ? `property__bookmark-button button ${favorite ? `property__bookmark-button--active` : ``}`
+          : `${buttonClassname}`}
+        type="button" to={`/login`}
         onClick={
           (evt) => {
             evt.stopPropagation();

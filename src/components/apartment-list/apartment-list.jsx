@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ApartmentCard from "../apartment-card/apartment-card.jsx";
-import {ActionCreator} from "../../reducer/data/data.jsx";
+import {ActionCreator} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
 // import {connect} from "react-redux";
 // import {getOffersShow} from "../selectors.js";

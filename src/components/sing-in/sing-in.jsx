@@ -5,7 +5,7 @@ import UserProfile from "../user-profile/user-profile.jsx";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {getUser} from "../selectors.js";
-import {Operation as OperationUser} from "../../reducer/user/user.jsx";
+import {Operation as OperationUser} from "../../reducer/user/user.js";
 
 const SingIng = (props) => {
   const {loginIn, userInfo} = props;
