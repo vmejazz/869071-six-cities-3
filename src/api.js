@@ -34,8 +34,6 @@ const createAPI = (onUnauthorized, onBadRequest) => {
       case ErrorMap.BAD_REQUEST:
         onBadRequest();
         throw err;
-      // default:
-      //   throw err;
     }
     throw err;
   };

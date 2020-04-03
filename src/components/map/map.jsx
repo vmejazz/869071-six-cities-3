@@ -134,7 +134,6 @@ Map.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  // activeCity: getActiveCity(state),
   cityes: getCityes(state),
   hoverCardId: gethoverCardId(state)
 });

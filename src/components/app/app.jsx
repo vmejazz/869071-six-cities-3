@@ -90,10 +90,6 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
   isCheckedStatus: getCheckedStatus(state)
-  // activeOfferId: getActiveOfferId(state),
-  // offersShow: getOffersShow(state),
-  // cityes: getCityes(state),
-  // userInfo: getUser(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

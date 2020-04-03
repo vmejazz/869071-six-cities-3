@@ -17,11 +17,6 @@ class ReviewsList extends PureComponent {
     getReviews(offerId);
   }
 
-  // componentDidUpdate() {
-  //   const {getReviews, offerId} = this.props;
-  //   // getReviews(offerId);
-  // }
-
   render() {
     let {reviews, commentPostError, closeModal} = this.props;
 
@@ -65,8 +60,6 @@ ReviewsList.propTypes = {
 ReviewsList.defaultProps = {
   reviews: []
 };
-
-// export default ReviewsList;
 
 const mapStateToProps = (state) => ({
   reviews: getComments(state),

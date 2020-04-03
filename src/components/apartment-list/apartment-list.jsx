@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import ApartmentCard from "../apartment-card/apartment-card.jsx";
 import {ActionCreator} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
-// import {connect} from "react-redux";
-// import {getOffersShow} from "../selectors.js";
 
 const ApartmentList = (props) => {
   const {offersShow = [], onApartmentCardClick, onCardHover, isFavoriteList = false} = props;
@@ -53,10 +51,6 @@ ApartmentList.propTypes = {
   isFavoriteList: PropTypes.bool
 };
 
-// const mapStateToProps = (state) => ({
-//   // offersShow: getOffersShow(state)
-// });
-
 const mapDispatchToProps = (dispatch) => ({
   onCardHover(id) {
     dispatch(
@@ -67,5 +61,3 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {ApartmentList};
 export default connect(null, mapDispatchToProps)(ApartmentList);
-// export default ApartmentList;
-

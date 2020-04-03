@@ -132,10 +132,8 @@ const Operation = {
       .then((response) => {
         const ParseDataModel = new ParseData(response);
         const offersParsed = ParseDataModel.toRaw();
-        // const cityes = ParseDataModel.toCityes();
         dispatch(ActionCreator.loadNearby({
           offersNearby: offersParsed,
-          // cityesFavorite: cityes,
         }));
       })
       .catch(() => {});
@@ -154,7 +152,6 @@ const Operation = {
       .catch(() => {
         dispatch(ActionCreator.setPostError(true));
       });
-
   },
 };
 

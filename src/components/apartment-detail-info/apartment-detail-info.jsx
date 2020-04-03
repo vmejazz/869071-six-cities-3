@@ -1,13 +1,10 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-// import {Link} from "react-router-dom";
-// import UserProfile from "../user-profile/user-profile.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import {Operation, ActionCreator} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
 import Map from "../map/map.jsx";
 import {getOffersNearby, getOpenOffer} from "../../reducer/data/selectors.js";
-// import ApartmentList from "../apartment-list/apartment-list.jsx";
 import ReviewsForm from "../reviews-form/reviews-form.jsx";
 import {getAutorisationStatus} from "../../reducer/user/selectors.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
@@ -25,12 +22,6 @@ class ApartmentDetailInfo extends PureComponent {
   constructor(props) {
     super(props);
   }
-
-  // componentDidMount() {
-  //   const {loadNearby, activeOfferId} = this.props;
-
-  //   loadNearby(activeOfferId);
-  // }
 
   componentDidUpdate() {
     window.scrollTo(0, 0);
@@ -143,7 +134,6 @@ class ApartmentDetailInfo extends PureComponent {
                     <section className="property__reviews reviews">
                       <ReviewsList
                         offerId={id}
-                      // reviews={reviews}
                       />
                       {authorizationStatus === AuthorizationStatus.AUTH
                         ? <ReviewsFormWrapped offerId={id} />
@@ -203,9 +193,6 @@ ApartmentDetailInfo.propTypes = {
   offersNearby: PropTypes.arrayOf(PropTypes.object),
   authorizationStatus: PropTypes.string.isRequired
 };
-
-// export default ApartmentDetailInfo;
-
 
 const mapStateToProps = (state, activeOfferId) => ({
   reviews: state.OFFER.reviews,

@@ -33,7 +33,6 @@ const mapStateToProps = (state) => ({
   userInfo: getUser(state)
 });
 
-
 export {UserProfile};
 export default connect(mapStateToProps)(UserProfile);
 

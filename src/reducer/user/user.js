@@ -113,7 +113,6 @@ const Operation = {
           default:
             break;
         }
-        // throw err;
       });
   },
 

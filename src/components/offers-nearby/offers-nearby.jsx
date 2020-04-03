@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
 import {Operation} from "../../reducer/data/data.js";
 import {getOffersNearby} from "../../reducer/data/selectors.js";
-
 class OffersNearby extends PureComponent {
 
   constructor(props) {
@@ -17,18 +16,11 @@ class OffersNearby extends PureComponent {
     loadNearby(activeOfferId);
   }
 
-  // componentWillReceiveProps() {
-  //   const {loadNearby, activeOfferId} = this.props;
-
-  //   loadNearby(activeOfferId);
-
-  // }
-
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     const {loadNearby, activeOfferId: nextId} = nextProps;
-    const {activeOfferId: oldID} = this.props;
+    const {activeOfferId: oldId} = this.props;
 
-    if (oldID !== nextId) {
+    if (oldId !== nextId) {
       loadNearby(nextId);
     }
   }

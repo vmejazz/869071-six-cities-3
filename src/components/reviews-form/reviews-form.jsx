@@ -2,7 +2,6 @@ import React from "react";
 import {Operation as OperationData} from "../../reducer/data/data.js";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-// import StarRating from "../star-rating/star.rating.jsx";
 
 const ReviewsForm = (props) => {
   const {review, buttonStatus, changeCommentInfo, resetReviewForm, commentPost, offerId} = props;
@@ -90,10 +89,6 @@ ReviewsForm.propTypes = {
   changeCommentInfo: PropTypes.func,
   resetReviewForm: PropTypes.func
 };
-
-// const mapStateToProps = (state) => ({
-//   // userInfo: getUser(state)
-// });
 
 const mapDispatchToProps = (dispatch) => ({
 

@@ -10,13 +10,18 @@ const BookmarkButton = (props) => {
   const {checkBookmarks, changeBookmark, offerId, userInfo, detailPage} = props;
   let {favorite} = props;
 
+  const СlassNameType = {
+    FAVORITE: `FAVORITE`,
+    USUAL: `USUAL`
+  };
+
   const PropertyElementRender = {
-    favorite: {
+    [СlassNameType.FAVORITE]: {
       button: `property__bookmark-button button ${favorite ? `property__bookmark-button--active` : ``}`,
       svgWidth: `31`,
       svgHeight: `33`
     },
-    usial: {
+    [СlassNameType.USUAL]: {
       button: `place-card__bookmark-button button ${favorite ? `place-card__bookmark-button--active` : ``}`,
       svgWidth: `18`,
       svgHeight: `19`
@@ -26,7 +31,7 @@ const BookmarkButton = (props) => {
   if (userInfo.authorizationStatus === AuthorizationStatus.AUTH) {
     return (
       <button
-        className={detailPage ? PropertyElementRender.favorite.button : PropertyElementRender.usial.button}
+        className={detailPage ? PropertyElementRender.FAVORITE.button : PropertyElementRender.USUAL.button}
         type="button"
         onClick={
           (evt) => {
@@ -38,8 +43,8 @@ const BookmarkButton = (props) => {
       >
         <svg
           className="place-card__bookmark-icon"
-          width={detailPage ? PropertyElementRender.favorite.svgWidth : PropertyElementRender.usial.svgWidth}
-          height={detailPage ? PropertyElementRender.favorite.svgHeight : PropertyElementRender.usial.svgHeight}
+          width={detailPage ? PropertyElementRender.FAVORITE.svgWidth : PropertyElementRender.USUAL.svgWidth}
+          height={detailPage ? PropertyElementRender.FAVORITE.svgHeight : PropertyElementRender.USUAL.svgHeight}
         >
           <use xlinkHref="#icon-bookmark"></use>
         </svg>
@@ -49,7 +54,7 @@ const BookmarkButton = (props) => {
   } else {
     return (
       <Link
-        className={detailPage ? PropertyElementRender.favorite.button : PropertyElementRender.usial.button}
+        className={detailPage ? PropertyElementRender.FAVORITE.button : PropertyElementRender.USUAL.button}
         type="button" to={`/login`}
         onClick={
           (evt) => {
@@ -61,8 +66,8 @@ const BookmarkButton = (props) => {
       >
         <svg
           className="place-card__bookmark-icon"
-          width={detailPage ? PropertyElementRender.favorite.svgWidth : PropertyElementRender.usial.svgWidth}
-          height={detailPage ? PropertyElementRender.favorite.svgHeight : PropertyElementRender.usial.svgHeight}
+          width={detailPage ? PropertyElementRender.FAVORITE.svgWidth : PropertyElementRender.USUAL.svgWidth}
+          height={detailPage ? PropertyElementRender.FAVORITE.svgHeight : PropertyElementRender.USUAL.svgHeight}
         >
           <use xlinkHref="#icon-bookmark"></use>
         </svg>

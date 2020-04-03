@@ -28,21 +28,27 @@ const Main = (props) => {
   const offerPlacesCount = offersShow.length;
   const emptyOffers = offerPlacesCount === 0;
 
+  const SortNames = {
+    POPULAR: `Popular`,
+    PRICE_LOW_TO_HIGH: `Price: low to high`,
+    PRICE_HIGH_TO_LOW: `Price: high to low`,
+    TOP_RATED_FIRST: `Top rated first`
+  };
 
   const sortTypes = {
-    [`Popular`]: {
+    [SortNames.POPULAR]: {
       type: `id`,
       directionForward: true
     },
-    [`Price: low to high`]: {
+    [SortNames.PRICE_LOW_TO_HIGH]: {
       type: `price`,
       directionForward: true
     },
-    [`Price: high to low`]: {
+    [SortNames.PRICE_HIGH_TO_LOW]: {
       type: `price`,
       directionForward: false
     },
-    [`Top rated first`]: {
+    [SortNames.TOP_RATED_FIRST]: {
       type: `rate`,
       directionForward: false
     }
@@ -56,10 +62,6 @@ const Main = (props) => {
       sortOffersReverse(type);
     }
   };
-
-  // const redirectOffer = (id) => {
-  //   history.push(`/offer/${id}`);
-  // };
 
   return (
     <React.Fragment>
@@ -92,7 +94,6 @@ const Main = (props) => {
                   </form>
                   <ApartmentList
                     offersShow={offersShow}
-                    // onApartmentCardClick={redirectOffer}
                     onCardHover={onCardHover}
                   />
                 </section>

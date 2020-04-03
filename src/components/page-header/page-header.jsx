@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import UserProfile from "../user-profile/user-profile.jsx";
 
-const PageHeader = (props) => {
+const PageHeader = () => {
   return (
     <header className="header">
       <div className="container">

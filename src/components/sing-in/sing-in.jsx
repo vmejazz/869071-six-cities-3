@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import {Link} from "react-router-dom";
-// import UserProfile from "../user-profile/user-profile.jsx";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {getUser, getStatusRequestModal} from "../../reducer/user/selectors.js";
@@ -39,13 +37,11 @@ const SingIng = (props) => {
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
                   <input className="login__input form__input" type="email" name="email" placeholder="Email" required
-                    // onChange={this.onChangeLogin}
                   />
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">Password</label>
                   <input className="login__input form__input" type="password" name="password" placeholder="Password" required
-                    // onChange={this.onChangePassword}
                   />
                 </div>
                 <button className="login__submit form__submit button" type="submit">

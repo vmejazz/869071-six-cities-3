@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 
 const Reviews = (props) => {
-  const {reviews = [], commentPostError} = props;
-  console.log(commentPostError);
-
+  const {reviews = []} = props;
 
   return (
     <section className="property__reviews reviews">
@@ -13,7 +11,6 @@ const Reviews = (props) => {
       <ReviewsList
         reviews={reviews}
       />
-
       <form className="reviews__form form" action="#" method="post">
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">

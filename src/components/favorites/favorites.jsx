@@ -1,6 +1,4 @@
 import React, {PureComponent} from "react";
-// import UserProfile from "../user-profile/user-profile.jsx";
-// import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/data/data.js";
 import {getOffersFavorite, getCityesFavorite} from "../../reducer/data/selectors.js";
@@ -18,12 +16,6 @@ class Favorites extends PureComponent {
     loadFavorites();
   }
 
-  componentDidUpdate() {
-    // const {loadFavorites} = this.props;
-    // loadFavorites();
-  }
-
-  // loadFavorites();
   render() {
     const {offersFavorite, cityesFavorite} = this.props;
 
@@ -34,8 +26,8 @@ class Favorites extends PureComponent {
         <PageHeader />
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
-            {isEmptyList ?
-              <FavoritesEmpty />
+            {isEmptyList
+              ? <FavoritesEmpty />
               : <section className="favorites">
                 <h1 className="favorites__title">Saved listing</h1>
                 <FavoritesList
@@ -66,11 +58,6 @@ Favorites.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  // activeCity: state.DATA.activeCity,
-  // hoverCardId: state.DATA.hoverCardId,
-  // userInfo: getUser(state),
-  // cityes: getCityes(state),
-  // offersShow: getOffersShow(state),
   offersFavorite: getOffersFavorite(state),
   cityesFavorite: getCityesFavorite(state),
 });

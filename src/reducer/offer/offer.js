@@ -1,5 +1,4 @@
 import {extend} from "../utils.js";
-// import ParseData from "../data/parse-data.js";
 
 const initialState = {
   reviews: []
