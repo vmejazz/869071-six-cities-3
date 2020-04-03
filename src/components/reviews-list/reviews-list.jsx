@@ -23,7 +23,7 @@ class ReviewsList extends PureComponent {
     const {offerId: nextOfferId} = nextProps;
 
     if (nextOfferId !== oldOfferId) {
-      getReviews(nextOfferId);
+      getReviews(oldOfferId);
     }
   }
 
