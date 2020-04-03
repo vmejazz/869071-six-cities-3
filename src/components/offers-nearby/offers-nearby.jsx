@@ -21,7 +21,7 @@ class OffersNearby extends PureComponent {
     const {activeOfferId: oldId} = this.props;
 
     if (oldId !== nextId) {
-      loadNearby(nextId);
+      loadNearby(oldId);
       window.scrollTo(0, 0);
     }
   }
