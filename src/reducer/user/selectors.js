@@ -7,5 +7,18 @@ export const getAuthorizationStatus = (state) => {
 };
 
 export const getStatusRequestModal = (state) => {
-  return state.USER.showRequestModal;
+  return state[NAME_SPACE].showRequestModal;
+};
+
+export const getUser = (state) => {
+  return state[NAME_SPACE];
+};
+
+
+export const getAutorisationStatus = (state) => {
+  return state[NAME_SPACE].authorizationStatus;
+};
+
+export const getCheckedStatus = (state) => {
+  return state[NAME_SPACE].isCheckedStatus;
 };

@@ -8,7 +8,7 @@ import CityList from "../city-list/city-list.jsx";
 import EmptyOffers from "../empty-offers/empty-offers.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import withActiveItem from "../../hocs/withActiveItem.jsx";
-import {getCityes, getOffersShow} from "../selectors.js";
+import {getCityes, getOffersShow} from "../../reducer/data/selectors.js";
 import PageHeader from "../page-header/page-header.jsx";
 
 const SortOptionsWrapped = withActiveItem(SortOptions);

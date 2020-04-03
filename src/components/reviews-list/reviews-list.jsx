@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import ReviewsItem from "../reviews-tem/reviews-item.jsx";
 import {connect} from "react-redux";
-import {getComments} from "../selectors.js";
+import {getComments} from "../../reducer/offer/selectors.js";
 import {Operation} from "../../reducer/data/data.js";
 import {getCommentPostStatus} from "../../reducer/data/selectors.js";
 import {ActionCreator} from "../../reducer/data/data.js";

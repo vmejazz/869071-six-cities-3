@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {getUser} from "../selectors.js";
+import {getUser} from "../../reducer/user/selectors.js";
 
 const UserProfile = (props) => {
   const {userInfo} = props;

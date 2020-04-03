@@ -3,7 +3,7 @@ import React, {PureComponent} from "react";
 // import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/data/data.js";
-import {getOffersFavorite, getCityesFavorite} from "../selectors.js";
+import {getOffersFavorite, getCityesFavorite} from "../../reducer/data/selectors.js";
 import FavoritesList from "../favorites-list/favorites-list.jsx";
 import PropTypes from "prop-types";
 import FavoritesEmpty from "../favorites-empty/favorites-empty.jsx";

@@ -1,5 +1,5 @@
 import React from "react";
-import {getUser} from "../selectors.js";
+import {getUser} from "../../reducer/user/selectors.js";
 import {Operation as OperationData} from "../../reducer/data/data.js";
 import {Operation as OperationUser, AuthorizationStatus} from "../../reducer/user/user.js";
 import {connect} from "react-redux";

@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 // import UserProfile from "../user-profile/user-profile.jsx";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {getUser} from "../selectors.js";
-import {getStatusRequestModal} from "../../reducer/user/selectors.js";
+import {getUser, getStatusRequestModal} from "../../reducer/user/selectors.js";
 import {Operation as OperationUser} from "../../reducer/user/user.js";
 import PageHeader from "../page-header/page-header.jsx";
 

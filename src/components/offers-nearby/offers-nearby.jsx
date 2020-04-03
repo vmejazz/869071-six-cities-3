@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import ApartmentList from "../apartment-list/apartment-list.jsx";
 import {Operation} from "../../reducer/data/data.js";
-import {getOffersNearby} from "../selectors.js";
+import {getOffersNearby} from "../../reducer/data/selectors.js";
 
 class OffersNearby extends PureComponent {
 
