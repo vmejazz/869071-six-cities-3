@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FavoritesList /> should render favorites list  1`] = `
+<ul
+  className="favorites__list"
+>
+  <li
+    className="favorites__locations-items"
+  >
+    <div
+      className="favorites__locations locations locations--current"
+    >
+      <div
+        className="locations__item"
+      >
+        <a
+          className="locations__item-link"
+          href="/"
+          onClick={[Function]}
+        >
+          <span>
+            Dusseldorf
+          </span>
+        </a>
+      </div>
+    </div>
+    <ApartmentList
+      isFavoriteList={true}
+      offersShow={
+        Array [
+          Object {
+            "apartmentStuff": Array [
+              "Breakfast",
+              "Laptop friendly workspace",
+              "Washer",
+            ],
+            "bedrooms": 3,
+            "city": "Dusseldorf",
+            "description": "Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.",
+            "favorite": true,
+            "id": 12,
+            "maxGuests": 8,
+            "ownerInfo": Object {
+              "id": 25,
+              "name": "Angelina",
+              "srcAvatar": "img/avatar-angelina.jpg",
+              "super": true,
+            },
+            "position": Array [
+              51.211402,
+              6.756314000000001,
+            ],
+            "premium": true,
+            "price": 405,
+            "rate": 3.8,
+            "srcGallery": Array [
+              "https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/12.jpg",
+            ],
+            "srcImg": "https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/2.jpg",
+            "title": "House in countryside",
+            "type": "house",
+          },
+          Object {
+            "apartmentStuff": Array [
+              "Laptop friendly workspace",
+              "Breakfast",
+            ],
+            "bedrooms": 3,
+            "city": "Dusseldorf",
+            "description": "Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.",
+            "favorite": true,
+            "id": 4,
+            "maxGuests": 8,
+            "ownerInfo": Object {
+              "id": 25,
+              "name": "Angelina",
+              "srcAvatar": "img/avatar-angelina.jpg",
+              "super": true,
+            },
+            "position": Array [
+              51.216402,
+              6.758314,
+            ],
+            "premium": false,
+            "price": 185,
+            "rate": 2.9,
+            "srcGallery": Array [],
+            "srcImg": "https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/13.jpg",
+            "title": "Canal View Prinsengracht",
+            "type": "hotel",
+          },
+        ]
+      }
+      onCardHover={[Function]}
+    />
+  </li>
+  <li
+    className="favorites__locations-items"
+  >
+    <div
+      className="favorites__locations locations locations--current"
+    >
+      <div
+        className="locations__item"
+      >
+        <a
+          className="locations__item-link"
+          href="/"
+          onClick={[Function]}
+        >
+          <span>
+            Amsterdam
+          </span>
+        </a>
+      </div>
+    </div>
+    <ApartmentList
+      isFavoriteList={true}
+      offersShow={Array []}
+      onCardHover={[Function]}
+    />
+  </li>
+  <li
+    className="favorites__locations-items"
+  >
+    <div
+      className="favorites__locations locations locations--current"
+    >
+      <div
+        className="locations__item"
+      >
+        <a
+          className="locations__item-link"
+          href="/"
+          onClick={[Function]}
+        >
+          <span>
+            Cologne
+          </span>
+        </a>
+      </div>
+    </div>
+    <ApartmentList
+      isFavoriteList={true}
+      offersShow={Array []}
+      onCardHover={[Function]}
+    />
+  </li>
+</ul>
+`;

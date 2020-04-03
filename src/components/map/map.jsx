@@ -2,17 +2,18 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {getCityes, gethoverCardId} from "../../reducer/data/selectors.js";
 class Map extends PureComponent {
   constructor(props) {
     super(props);
 
     this.icons = {
       iconBlue: leaflet.icon({
-        iconUrl: `img/pin.svg`,
+        iconUrl: `/img/pin.svg`,
         iconSize: [30, 45]
       }),
       iconYellow: leaflet.icon({
-        iconUrl: `img/pin-active.svg`,
+        iconUrl: `/img/pin-active.svg`,
         iconSize: [30, 45]
       })
     };
@@ -21,7 +22,7 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offersShow, cityes, activeCity} = this.props;
+    const {offersShow = [], cityes, activeCity} = this.props;
     const {iconBlue} = this.icons;
     const myMap = this.myMap = leaflet.map(`mapId`, {
       zoomControl: false,
@@ -48,7 +49,8 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {activeCity, cityes, offersShow, hoverCardId} = this.props;
+    const {activeCity, cityes, offersShow, isDetail, isDetailHoverId} = this.props;
+    let {hoverCardId} = this.props;
     const {iconBlue, iconYellow} = this.icons;
     const activeCityPosition = cityes[activeCity];
 
@@ -68,6 +70,8 @@ class Map extends PureComponent {
       );
     });
 
+    hoverCardId = isDetail ? isDetailHoverId : hoverCardId;
+
     const offerHovered = offersShow.find((item) => {
       return item.id === hoverCardId;
     });
@@ -83,8 +87,13 @@ class Map extends PureComponent {
   }
 
   render() {
+    const {isDetail} = this.props;
+
+    let mapClassName = isDetail ? `property__map map` : `cities__map map`;
+    let mapStyle = isDetail ? {width: `1145px`, marginLeft: `auto`, marginRight: `auto`, display: `block`} : {};
+
     return (
-      <section className="cities__map map" id="mapId"></section>
+      <section className={mapClassName} style={mapStyle} id="mapId"></section>
     );
   }
 }
@@ -110,7 +119,7 @@ Map.propTypes = {
     }),
     position: PropTypes.arrayOf(PropTypes.number).isRequired,
     city: PropTypes.string.isRequired
-  })).isRequired,
+  })),
   cityes: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({
@@ -120,11 +129,14 @@ Map.propTypes = {
     })
   ]),
   activeCity: PropTypes.string.isRequired,
-  hoverCardId: PropTypes.number
+  hoverCardId: PropTypes.number,
+  isDetail: PropTypes.bool,
+  isDetailHoverId: PropTypes.number
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.DATA.activeCity
+  cityes: getCityes(state),
+  hoverCardId: gethoverCardId(state)
 });
 
 export {Map};

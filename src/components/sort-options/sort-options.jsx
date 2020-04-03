@@ -35,17 +35,9 @@ const SortOptions = (props) => {
             </li>
           );
         })}
-        {/* <li tabIndex={0} className="places__option places__option--active">Popular</li> */}
       </ul>
-      {/* <select className="places__sorting-type" id="places-sorting">
-        <option className="places__option" value="popular" selected>Popular</option>
-        <option className="places__option" value="to-high">Price: low to high</option>
-        <option className="places__option" value="to-low">Price: high to low</option>
-        <option className="places__option" value="top-rated">Top rated first</option>
-      </select> */}
     </React.Fragment>
   );
-
 };
 
 SortOptions.propTypes = {

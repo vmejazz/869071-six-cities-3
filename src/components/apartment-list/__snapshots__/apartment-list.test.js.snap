@@ -1,3 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test Apartment list <ApartmentList /> should render list 1`] = `<h1 />`;
+exports[`Test Apartment list <ApartmentList /> should render list 1`] = `
+<div
+  className="cities__places-list places__list tabs__content"
+>
+  <ApartmentCard
+    isFavoriteList={false}
+    placeOffer={
+      Object {
+        "apartmentStuff": Array [],
+        "bedrooms": 1,
+        "city": "",
+        "description": "",
+        "id": 1,
+        "maxGuests": 1,
+        "ownerInfo": Object {
+          "name": "",
+          "srcAvatar": "",
+          "super": true,
+        },
+        "position": Array [
+          1,
+          1,
+        ],
+        "premium": true,
+        "price": 120,
+        "rate": 1,
+        "srcGallery": Array [],
+        "srcImg": "",
+        "title": "",
+        "type": "",
+      }
+    }
+  />
+</div>
+`;

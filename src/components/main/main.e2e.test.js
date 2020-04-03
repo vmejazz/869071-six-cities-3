@@ -1,54 +1,74 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-// import {Main} from "./main.jsx";
-jest.mock(`../map/map.jsx`);
+import {Main} from "./main.jsx";
 
 Enzyme.configure({
   adapter: new Adapter()
 });
 
-// const offersArray = [
-//   {
-//     id: 3,
-//     price: 777,
-//     title: `Title of apartment`,
-//     srcGallery: [],
-//     bedrooms: 2,
-//     maxGuests: 5,
-//     position: []
-//   }
-// ];
+const offersArray = [
+  {
+    id: 3,
+    price: 777,
+    title: `Title of apartment`,
+    srcGallery: [],
+    bedrooms: 2,
+    maxGuests: 5,
+    position: []
+  }
+];
 
-// const userInfo = {
-//   authorizationStatus: `AUTH`
-// };
+const sortParam = `Price: low to high`;
+const sortDirectionForward = true;
 
-// const cityes = {
-//   AMSTERDAM: [52.38333, 4.9]
-// };
+const userInfo = {
+  authorizationStatus: `AUTH`
+};
+
+const cityes = {
+  AMSTERDAM: [52.38333, 4.9]
+};
+
+const activeCity = `Moscow`;
 
 it(`Should button be pressed`, () => {
-  const onApartmentCardClick = jest.fn();
+  const changeCity = jest.fn();
 
   const mainScreen = shallow(
-      <h1 onClick={onApartmentCardClick}></h1>
-      // <Main
-      //   activeCity={`Moscow`}
-      //   offersArray={offersArray}
-      //   onApartmentCardClick={onApartmentCardClick}
-      //   cityes={cityes}
-      //   userInfo={userInfo}
-      // />
+      <Main
+        activeCity={activeCity}
+        offersShow={offersArray}
+        changeCity={changeCity}
+        cityes={cityes}
+        userInfo={userInfo}
+      />
   );
+  const cityNavigation = mainScreen.find(`CityList`);
+  cityNavigation.props().changeCity(activeCity);
 
-  // const titleLink = mainScreen.find(`ApartmentList`);
-  const link = mainScreen.find(`h1`);
+  expect(changeCity.mock.calls.length).toBe(1);
+  expect(changeCity).toHaveBeenCalledWith(`Moscow`);
+});
 
-  link.simulate(`click`);
 
-  // titleLink.props().onApartmentCardClick();
+it(`Should sort button be pressed`, () => {
+  const onSortOptionsClick = jest.fn();
+  const sortOffersDirect = jest.fn();
 
-  expect(onApartmentCardClick.mock.calls.length).toBe(1);
-  // expect(onApartmentCardClick).toHaveBeenCalledWith(3);
+  const mainScreen = shallow(
+      <Main
+        activeCity={activeCity}
+        offersShow={offersArray}
+        onSortOptionsClick={onSortOptionsClick}
+        cityes={cityes}
+        userInfo={userInfo}
+        sortOffersDirect={sortOffersDirect}
+      />
+  );
+  const SortOptionElement = mainScreen.find(`WithActiveItem`);
+  SortOptionElement.props().onSortOptionsClick(sortParam, sortDirectionForward);
+
+  expect(sortOffersDirect.mock.calls.length).toBe(1);
+  expect(sortOffersDirect).toHaveBeenCalledWith(`price`);
 });

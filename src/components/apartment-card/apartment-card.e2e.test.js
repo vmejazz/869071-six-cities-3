@@ -1,7 +1,9 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import ApartmentCard from "./apartment-card.jsx";
+import {ApartmentCard} from "./apartment-card.jsx";
+import customHistory from "../../history.js";
+import {Router} from "react-router-dom";
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -12,41 +14,22 @@ const placeOffer = {
   title: `Best Apartment`
 };
 
-describe(``, () => {
-  it(`Should button be pressed and retern ID card`, () => {
-    const onApartmentCardClick = jest.fn();
 
-    const tree = shallow(
-        <ApartmentCard
-          placeOffer={placeOffer}
-          onApartmentCardClick={onApartmentCardClick}
-        />
-    );
+it(`Should change ActideCardID when mouse hover and leave on card`, () => {
+  const onCardHover = jest.fn();
 
-    const apartmentArticle = tree.find(`.place-card`);
-
-    apartmentArticle.props().onClick();
-
-    expect(onApartmentCardClick).toHaveBeenCalledWith(5);
-  });
-
-  it(`Should change ActideCardID when mouse hover and leave on card`, () => {
-    const onCardHover = jest.fn();
-
-    const tree = shallow(
+  const tree = shallow(
+      <Router history={customHistory}>
         <ApartmentCard
           placeOffer={placeOffer}
           onCardHover={onCardHover}
         />
-    );
+      </Router>
+  );
+  const apartmentArticle = tree.find(`ApartmentCard`);
 
-    const apartmentArticle = tree.find(`.place-card`);
-
-    apartmentArticle.props().onMouseEnter();
-    expect(onCardHover).toHaveBeenCalledWith(5);
-
-    apartmentArticle.props().onMouseLeave();
-    expect(onCardHover).toHaveBeenCalledWith(-1);
-  });
+  apartmentArticle.props().onCardHover(placeOffer.id);
+  expect(onCardHover).toHaveBeenCalledWith(5);
 });
+
 

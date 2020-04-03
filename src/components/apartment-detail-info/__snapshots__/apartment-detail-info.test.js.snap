@@ -1,3 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ApartmentDetailInfo /> should render apartment-detail-info page  1`] = `<h1 />`;
+exports[`<ApartmentDetailInfo /> should render apartment-detail-info page  1`] = `
+Array [
+  <h1
+    style={
+      Object {
+        "fontSize": "28px",
+        "marginTop": "80px",
+        "textAlign": "center",
+      }
+    }
+  >
+    404
+  </h1>,
+  <h3
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    Page not found
+  </h3>,
+  <p
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    There's nothing here.
+    <br />
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      Try tu push this
+    </a>
+  </p>,
+]
+`;

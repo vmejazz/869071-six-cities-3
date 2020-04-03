@@ -1,36 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test render App component <App /> should render page 1`] = `
-<ApartmentDetailInfo
-  offer={
-    Object {
-      "apartmentStuff": Array [
-        "wifi",
-        "Cable TV",
-        "Kitchen",
-      ],
-      "bedrooms": 3,
-      "city": "Cologne",
-      "description": "",
-      "id": 2,
-      "maxGuests": 4,
-      "ownerInfo": Object {
-        "name": "Jon",
-        "srcAvatar": "img/avatar-max.jpg",
-        "super": true,
-      },
-      "position": Array [
-        50.938014,
-        6.958104,
-      ],
-      "premium": false,
-      "price": 200,
-      "rate": 1,
-      "srcGallery": Array [],
-      "srcImg": "img/apartment-02.jpg",
-      "title": "Perfect apartment",
-      "type": "House",
+Array [
+  <h1
+    style={
+      Object {
+        "fontSize": "28px",
+        "marginTop": "80px",
+        "textAlign": "center",
+      }
     }
-  }
-/>
+  >
+    Приложение загружается ...
+  </h1>,
+  <div>
+    <svg
+      display="block"
+      height="200"
+      preserveAspectRatio="xMidYMid"
+      style={
+        Object {
+          "margin": "auto",
+        }
+      }
+      viewBox="0 0 100 100"
+      width="200"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="50"
+        cy="50"
+        fill="none"
+        r="35"
+        stroke="#99adba"
+        strokeDasharray="164.93361431346415 56.97787143782138"
+        strokeWidth="10"
+        transform="rotate(99.747 50 50)"
+      >
+        <animateTransform
+          attributeName="transform"
+          dur="1s"
+          keyTimes="0;1"
+          repeatCount="indefinite"
+          type="rotate"
+          values="0 50 50;360 50 50"
+        />
+      </circle>
+    </svg>
+  </div>,
+]
 `;

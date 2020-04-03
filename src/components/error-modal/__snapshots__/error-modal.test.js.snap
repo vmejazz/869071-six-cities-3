@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ErrorModal /> should render  1`] = `
+<div
+  onClick={[Function]}
+  style={
+    Object {
+      "background": "rgba(0,0,0,0.8)",
+      "bottom": "0",
+      "left": "0",
+      "position": "fixed",
+      "right": "0",
+      "top": "0",
+      "transition": "opacity 400ms ease-in",
+      "zIndex": "99999",
+    }
+  }
+>
+  <p
+    style={
+      Object {
+        "background": "#fff",
+        "borderRadius": "10px",
+        "display": "block",
+        "fontSize": "28px",
+        "height": "100px",
+        "margin": "10% auto",
+        "padding": "5px 20px 13px 20px",
+        "paddingTop": "50px",
+        "position": "relative",
+        "textAlign": "center",
+        "width": "400px",
+      }
+    }
+  >
+    Возникла сетевая ошибка
+  </p>
+</div>
+`;

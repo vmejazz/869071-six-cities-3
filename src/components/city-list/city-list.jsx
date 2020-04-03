@@ -1,14 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CityItem from "../city-item/city-item.jsx";
-import {connect} from "react-redux";
-import {getCityes} from "../selectors.js";
 
 const MAX_CITYES = 6;
 
 const CityList = (props) => {
-  // console.log(props);
-
   const {cityes, changeCity, activeCity} = props;
   const cityesArray = Object.keys(cityes).slice(0, MAX_CITYES);
 
@@ -42,9 +38,4 @@ CityList.propTypes = {
   activeCity: PropTypes.string.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  cityes: getCityes(state)
-});
-
-export {CityList};
-export default connect(mapStateToProps)(CityList);
+export default CityList;

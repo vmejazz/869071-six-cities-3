@@ -2,16 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {createStore, applyMiddleware, compose} from "redux";
 import {Provider} from "react-redux";
-import reducer from "./reducer/reducer.jsx";
+import reducer from "./reducer/reducer.js";
 import thunk from "redux-thunk";
 import App from "./components/app/app.jsx";
 import {createAPI} from "./api.js";
-import {Operation as DataOperation} from "./reducer/data/data.jsx";
-import {Operation as UserOperation} from "./reducer/user/user.jsx";
+import {Operation as DataOperation} from "./reducer/data/data.js";
+import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
 
-const api = createAPI(() => {
-  store.dispatch();
-});
+const onUnauthorized = () => {
+  store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+};
+
+const onBadRequest = () => {
+  store.dispatch(ActionCreator.toggleRequestModal(true));
+};
+
+const api = createAPI(onUnauthorized, onBadRequest);
 
 const store = createStore(
     reducer,
@@ -21,16 +27,8 @@ const store = createStore(
     )
 );
 
-store.dispatch(DataOperation.loadOffers());
 store.dispatch(UserOperation.checkAuth());
-store.dispatch(UserOperation.getOffersFavorite());
-// setTimeout(() => {
-//   console.log(store.getState());
-// }, 1500);
-
-// store.dispatch(UserOperation.login(
-//     {email: `pop@gmail.com`, password: `123`}
-// ));
+store.dispatch(DataOperation.loadOffers());
 
 ReactDOM.render(
     <Provider store={store}>

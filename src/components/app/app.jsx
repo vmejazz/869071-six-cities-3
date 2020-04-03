@@ -1,76 +1,61 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Router, Route, Switch, Redirect} from "react-router-dom";
+import {Route, Switch, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator as ActionCreatorData} from "../../reducer/data/data.jsx";
-import {Operation as OperationUser} from "../../reducer/user/user.jsx";
+import {ActionCreator as ActionCreatorData} from "../../reducer/data/data.js";
+import {Operation as OperationUser} from "../../reducer/user/user.js";
 import Main from "../main/main.jsx";
 import SingIng from "../sing-in/sing-in.jsx";
 import ApartmentDetailInfo from "../apartment-detail-info/apartment-detail-info.jsx";
-import {getOffers, getOffersShow, getUser, getCityes} from "../selectors.js";
+import {getOffers} from "../../reducer/data/selectors.js";
+import {getCheckedStatus} from "../../reducer/user/selectors.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import Favorites from "../favorites/favorites.jsx";
-import customHistory from "../../history.js";
+import LoadingPage from "../loading-page/loading-page.jsx";
+import PageNotFound from "../page-not-found/page-not-forund.jsx";
 
 const App = (props) => {
-  const {offers, offersShow, cityes, openOffer, activeOfferId, userInfo} = props;
+  const {
+    offers,
+    isCheckedStatus
+  } = props;
 
-  const _renderApp = () => {
-
-    if (userInfo.bookmarksRequired === true && userInfo.authorizationStatus === `NO_AUTH`) {
-      return (
-        <Redirect to="/login" />
-      );
-    }
-    if (offers.length < 1) {
-      return (
-        <h2 style={{textAlign: `center`, marginTop: `50px`, fontSize: `28px`}}>
-          Предложения загружаются...
-        </h2>
-      );
-    }
-    if (activeOfferId < 1 && offers.length >= 1) {
-      return (
-        <Main
-          offerPlacesCount={offersShow.length}
-          offersShow={offersShow}
-          onApartmentCardClick={openOffer}
-          cityes={cityes}
-        />
-      );
-    } else {
-      return (
-        <ApartmentDetailInfo
-          offer={offersShow.find((item) => item.id === activeOfferId)}
-        />
-      );
-    }
-  };
-
-  return (
-
-    <Router history={customHistory}>
-      <Switch>
-        <Route exact path="/">
-          {_renderApp()}
-          {/* <Main
-            offerPlacesCount={offersShow.length}
-            offersShow={offersShow}
-            onApartmentCardClick={openOffer}
-            cityes={cityes}
-          /> */}
-        </Route>
-        <PrivateRoute exact path="/favorites" component={Favorites} />
-        {/* <Route exact path="/login" >
-          <SingIng />
-        </Route> */}
-        <Route exact path="/login" component={SingIng} />
-        <Route path="/offer">
-          {/* <ApartmentDetailInfo offer={offer} /> */}
-        </Route>
-      </Switch>
-    </Router>
-  );
+  if (offers.length < 1 || !isCheckedStatus) {
+    return (
+      <LoadingPage />
+    );
+  } else {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Main}>
+          </Route>
+          <Route exact path="/login" component={SingIng} />
+          <PrivateRoute
+            exact
+            path="/favorites"
+            render={() => {
+              return (
+                <Favorites />
+              );
+            }}
+          />
+          <Route path="/offer/:id?" render={
+            (routeProps) =>
+              <ApartmentDetailInfo
+                activeOfferId={routeProps.match.params.id}
+                history={routeProps}
+                offers={offers}
+              />
+          }>
+          </Route>
+          <Route >
+            <PageNotFound />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 };
 
 App.propTypes = {
@@ -95,7 +80,7 @@ App.propTypes = {
       zoom: PropTypes.number
     })
   ]),
-  activeOfferId: PropTypes.number.isRequired,
+  activeOfferId: PropTypes.number,
   openOffer: PropTypes.func,
   getOffers: PropTypes.func,
   loginIn: PropTypes.func,
@@ -103,17 +88,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  // pop: getOffersShow,
-  // offers: state.DATA.offers,
   offers: getOffers(state),
-  // activeCity: state.activeCity,
-  activeOfferId: state.DATA.activeOfferId,
-  // offers: state.offers,
-  // offersShow: state.DATA.offersShow,
-  offersShow: getOffersShow(state),
-  // cityes: state.DATA.cityes,
-  cityes: getCityes(state),
-  userInfo: getUser(state)
+  isCheckedStatus: getCheckedStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -132,11 +108,6 @@ const mapDispatchToProps = (dispatch) => ({
         OperationUser.loginIn(loginInfo)
     );
   }
-  // parseCityes(offers) {
-  //   dispatch(
-  //       ActionCreatorData.parseCityes(offers)
-  //   );
-  // }
 });
 
 export {App};

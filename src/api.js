@@ -2,12 +2,13 @@ import axios from "axios";
 
 const ErrorMap = {
   NOT_FOUND: 404,
-  UNAUTHORIZED: 401
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 400
 };
 
 const SUCCESS_CODE = 200;
 
-const createAPI = () => {
+const createAPI = (onUnauthorized, onBadRequest) => {
   const api = axios.create({
     baseURL: `https://htmlacademy-react-3.appspot.com/six-cities`,
     timeout: 5000,
@@ -23,14 +24,15 @@ const createAPI = () => {
   };
 
   const onFail = (err) => {
-    const {response} = err;
-
+    const {response = ``} = err;
     switch (response.status) {
       case ErrorMap.NOT_FOUND:
-        break;
+        throw err;
       case ErrorMap.UNAUTHORIZED:
-        break;
-      default:
+        onUnauthorized();
+        throw err;
+      case ErrorMap.BAD_REQUEST:
+        onBadRequest();
         throw err;
     }
     throw err;

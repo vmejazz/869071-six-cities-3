@@ -1,21 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ApartmentCard from "../apartment-card/apartment-card.jsx";
-import {connect} from "react-redux";
-import {getOffersShow} from "../selectors.js";
 
 const ApartmentList = (props) => {
-  const {offersShow, onApartmentCardClick, onCardHover} = props;
+  const {offersShow = [], isFavoriteList = false} = props;
+  const listClassName = isFavoriteList ? `favorites__places` : `cities__places-list places__list tabs__content`;
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={listClassName}>
       {offersShow.map((item) => {
         return (
           <ApartmentCard
             key={item.id}
             placeOffer={item}
-            onApartmentCardClick={onApartmentCardClick}
-            onCardHover={onCardHover}
+            isFavoriteList={isFavoriteList}
           />
         );
       })}
@@ -42,17 +40,9 @@ ApartmentList.propTypes = {
       super: PropTypes.bool,
       srcAvatar: PropTypes.string
     }),
-    position: PropTypes.arrayOf(PropTypes.number).isRequired
-  })).isRequired,
-  onApartmentCardClick: PropTypes.func,
-  onCardHover: PropTypes.func
+    position: PropTypes.arrayOf(PropTypes.number)
+  })),
+  isFavoriteList: PropTypes.bool
 };
 
-const mapStateToProps = (state) => ({
-  offersShow: getOffersShow(state)
-});
-
-export {ApartmentList};
-export default connect(mapStateToProps)(ApartmentList);
-
-
+export default ApartmentList;

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {getUser} from "../selectors.js";
+import {getUser} from "../../reducer/user/selectors.js";
 
 const UserProfile = (props) => {
   const {userInfo} = props;
@@ -26,13 +26,23 @@ const UserProfile = (props) => {
 };
 
 UserProfile.propTypes = {
-  userInfo: PropTypes.object
+  userInfo: PropTypes.shape({
+    authorizationStatus: PropTypes.string,
+    bookmarksRequired: PropTypes.bool,
+    setCheckedStatus: PropTypes.bool,
+    showRequestModal: PropTypes.bool,
+    isCheckedStatus: PropTypes.bool,
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatarUrl: PropTypes.string,
+    isPro: PropTypes.bool
+  })
 };
 
 const mapStateToProps = (state) => ({
   userInfo: getUser(state)
 });
-
 
 export {UserProfile};
 export default connect(mapStateToProps)(UserProfile);
