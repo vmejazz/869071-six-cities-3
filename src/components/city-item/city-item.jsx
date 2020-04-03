@@ -9,7 +9,7 @@ const CityItem = (props) => {
     <li className="locations__item" onClick={() => onCityClick(city)}>
       <a
         className={`locations__item-link tabs__item ${activeClass ? `tabs__item--active` : ``}`}
-        href=""
+        href="#"
       >
         <span>
           {city}

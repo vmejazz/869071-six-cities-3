@@ -130,7 +130,8 @@ Map.propTypes = {
   ]),
   activeCity: PropTypes.string.isRequired,
   hoverCardId: PropTypes.number,
-  isDetail: PropTypes.bool
+  isDetail: PropTypes.bool,
+  isDetailHoverId: PropTypes.number
 };
 
 const mapStateToProps = (state) => ({

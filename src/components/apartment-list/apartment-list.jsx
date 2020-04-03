@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ApartmentCard from "../apartment-card/apartment-card.jsx";
-import {ActionCreator} from "../../reducer/data/data.js";
-import {connect} from "react-redux";
 
 const ApartmentList = (props) => {
-  const {offersShow = [], onApartmentCardClick, onCardHover, isFavoriteList = false} = props;
+  const {offersShow = [], isFavoriteList = false} = props;
   const listClassName = isFavoriteList ? `favorites__places` : `cities__places-list places__list tabs__content`;
 
   return (
@@ -15,8 +13,6 @@ const ApartmentList = (props) => {
           <ApartmentCard
             key={item.id}
             placeOffer={item}
-            onApartmentCardClick={onApartmentCardClick}
-            onCardHover={onCardHover}
             isFavoriteList={isFavoriteList}
           />
         );
@@ -46,18 +42,7 @@ ApartmentList.propTypes = {
     }),
     position: PropTypes.arrayOf(PropTypes.number)
   })),
-  onApartmentCardClick: PropTypes.func,
-  onCardHover: PropTypes.func,
   isFavoriteList: PropTypes.bool
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onCardHover(id) {
-    dispatch(
-        ActionCreator.onCardHover(id)
-    );
-  },
-});
-
-export {ApartmentList};
-export default connect(null, mapDispatchToProps)(ApartmentList);
+export default ApartmentList;

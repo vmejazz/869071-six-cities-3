@@ -4,5 +4,6 @@ exports[`Map render 1`] = `
 <section
   className="cities__map map"
   id="mapId"
+  style={Object {}}
 />
 `;

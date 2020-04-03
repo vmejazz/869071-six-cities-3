@@ -12,15 +12,13 @@ const AuthorizationStatus = {
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  bookmarksRequired: false,
-  setCheckedStatus: false,
+  isCheckedStatus: false,
   showRequestModal: false
 };
 
 const ActionType = {
   AUTH_INFO: `AUTH_INFO`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-  REQUIRED_BOOKMARKS: `REQUIRED_BOOKMARKS`,
   LOAD_FAVORITES: `LOAD_FAVORITES`,
   IS_CHECKED: `IS_CHECKED`,
   SHOW_REQUEST_MODAL: `SHOW_REQUEST_MODAL`
@@ -39,10 +37,6 @@ const ActionCreator = {
       payload: status,
     };
   },
-  requireBookmarks: (status) => ({
-    type: ActionType.REQUIRED_BOOKMARKS,
-    payload: status
-  }),
   setCheckedStatus: (status) => ({
     type: ActionType.IS_CHECKED,
     payload: status
@@ -98,7 +92,6 @@ const Operation = {
       password: authData.password,
     })
       .then((response) => {
-        dispatch(ActionCreator.requireBookmarks(true));
         dispatch(ActionCreator.setAuthInfo(response));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setCheckedStatus(true));
@@ -114,10 +107,6 @@ const Operation = {
             break;
         }
       });
-  },
-
-  checkBookmarks: () => (dispatch) => {
-    return dispatch(ActionCreator.requireBookmarks(true));
   },
 
   hideRequestModal: () => (dispatch) => {

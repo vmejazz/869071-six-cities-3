@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import ApartmentCard from "./apartment-card.jsx";
+import {ApartmentCard} from "./apartment-card.jsx";
 import customHistory from "../../history.js";
 import {Router} from "react-router-dom";
 jest.mock(`../bookmark-button/bookmark-button.jsx`, () => `BookmarkButton`);

@@ -14,7 +14,17 @@ class ReviewsList extends PureComponent {
 
   componentDidMount() {
     const {getReviews, offerId} = this.props;
+
     getReviews(offerId);
+  }
+
+  componentDidUpdate(nextProps) {
+    const {offerId: oldOfferId, getReviews} = this.props;
+    const {offerId: nextOfferId} = nextProps;
+
+    if (nextOfferId !== oldOfferId) {
+      getReviews(nextOfferId);
+    }
   }
 
   render() {

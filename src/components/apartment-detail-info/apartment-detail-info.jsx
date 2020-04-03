@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
-import {Operation, ActionCreator} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
 import Map from "../map/map.jsx";
 import {getOffersNearby, getOpenOffer} from "../../reducer/data/selectors.js";
@@ -21,10 +20,6 @@ const MAX_IMAGES = 6;
 class ApartmentDetailInfo extends PureComponent {
   constructor(props) {
     super(props);
-  }
-
-  componentDidUpdate() {
-    window.scrollTo(0, 0);
   }
 
   render() {
@@ -74,12 +69,6 @@ class ApartmentDetailInfo extends PureComponent {
                         offerId={id}
                         favorite={favorite}
                       />
-                      {/* <button className="property__bookmark-button button" type="button">
-                      <svg className="property__bookmark-icon" width={31} height={33}>
-                        <use xlinkHref="#icon-bookmark" />
-                      </svg>
-                      <span className="visually-hidden">To bookmarks</span>
-                    </button> */}
                     </div>
                     <div className="property__rating rating">
                       <div className="property__stars rating__stars">
@@ -148,7 +137,6 @@ class ApartmentDetailInfo extends PureComponent {
                   activeCity={city}
                   isDetailHoverId={id}
                 />
-                {/* <section className="property__map map" /> */}
               </section>
               <div className="container">
                 <section className="near-places places">
@@ -169,7 +157,6 @@ class ApartmentDetailInfo extends PureComponent {
   }
 }
 
-
 ApartmentDetailInfo.propTypes = {
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -187,38 +174,18 @@ ApartmentDetailInfo.propTypes = {
     favorite: PropTypes.bool,
     city: PropTypes.string
   }),
-  loadNearby: PropTypes.func,
   activeOfferId: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object),
   offersNearby: PropTypes.arrayOf(PropTypes.object),
-  authorizationStatus: PropTypes.string.isRequired
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, activeOfferId) => ({
-  reviews: state.OFFER.reviews,
   offersNearby: getOffersNearby(state),
   authorizationStatus: getAutorisationStatus(state),
   offer: getOpenOffer(state, activeOfferId),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getReviews(offerId) {
-    dispatch(
-        Operation.getReviews(offerId)
-    );
-  },
-  loadNearby(offerId) {
-    dispatch(
-        Operation.loadNearby(offerId)
-    );
-  },
-  onCardHover(id) {
-    dispatch(
-        ActionCreator.onCardHover(id)
-    );
-  },
-});
-
 export {ApartmentDetailInfo};
-export default connect(mapStateToProps, mapDispatchToProps)(ApartmentDetailInfo);
+export default connect(mapStateToProps, null)(ApartmentDetailInfo);
 

@@ -22,6 +22,7 @@ class OffersNearby extends PureComponent {
 
     if (oldId !== nextId) {
       loadNearby(nextId);
+      window.scrollTo(0, 0);
     }
   }
 

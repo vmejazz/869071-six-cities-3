@@ -18,12 +18,14 @@ exports[`<Main /> should render all page 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
               className="header__logo"
               height="41"
-              src="img/logo.svg"
+              src="/img/logo.svg"
               width="81"
             />
           </a>
@@ -37,13 +39,7 @@ exports[`<Main /> should render all page 1`] = `
             <li
               className="header__nav-item user"
             >
-              <UserProfile
-                userInfo={
-                  Object {
-                    "AuthorizationStatus": "NO_AUTH",
-                  }
-                }
-              />
+              <UserProfile />
             </li>
           </ul>
         </nav>

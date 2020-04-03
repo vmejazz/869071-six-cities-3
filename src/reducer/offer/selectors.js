@@ -16,3 +16,7 @@ export const getComments = (state) => {
 
   return reviews;
 };
+
+export const getReviews = (state) => {
+  return state[NAME_SPACE].reviews;
+};

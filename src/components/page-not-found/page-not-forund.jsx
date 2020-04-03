@@ -11,7 +11,8 @@ const PageNotFound = () => {
         Page not found
       </h3>
       <p style={{textAlign: `center`}}>
-        There's nothing here.<br></br>
+        {`There's nothing here.`}
+        <br></br>
         <Link to="/">
           Try tu push this
         </Link>

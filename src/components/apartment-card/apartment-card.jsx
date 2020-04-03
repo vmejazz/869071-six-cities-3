@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import BookmarkButton from "../bookmark-button/bookmark-button.jsx";
 import {Link} from "react-router-dom";
+import {ActionCreator} from "../../reducer/data/data.js";
+import {connect} from "react-redux";
 
 const ApartmentCard = (props) => {
   const {placeOffer, onCardHover, isFavoriteList} = props;
@@ -89,4 +91,13 @@ ApartmentCard.propTypes = {
   isFavoriteList: PropTypes.bool
 };
 
-export default ApartmentCard;
+const mapDispatchToProps = (dispatch) => ({
+  onCardHover(id) {
+    dispatch(
+        ActionCreator.onCardHover(id)
+    );
+  },
+});
+
+export {ApartmentCard};
+export default connect(null, mapDispatchToProps)(ApartmentCard);

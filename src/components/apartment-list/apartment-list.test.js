@@ -1,9 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {ApartmentList} from "./apartment-list.jsx";
+import ApartmentList from "./apartment-list.jsx";
 import customHistory from "../../history.js";
 import {Router} from "react-router-dom";
 jest.mock(`../bookmark-button/bookmark-button.jsx`, () => `BookmarkButton`);
+jest.mock(`../apartment-card/apartment-card.jsx`, () => `ApartmentCard`);
 
 const offersShow = [
   {

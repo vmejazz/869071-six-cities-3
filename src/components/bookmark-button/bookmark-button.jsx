@@ -1,13 +1,13 @@
 import React from "react";
 import {getUser} from "../../reducer/user/selectors.js";
 import {Operation as OperationData} from "../../reducer/data/data.js";
-import {Operation as OperationUser, AuthorizationStatus} from "../../reducer/user/user.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 const BookmarkButton = (props) => {
-  const {checkBookmarks, changeBookmark, offerId, userInfo, detailPage} = props;
+  const {changeBookmark, offerId, userInfo, detailPage} = props;
   let {favorite} = props;
 
   const СlassNameType = {
@@ -36,7 +36,6 @@ const BookmarkButton = (props) => {
         onClick={
           (evt) => {
             evt.stopPropagation();
-            checkBookmarks();
             changeBookmark(offerId, favorite ? 0 : 1);
           }
         }
@@ -59,7 +58,6 @@ const BookmarkButton = (props) => {
         onClick={
           (evt) => {
             evt.stopPropagation();
-            checkBookmarks();
             changeBookmark(offerId, favorite ? 0 : 1);
           }
         }
@@ -79,7 +77,6 @@ const BookmarkButton = (props) => {
 
 
 BookmarkButton.propTypes = {
-  checkBookmarks: PropTypes.func,
   changeBookmark: PropTypes.func,
   offerId: PropTypes.number,
   favorite: PropTypes.bool
@@ -90,11 +87,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  checkBookmarks() {
-    dispatch(
-        OperationUser.checkBookmarks()
-    );
-  },
   changeBookmark(id, status) {
     dispatch(
         OperationData.changeBookmark(id, status)

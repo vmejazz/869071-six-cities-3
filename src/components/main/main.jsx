@@ -8,7 +8,7 @@ import CityList from "../city-list/city-list.jsx";
 import EmptyOffers from "../empty-offers/empty-offers.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import withActiveItem from "../../hocs/withActiveItem.jsx";
-import {getCityes, getOffersShow} from "../../reducer/data/selectors.js";
+import {getCityes, getOffersShow, getActiveCity, gethoverCardId} from "../../reducer/data/selectors.js";
 import PageHeader from "../page-header/page-header.jsx";
 
 const SortOptionsWrapped = withActiveItem(SortOptions);
@@ -20,7 +20,6 @@ const Main = (props) => {
     activeCity = Object.keys(cityes)[0],
     changeCity,
     hoverCardId,
-    onCardHover,
     sortOffersDirect,
     sortOffersReverse,
   } = props;
@@ -94,7 +93,6 @@ const Main = (props) => {
                   </form>
                   <ApartmentList
                     offersShow={offersShow}
-                    onCardHover={onCardHover}
                   />
                 </section>
               }
@@ -147,7 +145,6 @@ Main.propTypes = {
     }),
     position: PropTypes.arrayOf(PropTypes.number).isRequired
   })).isRequired,
-  onApartmentCardClick: PropTypes.func,
   cityes: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({
@@ -159,7 +156,6 @@ Main.propTypes = {
   activeCity: PropTypes.string,
   changeCity: PropTypes.func,
   hoverCardId: PropTypes.number,
-  onCardHover: PropTypes.func,
   sortOffersDirect: PropTypes.func,
   sortOffersReverse: PropTypes.func,
   userInfo: PropTypes.object,
@@ -167,8 +163,8 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.DATA.activeCity,
-  hoverCardId: state.DATA.hoverCardId,
+  activeCity: getActiveCity(state),
+  hoverCardId: gethoverCardId(state),
   cityes: getCityes(state),
   offersShow: getOffersShow(state),
 });
@@ -179,11 +175,6 @@ const mapDispatchToProps = (dispatch) => ({
         ActionCreator.changeCity(city)
     );
   },
-  onCardHover(id) {
-    dispatch(
-        ActionCreator.onCardHover(id)
-    );
-  },
   sortOffersDirect(param) {
     dispatch(
         ActionCreator.sortOffersDirect(param)
@@ -192,11 +183,6 @@ const mapDispatchToProps = (dispatch) => ({
   sortOffersReverse(param) {
     dispatch(
         ActionCreator.sortOffersReverse(param)
-    );
-  },
-  getOffers(city) {
-    dispatch(
-        ActionCreator.getOffers(city)
     );
   },
 });

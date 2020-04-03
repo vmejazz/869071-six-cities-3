@@ -15,12 +15,12 @@ const offers = [
 ];
 
 it(`Reducer create inistialState`, () => {
-  // console.log(reducer().degug());
 
   expect(reducer(void 0, {})).toEqual({
     activeCity: `Paris`,
     activeOfferId: -1,
     cityesFavorite: [],
+    commentPostError: false,
     offers: [],
     offersFavorite: [],
   });

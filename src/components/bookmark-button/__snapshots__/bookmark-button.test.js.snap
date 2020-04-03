@@ -2,7 +2,7 @@
 
 exports[`<BookmarkButton /> should render Bookmark button  1`] = `
 <button
-  className="place-card__bookmark-button button"
+  className="place-card__bookmark-button button "
   onClick={[Function]}
   type="button"
 >
