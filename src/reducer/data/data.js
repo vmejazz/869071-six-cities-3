@@ -7,7 +7,8 @@ const initialState = {
   activeCity: `Paris`,
   offersFavorite: [],
   cityesFavorite: [],
-  commentPostError: false
+  commentPostError: false,
+  offersNearby: []
 };
 
 const ActionType = {
@@ -195,10 +196,12 @@ const reducer = (state = initialState, action) => {
         })
       });
     case ActionType.SET_FAVOTIRE:
+      const offersNearbyArray = state.offersNearby.map((item) => item.id === action.payload.id ? action.payload : item);
       const offersArray = state.offers.map((item) => item.id === action.payload.id ? action.payload : item);
 
       return extend(state, {
-        offers: offersArray
+        offers: offersArray,
+        offersNearby: offersNearbyArray
       });
     case ActionType.GET_REVIEWS:
       return extend(state, action.payload);

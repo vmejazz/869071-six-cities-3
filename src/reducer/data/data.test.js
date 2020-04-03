@@ -23,6 +23,7 @@ it(`Reducer create inistialState`, () => {
     commentPostError: false,
     offers: [],
     offersFavorite: [],
+    offersNearby: []
   });
 });
 
@@ -215,6 +216,7 @@ it(`Reducer set Favorite`, () => {
         favorite: true
       }
     ],
+    offersNearby: []
   }, {
     type: ActionType.SET_FAVOTIRE,
     payload: {
@@ -236,6 +238,7 @@ it(`Reducer set Favorite`, () => {
         favorite: true
       }
     ],
+    offersNearby: []
   });
 });
 
