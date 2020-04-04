@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+const COEFFICIENT_ROUNDING_STAR = 20;
+
 const ReviewsItem = (props) => {
   const {review} = props;
 
@@ -32,7 +34,7 @@ const ReviewsItem = (props) => {
         <div className="reviews__info">
           <div className="reviews__rating rating">
             <div className="reviews__stars rating__stars">
-              <span style={{width: `${rating <= 4 ? rating * 20 : 100}%`}} />
+              <span style={{width: `${COEFFICIENT_ROUNDING_STAR * Math.round(rating)}%`}}></span>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>

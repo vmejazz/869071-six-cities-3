@@ -5,6 +5,8 @@ import {Link} from "react-router-dom";
 import {ActionCreator} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
 
+const COEFFICIENT_ROUNDING_STAR = 20;
+
 const ApartmentCard = (props) => {
   const {placeOffer, onCardHover, isFavoriteList} = props;
   const {id, title, price, srcImg, premium, type, rate, favorite} = placeOffer;
@@ -58,7 +60,7 @@ const ApartmentCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${20 * Math.round(rate)}%`}}></span>
+            <span style={{width: `${COEFFICIENT_ROUNDING_STAR * Math.round(rate)}%`}}></span>
             Math.round
             <span className="visually-hidden">{rate}Rating</span>
           </div>

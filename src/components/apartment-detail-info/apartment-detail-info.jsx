@@ -16,7 +16,7 @@ import OffersNearby from "../offers-nearby/offers-nearby.jsx";
 const ReviewsFormWrapped = withReviewForm(ReviewsForm);
 
 const MAX_IMAGES = 6;
-
+const COEFFICIENT_ROUNDING_STAR = 20;
 class ApartmentDetailInfo extends PureComponent {
   constructor(props) {
     super(props);
@@ -72,7 +72,7 @@ class ApartmentDetailInfo extends PureComponent {
                     </div>
                     <div className="property__rating rating">
                       <div className="property__stars rating__stars">
-                        <span style={{width: `${20 * Math.round(rate)}%`}}></span>
+                        <span style={{width: `${COEFFICIENT_ROUNDING_STAR * Math.round(rate)}%`}}></span>
                         <span className="visually-hidden">Rating</span>
                       </div>
                       <span className="property__rating-value rating__value">{rate}</span>
@@ -162,7 +162,7 @@ ApartmentDetailInfo.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number,
-    imageURLs: PropTypes.arrayOf(PropTypes.string).isRequired,
+    imageURLs: PropTypes.arrayOf(PropTypes.string),
     description: PropTypes.string,
     premium: PropTypes.bool,
     type: PropTypes.string,
