@@ -17,6 +17,10 @@ const withReviewForm = (Component) => {
       this._checkStatus = this._checkStatus.bind(this);
     }
 
+    componentDidUpdate() {
+      this._checkStatus();
+    }
+
     _setStatusButton(status) {
       this.setState({
         buttonStatus: status
@@ -44,10 +48,6 @@ const withReviewForm = (Component) => {
         rating: 0,
         buttonStatus: true
       });
-    }
-
-    componentDidUpdate() {
-      this._checkStatus();
     }
 
     render() {
