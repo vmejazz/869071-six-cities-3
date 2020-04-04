@@ -26,7 +26,6 @@ class OffersNearby extends PureComponent {
     }
   }
 
-
   render() {
     const {offersNearby = []} = this.props;
 
@@ -41,7 +40,26 @@ class OffersNearby extends PureComponent {
 OffersNearby.propTypes = {
   loadNearby: PropTypes.func,
   activeOfferId: PropTypes.string.isRequired,
-  offersNearby: PropTypes.arrayOf(PropTypes.object),
+  offersNearby: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    srcImg: PropTypes.string,
+    imageURLs: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
+    premium: PropTypes.bool,
+    type: PropTypes.string,
+    rate: PropTypes.number,
+    bedrooms: PropTypes.number.isRequired,
+    maxGuests: PropTypes.number.isRequired,
+    apartmentDetails: PropTypes.arrayOf(PropTypes.string),
+    ownerInfo: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool,
+      srcAvatar: PropTypes.string
+    }),
+    positions: PropTypes.arrayOf(PropTypes.number).isRequired
+  })),
 };
 
 const mapStateToProps = (state) => ({

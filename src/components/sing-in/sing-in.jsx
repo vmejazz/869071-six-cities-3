@@ -65,6 +65,19 @@ const SingIng = (props) => {
 
 SingIng.propTypes = {
   loginIn: PropTypes.func,
+  userInfo: PropTypes.shape({
+    authorizationStatus: PropTypes.string,
+    bookmarksRequired: PropTypes.bool,
+    setCheckedStatus: PropTypes.bool,
+    showRequestModal: PropTypes.bool,
+    isCheckedStatus: PropTypes.bool,
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatarUrl: PropTypes.string,
+    isPro: PropTypes.bool
+  }),
+  showRequestModal: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({

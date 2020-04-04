@@ -62,16 +62,43 @@ App.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    price: PropTypes.number,
-    srcImg: PropTypes.string
+    price: PropTypes.number.isRequired,
+    srcImg: PropTypes.string,
+    imageURLs: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
+    premium: PropTypes.bool,
+    type: PropTypes.string,
+    rate: PropTypes.number,
+    bedrooms: PropTypes.number.isRequired,
+    maxGuests: PropTypes.number.isRequired,
+    apartmentDetails: PropTypes.arrayOf(PropTypes.string),
+    ownerInfo: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool,
+      srcAvatar: PropTypes.string
+    }),
+    positions: PropTypes.arrayOf(PropTypes.number).isRequired
   })).isRequired,
   offersShow: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    price: PropTypes.number,
-    srcImg: PropTypes.string
+    price: PropTypes.number.isRequired,
+    srcImg: PropTypes.string,
+    imageURLs: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
+    premium: PropTypes.bool,
+    type: PropTypes.string,
+    rate: PropTypes.number,
+    bedrooms: PropTypes.number.isRequired,
+    maxGuests: PropTypes.number.isRequired,
+    apartmentDetails: PropTypes.arrayOf(PropTypes.string),
+    ownerInfo: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool,
+      srcAvatar: PropTypes.string
+    }),
+    positions: PropTypes.arrayOf(PropTypes.number).isRequired
   })),
-  onApartmentCardClick: PropTypes.func,
   cityes: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({
@@ -84,7 +111,18 @@ App.propTypes = {
   openOffer: PropTypes.func,
   getOffers: PropTypes.func,
   loginIn: PropTypes.func,
-  userInfo: PropTypes.object
+  userInfo: PropTypes.shape({
+    authorizationStatus: PropTypes.string,
+    bookmarksRequired: PropTypes.bool,
+    setCheckedStatus: PropTypes.bool,
+    showRequestModal: PropTypes.bool,
+    isCheckedStatus: PropTypes.bool,
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatarUrl: PropTypes.string,
+    isPro: PropTypes.bool
+  })
 };
 
 const mapStateToProps = (state) => ({
