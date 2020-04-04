@@ -130,20 +130,20 @@ Main.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     srcImg: PropTypes.string,
-    srcGallery: PropTypes.arrayOf(PropTypes.string),
+    imageURLs: PropTypes.arrayOf(PropTypes.string),
     description: PropTypes.string,
     premium: PropTypes.bool,
     type: PropTypes.string,
     rate: PropTypes.number,
     bedrooms: PropTypes.number.isRequired,
     maxGuests: PropTypes.number.isRequired,
-    apartmentStuff: PropTypes.arrayOf(PropTypes.string),
+    apartmentDetails: PropTypes.arrayOf(PropTypes.string),
     ownerInfo: PropTypes.shape({
       name: PropTypes.string.isRequired,
       super: PropTypes.bool,
       srcAvatar: PropTypes.string
     }),
-    position: PropTypes.arrayOf(PropTypes.number).isRequired
+    positions: PropTypes.arrayOf(PropTypes.number).isRequired
   })).isRequired,
   cityes: PropTypes.oneOfType([
     PropTypes.string,

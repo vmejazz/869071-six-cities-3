@@ -29,7 +29,7 @@ exports[`<FavoritesList /> should render favorites list  1`] = `
       offersShow={
         Array [
           Object {
-            "apartmentStuff": Array [
+            "apartmentDetails": Array [
               "Breakfast",
               "Laptop friendly workspace",
               "Washer",
@@ -46,14 +46,14 @@ exports[`<FavoritesList /> should render favorites list  1`] = `
               "srcAvatar": "img/avatar-angelina.jpg",
               "super": true,
             },
-            "position": Array [
+            "positions": Array [
               51.211402,
               6.756314000000001,
             ],
             "premium": true,
             "price": 405,
             "rate": 3.8,
-            "srcGallery": Array [
+            "imageURLs": Array [
               "https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/12.jpg",
             ],
             "srcImg": "https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/2.jpg",
@@ -61,7 +61,7 @@ exports[`<FavoritesList /> should render favorites list  1`] = `
             "type": "house",
           },
           Object {
-            "apartmentStuff": Array [
+            "apartmentDetails": Array [
               "Laptop friendly workspace",
               "Breakfast",
             ],
@@ -77,14 +77,14 @@ exports[`<FavoritesList /> should render favorites list  1`] = `
               "srcAvatar": "img/avatar-angelina.jpg",
               "super": true,
             },
-            "position": Array [
+            "positions": Array [
               51.216402,
               6.758314,
             ],
             "premium": false,
             "price": 185,
             "rate": 2.9,
-            "srcGallery": Array [],
+            "imageURLs": Array [],
             "srcImg": "https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/13.jpg",
             "title": "Canal View Prinsengracht",
             "type": "hotel",

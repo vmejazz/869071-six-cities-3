@@ -12,10 +12,10 @@ const offersArray = [
     id: 3,
     price: 777,
     title: `Title of apartment`,
-    srcGallery: [],
+    imageURLs: [],
     bedrooms: 2,
     maxGuests: 5,
-    position: []
+    positions: []
   }
 ];
 

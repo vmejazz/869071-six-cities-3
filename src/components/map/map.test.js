@@ -22,20 +22,20 @@ const offersShow = [
     title: ``,
     price: 120,
     srcImg: ``,
-    srcGallery: [],
+    imageURLs: [],
     description: ``,
     premium: true,
     type: ``,
     rate: 1,
     bedrooms: 1,
     maxGuests: 1,
-    apartmentStuff: [],
+    apartmentDetails: [],
     ownerInfo: {
       name: ``,
       super: true,
       srcAvatar: ``
     },
-    position: [1, 1],
+    positions: [1, 1],
     city: `Moscow`
   }
 ];

@@ -8,7 +8,7 @@ exports[`Test Apartment list <ApartmentList /> should render list 1`] = `
     isFavoriteList={false}
     placeOffer={
       Object {
-        "apartmentStuff": Array [],
+        "apartmentDetails": Array [],
         "bedrooms": 1,
         "city": "",
         "description": "",
@@ -19,14 +19,14 @@ exports[`Test Apartment list <ApartmentList /> should render list 1`] = `
           "srcAvatar": "",
           "super": true,
         },
-        "position": Array [
+        "positions": Array [
           1,
           1,
         ],
         "premium": true,
         "price": 120,
         "rate": 1,
-        "srcGallery": Array [],
+        "imageURLs": Array [],
         "srcImg": "",
         "title": "",
         "type": "",

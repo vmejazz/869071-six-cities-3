@@ -11,7 +11,7 @@ const offersFavorite = [
     title: `House in countryside`,
     price: 405,
     srcImg: `https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/2.jpg`,
-    srcGallery: [
+    imageURLs: [
       `https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/12.jpg`
     ],
     description: `Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.`,
@@ -20,7 +20,7 @@ const offersFavorite = [
     rate: 3.8,
     bedrooms: 3,
     maxGuests: 8,
-    apartmentStuff: [
+    apartmentDetails: [
       `Breakfast`,
       `Laptop friendly workspace`,
       `Washer`
@@ -31,7 +31,7 @@ const offersFavorite = [
       "srcAvatar": `img/avatar-angelina.jpg`,
       "id": 25
     },
-    position: [
+    positions: [
       51.211402,
       6.756314000000001
     ],
@@ -43,7 +43,7 @@ const offersFavorite = [
     title: `Canal View Prinsengracht`,
     price: 185,
     srcImg: `https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/13.jpg`,
-    srcGallery: [
+    imageURLs: [
     ],
     description: `Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.`,
     premium: false,
@@ -51,7 +51,7 @@ const offersFavorite = [
     rate: 2.9,
     bedrooms: 3,
     maxGuests: 8,
-    apartmentStuff: [
+    apartmentDetails: [
       `Laptop friendly workspace`,
       `Breakfast`
     ],
@@ -61,7 +61,7 @@ const offersFavorite = [
       "srcAvatar": `img/avatar-angelina.jpg`,
       "id": 25
     },
-    position: [
+    positions: [
       51.216402,
       6.758314
     ],

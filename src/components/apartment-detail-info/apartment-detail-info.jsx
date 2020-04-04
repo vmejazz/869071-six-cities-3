@@ -28,7 +28,7 @@ class ApartmentDetailInfo extends PureComponent {
     if (offer === undefined) {
       return <PageNotFound />;
     } else {
-      const {id, title, price, srcGallery = [], description, premium, type, rate, bedrooms, maxGuests, apartmentStuff, ownerInfo, favorite, city} = offer;
+      const {id, title, price, imageURLs = [], description, premium, type, rate, bedrooms, maxGuests, apartmentDetails, ownerInfo, favorite, city} = offer;
       let offersNearbyForMap = offersNearby.slice();
       offersNearbyForMap.push(offer);
 
@@ -40,7 +40,7 @@ class ApartmentDetailInfo extends PureComponent {
               <section className="property">
                 <div className="property__gallery-container container">
                   <div className="property__gallery">
-                    {srcGallery
+                    {imageURLs
                     .slice(0, MAX_IMAGES)
                     .map((item, index) => {
                       return (
@@ -95,7 +95,7 @@ class ApartmentDetailInfo extends PureComponent {
                     <div className="property__inside">
                       <h2 className="property__inside-title">What`s inside</h2>
                       <ul className="property__inside-list">
-                        {apartmentStuff.map((item, index) => {
+                        {apartmentDetails.map((item, index) => {
                           return (
                             <li className="property__inside-item" key={item + index}>
                               {item}
@@ -162,14 +162,14 @@ ApartmentDetailInfo.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number,
-    srcGallery: PropTypes.arrayOf(PropTypes.string).isRequired,
+    imageURLs: PropTypes.arrayOf(PropTypes.string).isRequired,
     description: PropTypes.string,
     premium: PropTypes.bool,
     type: PropTypes.string,
     rate: PropTypes.number,
     bedrooms: PropTypes.number,
     maxGuests: PropTypes.number,
-    apartmentStuff: PropTypes.arrayOf(PropTypes.string),
+    apartmentDetails: PropTypes.arrayOf(PropTypes.string),
     ownerInfo: PropTypes. object,
     favorite: PropTypes.bool,
     city: PropTypes.string
