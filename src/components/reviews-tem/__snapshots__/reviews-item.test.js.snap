@@ -33,7 +33,7 @@ exports[`Review section render 1`] = `
         <span
           style={
             Object {
-              "width": "100%",
+              "width": "NaN%",
             }
           }
         />

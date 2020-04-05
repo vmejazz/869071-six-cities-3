@@ -39,6 +39,9 @@ exports[`<FavoritesList /> should render favorites list  1`] = `
             "description": "Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.",
             "favorite": true,
             "id": 12,
+            "imageURLs": Array [
+              "https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/12.jpg",
+            ],
             "maxGuests": 8,
             "ownerInfo": Object {
               "id": 25,
@@ -53,9 +56,6 @@ exports[`<FavoritesList /> should render favorites list  1`] = `
             "premium": true,
             "price": 405,
             "rate": 3.8,
-            "imageURLs": Array [
-              "https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/12.jpg",
-            ],
             "srcImg": "https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/2.jpg",
             "title": "House in countryside",
             "type": "house",
@@ -70,6 +70,7 @@ exports[`<FavoritesList /> should render favorites list  1`] = `
             "description": "Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.",
             "favorite": true,
             "id": 4,
+            "imageURLs": Array [],
             "maxGuests": 8,
             "ownerInfo": Object {
               "id": 25,
@@ -84,7 +85,6 @@ exports[`<FavoritesList /> should render favorites list  1`] = `
             "premium": false,
             "price": 185,
             "rate": 2.9,
-            "imageURLs": Array [],
             "srcImg": "https://htmlacademy-react-3.appspot.com/six-cities/static/hotel/13.jpg",
             "title": "Canal View Prinsengracht",
             "type": "hotel",

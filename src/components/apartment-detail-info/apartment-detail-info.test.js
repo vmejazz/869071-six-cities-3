@@ -27,13 +27,50 @@ const offer = {
     name: `Jon`,
     super: true,
     srcAvatar: `img/avatar-max.jpg`
-  }
+  },
+  positions: [44, 34]
 };
 
 const activeOfferId = `1`;
 const offersNearby = [
-  {},
-  {}
+  {id: 43,
+    title: `Beautiful apartment`,
+    price: 120,
+    srcImg: `img/apartment-01.jpg`,
+    imageURLs: [`img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`],
+    description: `All super long text about apartmmnet with cools stuffs`,
+    premium: true,
+    type: `Room`,
+    rate: 4.8,
+    bedrooms: 3,
+    maxGuests: 4,
+    apartmentDetails: [`Wifi`, `Cable TV`, `Kitchen`],
+    ownerInfo: {
+      name: `Jon`,
+      super: true,
+      srcAvatar: `img/avatar-max.jpg`
+    },
+    positions: [44, 34]
+  },
+  {id: 57,
+    title: `Beautiful apartment`,
+    price: 120,
+    srcImg: `img/apartment-01.jpg`,
+    imageURLs: [`img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`],
+    description: `All super long text about apartmmnet with cools stuffs`,
+    premium: true,
+    type: `Room`,
+    rate: 4.8,
+    bedrooms: 3,
+    maxGuests: 4,
+    apartmentDetails: [`Wifi`, `Cable TV`, `Kitchen`],
+    ownerInfo: {
+      name: `Jon`,
+      super: true,
+      srcAvatar: `img/avatar-max.jpg`
+    },
+    positions: [44, 34]
+  }
 ];
 const authorizationStatus = `NO_AUTH`;
 const reviews = [{

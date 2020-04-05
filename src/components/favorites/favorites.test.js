@@ -27,7 +27,8 @@ const offersFavorite = [{
     name: `Jon`,
     super: true,
     srcAvatar: `img/avatar-max.jpg`
-  }
+  },
+  positions: [234, 234234]
 }];
 
 const cityesFavorite = {
